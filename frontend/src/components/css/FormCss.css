@@ -1,0 +1,26 @@
+.formContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  min-height: calc(100vh - 12vh);
+  justify-items: center;
+}
+.innerFormContainer {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  padding: 5em;
+  row-gap: 2em;
+  align-items: center;
+  max-height: calc(100vh - 12vh);
+  flex-direction: column;
+  background-color: white;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  width: 100%;
+}

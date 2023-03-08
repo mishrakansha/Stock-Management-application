@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+#dataContainer {
+  grid-column: 1/7;
+  min-height: calc(100vh - 12vh);
+  background: linear-gradient(20deg, #1565c0 -2%, #ad5353 68%, #89216be3 100%);
+}
+.mainlayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}

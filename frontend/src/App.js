@@ -1,29 +1,16 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import React, { Component } from "react";
 import NavBar from "./components/NavBar";
-import NewItemForm from "./components/forms/NewItemForm";
-import DashboardPage from "./components/DashboardPage";
+// import SideNavBar from "./components/SideNavBar";
 
 export default class App extends Component {
   render() {
     return (
-      <div>
+      <div className="mainlayout">
         <Router>
           <NavBar />
-          <Routes>
-            <Route
-              exact
-              path="/AddItem"
-              element={<NewItemForm key="addItem" />}
-            ></Route>
-            <Route
-              exact
-              path="/"
-              element={<DashboardPage key="DashBoard" />}
-            ></Route>
-          </Routes>
         </Router>
       </div>
     );
