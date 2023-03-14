@@ -1,17 +1,16 @@
 .nav {
   height: 12vh;
   width: 100%;
+  padding: 1em;
   display: flex;
   z-index: 20;
-  background: white;
-  color: #89216b;
-  border-bottom: 0.2em solid;
+  background: #323765;
+  color: #ffffff;
   padding: 12px;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
 }
-
 .nav ul {
   list-style: none;
 }
@@ -20,12 +19,12 @@
   position: relative;
 }
 
-.searchbar {
+.searchBar {
   display: flex;
   gap: 0;
 }
 
-.searchicon {
+.searchIcon {
   margin-right: -23px;
 
   display: flex;
@@ -34,30 +33,26 @@
 }
 .icon {
   text-transform: uppercase;
+  font-weight: 700;
 }
-.leftsidelist {
+.leftSideList {
   display: flex;
   gap: 9px;
   cursor: pointer;
   font-size: 1em;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
-.baricon {
+.barIcon {
   font-size: 25px;
   padding: 2px 9px;
-  border: 2px solid #89216b;
   border-radius: 5px;
   margin: auto 9px;
 }
 
-.headnavbar {
+.headNavBar {
   grid-column: 1/7;
   position: sticky;
   z-index: 8;
   top: 0;
-}
-.baricon:hover {
-  background-color: #89216b;
-  color: white;
 }

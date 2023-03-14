@@ -4,18 +4,20 @@
   align-items: center;
   justify-items: center;
   min-height: calc(100vh - 12vh);
-  justify-items: center;
+  padding: 2em;
 }
 .innerFormContainer {
   width: 80%;
   display: flex;
+  /* overflow-y: scroll; */
   justify-content: center;
-  padding: 5em;
+  padding: 2em 5em;
+  text-align: center;
   row-gap: 2em;
-  align-items: center;
-  max-height: calc(100vh - 12vh);
+  /* max-height: calc(100vh - 12vh); */
   flex-direction: column;
-  background-color: white;
+  border-radius: 1em;
+  box-shadow: 0px 0px 12px 1px #b3b3b3;
 }
 
 #form {
@@ -23,4 +25,13 @@
   flex-direction: column;
   row-gap: 1em;
   width: 100%;
+}
+.errorMessage {
+  font-size: 0.7em;
+  text-align: left;
+  color: red;
+}
+.submitButtonContainer {
+  display: flex;
+  justify-content: center;
 }

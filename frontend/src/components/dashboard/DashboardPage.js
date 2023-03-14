@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Card from "./Card";
-import { items } from "./data";
+import Card from "../card/Card";
+import { items } from "../data";
 export default class DashboardPage extends Component {
   constructor() {
     super();
@@ -16,9 +16,13 @@ export default class DashboardPage extends Component {
           return (
             <Card
               key={element.id}
-              itemname={element.itemname}
-              quantity={element.Qantity}
+              id={element.id}
+              itemName={element.itemName}
+              quantity={element.quantity}
               price={element.price}
+              discription={element.discription}
+              date={element.date}
+              manufacturingCompany={element.manufacturingCompany}
             />
           );
         })}

@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import TextField from "@mui/material/TextField";
-import "./css/NavBarCss.css";
-import SideNavBar from "./SideNavBar";
-import NewItemForm from "./forms/NewItemForm";
-import DashboardPage from "./DashboardPage";
+// import TextField from "@mui/material/TextField";
+import "./NavBarCss.css";
+import SideNavBar from "../sidebarnav/SideNavBar";
+import { ExpendableSlidebar } from "../sidebarnav/SideNavBar.js";
 
-import { Route, Routes } from "react-router-dom";
+import {} from "react-router-dom";
 
 export class NavBar extends Component {
   constructor(props) {
@@ -13,8 +12,8 @@ export class NavBar extends Component {
     this.state = {
       hamburgerOpen: false,
     };
-    // const { window } = this.props;
   }
+
   hamburgerClick = async () => {
     console.log("clicked");
     this.setState({
@@ -23,25 +22,30 @@ export class NavBar extends Component {
   };
   componentDidUpdate() {
     console.log(document.querySelector("#dataContainer"));
-    this.state.hamburgerOpen
-      ? (document.querySelector("#dataContainer").style = "grid-column: 2/7;")
-      : (document.querySelector("#dataContainer").style = "grid-column: 1/7;");
+    if (this.state.hamburgerOpen) {
+      document.querySelector("#dataContainer").style = "grid-column: 3/7;";
+      document.querySelector("#sideNav").style = "border-right:none;";
+    } else {
+      document.querySelector("#dataContainer").style = "grid-column: 2/7;";
+      document.querySelector("#sideNav").style =
+        "border-right: 2px solid #323765;";
+    }
   }
   render() {
     return (
       <>
-        <div className="headnavbar">
+        <div className="headNavBar">
           <nav className="nav">
-            <ul className="leftsidelist">
-              <li onClick={this.hamburgerClick} className="baricon">
+            <ul className="leftSideList">
+              <li onClick={this.hamburgerClick} className="barIcon">
                 <i className="fa-solid fa-bars"></i>
               </li>
               <li>
                 <div className="icon">Stock management app</div>
               </li>
             </ul>
-            <ul className="searchbar">
-              <span className="searchicon">
+            {/* <ul className="searchBar">
+              <span className="searchIcon">
                 <i className="fas fa-search "></i>
               </span>
               <TextField
@@ -57,25 +61,18 @@ export class NavBar extends Component {
                   },
                 }}
               />{" "}
+            </ul> */}
+            <ul className="profileIcon">
+              <li className="barIcon">
+                <i className="fa-solid fa-user"></i>
+              </li>
             </ul>
           </nav>
         </div>
-
-        {this.state.hamburgerOpen && <SideNavBar />}
-        <div id="dataContainer">
-          <Routes>
-            <Route
-              exact
-              path="/AddItem"
-              element={<NewItemForm key="addItem" />}
-            ></Route>
-            <Route
-              exact
-              path="/"
-              element={<DashboardPage key="DashBoard" />}
-            ></Route>
-          </Routes>
-        </div>
+        {/* <div className="sideNavBarContainers"> */}
+        <SideNavBar />
+        {this.state.hamburgerOpen && <ExpendableSlidebar />}
+        {/* </div> */}
       </>
     );
   }
