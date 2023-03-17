@@ -15,25 +15,24 @@ export default class App extends Component {
           {/* <Test /> */}
           <Router>
             <NavBar />
-            <div id="dataContainer">
-              <Routes>
-                <Route
-                  exact
-                  path="/additem"
-                  element={<NewItemForm key="addItem" />}
-                ></Route>
-                <Route
-                  exact
-                  path="/"
-                  element={<DashboardPage key="DashBoard" />}
-                ></Route>
-                <Route
-                  exact
-                  path="/showdetails/:id"
-                  element={<Details key="Details  " />}
-                ></Route>
-              </Routes>
-            </div>
+
+            <Routes>
+              <Route
+                exact
+                path="/additem"
+                element={<NewItemForm key="addItem" />}
+              ></Route>
+              <Route
+                exact
+                path="/"
+                element={<DashboardPage key="DashBoard" />}
+              ></Route>
+              <Route
+                exact
+                path="/showdetails/:id"
+                element={<Details key="Details  " />}
+              ></Route>
+            </Routes>
           </Router>
         </div>
       </>

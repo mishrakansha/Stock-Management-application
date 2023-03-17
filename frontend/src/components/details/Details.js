@@ -18,24 +18,26 @@ class Details extends Component {
     const { id } = this.props.params;
     console.log(id);
     return (
-      <div className="deailsPageContainer">
-        {this.state.item.map((element) => {
-          if (element.id == id) {
-            return (
-              <div className="innerDeailsPageContainer">
-                {" "}
-                <div>item Name:- {element.itemName}</div>
-                <div>Quantity:- {element.quantity}</div>
-                <div>Price:- {element.price}</div>
-                <div>Date:- {element.date}</div>
-                <div>
-                  Manufacturing Company:- {element.manufacturingCompany}
+      <div id="dataContainer">
+        <div className="deailsPageContainer">
+          {this.state.item.map((element) => {
+            if (element.id == id) {
+              return (
+                <div className="innerDeailsPageContainer">
+                  {" "}
+                  <div>item Name:- {element.itemName}</div>
+                  <div>Quantity:- {element.quantity}</div>
+                  <div>Price:- {element.price}</div>
+                  <div>Date:- {element.date}</div>
+                  <div>
+                    Manufacturing Company:- {element.manufacturingCompany}
+                  </div>
+                  <div> Description:- {element.description}</div>
                 </div>
-                <div> Discription:- {element.discription}</div>
-              </div>
-            );
-          }
-        })}
+              );
+            }
+          })}
+        </div>
       </div>
     );
   }

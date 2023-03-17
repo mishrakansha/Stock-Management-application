@@ -19,6 +19,10 @@
   border-radius: 1em;
   box-shadow: 0px 0px 12px 1px #b3b3b3;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+}
 
 #form {
   display: flex;
@@ -29,6 +33,7 @@
 .errorMessage {
   font-size: 0.7em;
   text-align: left;
+  margin-top: -15px;
   color: red;
 }
 .submitButtonContainer {

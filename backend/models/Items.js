@@ -1,17 +1,28 @@
 const mongoose = require("mongoose");
 const itemSchema = new mongoose.Schema({
-  Item_name: {
+  itemName: {
     type: String,
-    required: true,
+    required: [true, "Item name is required."],
   },
-  Quantity: {
+  quantity: {
     type: Number,
     required: true,
-    unique: true,
   },
   price: {
-    type: String,
+    type: Number,
     required: true,
+  },
+  description: {
+    type: String,
+    required: [true, "Description is required."],
+  },
+  date: {
+    type: Date,
+    required: true,
+  },
+  manufacturingCompany: {
+    type: String,
+    required: [true, "Manufacturing company is required."],
   },
 });
 module.exports = mongoose.model("items", itemSchema);
