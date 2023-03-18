@@ -14,6 +14,7 @@ class Details extends Component {
       item: items,
     };
   }
+  async componentDidMount() {}
   render() {
     const { id } = this.props.params;
     console.log(id);
@@ -21,7 +22,7 @@ class Details extends Component {
       <div id="dataContainer">
         <div className="deailsPageContainer">
           {this.state.item.map((element) => {
-            if (element.id == id) {
+            if (element.id === id) {
               return (
                 <div className="innerDeailsPageContainer">
                   {" "}
@@ -35,6 +36,8 @@ class Details extends Component {
                   <div> Description:- {element.description}</div>
                 </div>
               );
+            } else {
+              return <></>;
             }
           })}
         </div>

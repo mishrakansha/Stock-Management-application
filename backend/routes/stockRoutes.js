@@ -1,5 +1,5 @@
 const express = require("express");
-const { body, validationResult } = require("express-validator");
+const { body } = require("express-validator");
 
 const router = express.Router();
 const stockController = require("../Controller/stockController");
@@ -13,12 +13,15 @@ router.put(
     body("quantity", "Enter the valid quantity").isInt({ min: 1 }),
     body("price", "Enter the valid price").isInt({ min: 1 }),
     body("date", "Date is invalid").custom((value) => {
+      // if (value == "" || value == undefined || value == null) {
+      //   throw new Error("Date required");
+      // }
       let enteredDate = new Date(value);
       let todaysDate = new Date();
-      if (enteredDate > todaysDate) {
-        throw new Error("Invalid Date");
+      if (enteredDate < todaysDate) {
+        return true;
       }
-      return true;
+      throw new Error("Date is required and cannot be invalid");
     }),
   ],
   stockController.modifyItem
