@@ -4,7 +4,9 @@
   padding: 1em;
   display: flex;
   z-index: 20;
-  background: #323765;
+  /* background: #323765; */
+  background: linear-gradient(to right, #0178bc 0%, #00bdda 100%);
+
   color: #ffffff;
   padding: 12px;
   justify-content: space-between;

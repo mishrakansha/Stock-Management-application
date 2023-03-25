@@ -1,40 +1,93 @@
-/* .deailsPageContainer {
+.deailsPageContainer {
   display: flex;
+  font-family: Roboto;
   justify-content: center;
   align-items: center;
   justify-items: center;
   min-height: calc(100vh - 12vh);
   padding: 2em;
 }
- {
-  width: 80%;
+.detailsComponent {
   display: flex;
-  justify-content: center;
-  padding: 2em 5em;
-  text-align: center;
-  row-gap: 2em;
+  padding: 1em 4em;
   flex-direction: column;
-  border-radius: 1em;
-  background-color: rgb(50 55 101 / 98%);
-} */
-.deailsPageContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-items: center;
-  min-height: calc(100vh - 12vh);
-  padding: 2em;
 }
 .innerDeailsPageContainer {
   width: 80%;
   display: flex;
-  /* overflow-y: scroll; */
-  justify-content: center;
-  padding: 2em 5em;
-  text-align: center;
+  padding: 1em;
   row-gap: 2em;
-  /* max-height: calc(100vh - 12vh); */
   flex-direction: column;
   border-radius: 1em;
   box-shadow: 0px 0px 12px 1px #b3b3b3;
+  background: linear-gradient(
+    218deg,
+    rgba(63, 193, 251, 1) 0%,
+    rgba(88, 177, 232, 1) 13%,
+    rgba(252, 70, 107, 0.6728816526610644) 100%
+  );
+
+  /* background: linear-gradient(
+    218deg,
+    rgba(10, 84, 117, 1) 0%,
+    rgba(252, 70, 120, 1) 100%
+  ); */
+}
+.detailsPart {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.7em;
+}
+
+.containerTitles {
+  font-size: 1.3em;
+  opacity: 0.8;
+}
+.detailElement h4 {
+  opacity: 0.74;
+  font-size: 1.1em;
+}
+.detailElement {
+  padding: 0.4em;
+  width: 50%;
+}
+.detailElement div {
+  opacity: 0.71;
+  font-size: 1.1em;
+}
+.descriptionPart {
+  padding: 0.7em;
+  opacity: 0.71;
+}
+.backButton {
+  /* background-color: white; */
+  height: 2em;
+  width: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.backButton:hover {
+  box-shadow: 0px 0px 8px black;
+}
+@media screen and (max-width: 620px) {
+  .detailElement {
+    width: 100%;
+  }
+  .deailsPageContainer {
+    padding: 0.5em;
+  }
+  .innerDeailsPageContainer {
+    width: 100%;
+  }
+}
+hr {
+  border-bottom: 1.5px solid white;
+  box-shadow: 0px 5px 8px 1px black;
+}
+
+.backButton:hover {
+  transform: scale(1.1);
 }

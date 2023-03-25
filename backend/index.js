@@ -5,7 +5,7 @@ const app = express();
 const cors = require("cors");
 const corsOptions = {
   origin: "http://localhost:3000",
-  credentials: true, //access-control-allow-credentials:true
+  credentials: true,
   optionSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
@@ -13,7 +13,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/stock", require("./routes/stockRoutes"));
-// app.use("/auth", require("./routes/authentication"));
-app.listen(5000, () => {
+app.use("/auth", require("./routes/authRoutes"));
+module.exports = app.listen(5000, () => {
   console.log("server started at port 5000");
 });

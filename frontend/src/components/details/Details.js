@@ -1,49 +1,76 @@
 import React, { Component } from "react";
-import { items } from "../data";
 import { useParams } from "react-router-dom";
 import "./DetailsPage.css";
+import { getOneItem } from "./../../actions/itemsFetching";
+import moment from "moment";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import DataContainer from "../dataContainer/DataContainer";
+
 const withRouter = (WrappedComponent) => (props) => {
   const params = useParams();
-
   return <WrappedComponent {...props} params={params} />;
 };
 class Details extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      item: items,
-    };
-  }
-  async componentDidMount() {}
-  render() {
+  async componentDidMount() {
     const { id } = this.props.params;
-    console.log(id);
+    this.props.getOneItem(id);
+  }
+  render() {
+    const { oneItem } = this.props;
     return (
-      <div id="dataContainer">
-        <div className="deailsPageContainer">
-          {this.state.item.map((element) => {
-            if (element.id === id) {
-              return (
-                <div className="innerDeailsPageContainer">
-                  {" "}
-                  <div>item Name:- {element.itemName}</div>
-                  <div>Quantity:- {element.quantity}</div>
-                  <div>Price:- {element.price}</div>
-                  <div>Date:- {element.date}</div>
-                  <div>
-                    Manufacturing Company:- {element.manufacturingCompany}
+      <DataContainer
+        child=<div className="deailsPageContainer">
+          <div className="innerDeailsPageContainer">
+            <h3 className="backButton">
+              <Link className="Link" to="/">
+                <i class="fa-solid fa-arrow-left"></i>
+              </Link>
+            </h3>
+            {oneItem && (
+              <div className="detailsComponent">
+                <h3 className="containerTitles">Deatails</h3>
+                <hr />
+                <div className="detailsPart">
+                  <div className="detailElement">
+                    <h4> Item Name </h4>
+                    <div>{oneItem.itemName}</div>
                   </div>
-                  <div> Description:- {element.description}</div>
+
+                  <div className="detailElement">
+                    <h4> Quantity</h4>
+                    <div> {oneItem.quantity}</div>
+                  </div>
+                  <div className="detailElement">
+                    <h4> Price</h4>
+                    <div> {oneItem.price}</div>
+                  </div>
+                  <div className="detailElement">
+                    <h4> Date</h4>
+                    <div>{moment(oneItem.date).format("MMMM D, YYYY")}</div>
+                  </div>
+                  <div className="detailElement">
+                    <h4> Manufacturing Company</h4>
+                    <div>{oneItem.manufacturingCompany}</div>
+                  </div>
+                </div>{" "}
+                <h3 className="containerTitles">Description</h3>
+                <hr />
+                <div className="descriptionPart">
+                  <div>{oneItem.description}</div>
                 </div>
-              );
-            } else {
-              return <></>;
-            }
-          })}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      />
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    oneItem: state.items.payload,
+  };
+};
 
-export default withRouter(Details);
+export default connect(mapStateToProps, { getOneItem })(withRouter(Details));

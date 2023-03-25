@@ -3,8 +3,9 @@ import Card from "../card/Card";
 import "./DashboardPage.css";
 import { getAllItem } from "./../../actions/itemsFetching";
 import { connect } from "react-redux";
-// import { items } from "../data";
-// import axios from "axios";
+import Loader from "../Loader/Loader";
+import DataContainer from "../dataContainer/DataContainer";
+
 class DashboardPage extends Component {
   constructor(props) {
     super(props);
@@ -33,39 +34,44 @@ class DashboardPage extends Component {
   }
   render() {
     const { item } = this.props;
-    console.log("item", this.props);
-    // const { item } = this.state;
+    const { isloading } = this.props;
     return (
-      <div id="dataContainer">
-        <div className="cardContainer">
-          {item &&
-            item.length > 0 &&
-            item.map((element) => {
-              element.date = new Date(element.date).toLocaleDateString();
-              return (
-                <Card
-                  key={element._id}
-                  id={element._id}
-                  itemName={element.itemName}
-                  quantity={element.quantity}
-                  price={element.price}
-                  description={element.description}
-                  date={element.date}
-                  manufacturingCompany={element.manufacturingCompany}
-                />
-              );
-            })}
-        </div>
-      </div>
+      <DataContainer
+        child={
+          isloading ? (
+            <Loader></Loader>
+          ) : (
+            <div className="cardContainer">
+              {item &&
+                item.length > 0 &&
+                item.map((element) => {
+                  return (
+                    <Card
+                      key={element._id}
+                      id={element._id}
+                      itemName={element.itemName}
+                      quantity={element.quantity}
+                      price={element.price}
+                      description={element.description}
+                      date={element.date}
+                      manufacturingCompany={element.manufacturingCompany}
+                    />
+                  );
+                })}
+            </div>
+          )
+        }
+      />
     );
   }
 }
 const mapStateToProps = (state) => {
-  console.log("mapstatetoprops");
-  console.log(state.allItem);
   return {
-    item: state.allItem.payload,
+    isloading: state.items.isloading,
+    item: state.items.items,
   };
 };
 
-export default connect(mapStateToProps, { getAllItem })(DashboardPage);
+export default connect(mapStateToProps, {
+  getAllItem,
+})(DashboardPage);

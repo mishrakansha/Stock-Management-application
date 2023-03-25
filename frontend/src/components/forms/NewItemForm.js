@@ -3,7 +3,9 @@ import { addItem } from "./../../actions/itemsFetching";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import "./FormCss.css";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import DataContainer from "../dataContainer/DataContainer";
 class NewItemForm extends Component {
   constructor() {
     super();
@@ -139,9 +141,15 @@ class NewItemForm extends Component {
 
   render() {
     return (
-      <div id="dataContainer">
-        <div className="formContainer">
+      <DataContainer
+        child=<div className="formContainer">
           <div className="innerFormContainer">
+            {" "}
+            <h3 className="backButton">
+              <Link className="Link" to="/">
+                <i class="fa-solid fa-arrow-left"></i>
+              </Link>
+            </h3>
             <form
               onSubmit={this.handleSubmit}
               method="post"
@@ -149,7 +157,7 @@ class NewItemForm extends Component {
               id="form"
             >
               <h1>Add New Item</h1>
-              {this.state.formSubmitted && <h3>Sucessfully submitted form</h3>}
+              {this.state.formSubmitted && <h3>Form submitted sucessfully</h3>}
 
               <TextField
                 required
@@ -160,6 +168,14 @@ class NewItemForm extends Component {
                 variant="filled"
                 onChange={this.handelOnchange}
                 type="text"
+                InputLabelProps={{
+                  style: {
+                    background:
+                      "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
+                    webkitTextFillColor: "transparent",
+                    webkitBackgroundClip: "text",
+                  },
+                }}
                 style={{ width: "100%" }}
               />
               {this.state.itemNameError && (
@@ -173,6 +189,14 @@ class NewItemForm extends Component {
                 id="filled-basic"
                 min="1"
                 label="Quantity"
+                InputLabelProps={{
+                  style: {
+                    background:
+                      "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
+                    webkitTextFillColor: "transparent",
+                    webkitBackgroundClip: "text",
+                  },
+                }}
                 value={this.state.quantity}
                 InputProps={{
                   inputProps: {
@@ -194,6 +218,14 @@ class NewItemForm extends Component {
                 required
                 id="filled-basic"
                 name="price"
+                InputLabelProps={{
+                  style: {
+                    background:
+                      "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
+                    webkitTextFillColor: "transparent",
+                    webkitBackgroundClip: "text",
+                  },
+                }}
                 label="Price"
                 value={this.state.price}
                 variant="filled"
@@ -217,6 +249,14 @@ class NewItemForm extends Component {
                 name="manufacturingCompany"
                 label="Manufacturing company"
                 variant="filled"
+                InputLabelProps={{
+                  style: {
+                    background:
+                      "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
+                    webkitTextFillColor: "transparent",
+                    webkitBackgroundClip: "text",
+                  },
+                }}
                 onChange={this.handelOnchange}
                 type="text"
                 value={this.state.manufacturingCompany}
@@ -229,6 +269,14 @@ class NewItemForm extends Component {
                 required
                 multiline
                 rows={2}
+                InputLabelProps={{
+                  style: {
+                    background:
+                      "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
+                    webkitTextFillColor: "transparent",
+                    webkitBackgroundClip: "text",
+                  },
+                }}
                 name="description"
                 onChange={this.handelOnchange}
                 variant="filled"
@@ -242,13 +290,19 @@ class NewItemForm extends Component {
                 id="datetime-local"
                 label="Date"
                 type="date"
+                InputLabelProps={{
+                  shrink: true,
+                  style: {
+                    background:
+                      "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
+                    webkitTextFillColor: "transparent",
+                    webkitBackgroundClip: "text",
+                  },
+                }}
                 variant="filled"
                 value={this.state.date}
                 name="date"
                 onChange={this.handelOnchange}
-                InputLabelProps={{
-                  shrink: true,
-                }}
               />
               {this.state.dateError && (
                 <div className="errorMessage">
@@ -276,8 +330,14 @@ class NewItemForm extends Component {
             </form>
           </div>
         </div>
-      </div>
+      />
     );
   }
 }
-export default connect(null, { addItem })(NewItemForm);
+const mapStateToProps = (state) => {
+  const { dataContainerGrid } = state.navBar;
+  return {
+    dataContainerGrid: dataContainerGrid,
+  };
+};
+export default connect(mapStateToProps, { addItem })(NewItemForm);

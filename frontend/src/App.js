@@ -6,6 +6,8 @@ import NavBar from "./components/navbar/NavBar";
 import NewItemForm from "./components/forms/NewItemForm";
 import DashboardPage from "./components/dashboard/DashboardPage";
 import Details from "./components/details/Details";
+import EditForm from "./components/editForm/EditForm";
+
 // import Test from "./test/Test";
 export default class App extends Component {
   render() {
@@ -30,7 +32,12 @@ export default class App extends Component {
               <Route
                 exact
                 path="/showdetails/:id"
-                element={<Details key="Details  " />}
+                element={<Details key="Details" />}
+              ></Route>
+              <Route
+                exact
+                path="editdetails/:id"
+                element={<EditForm key="EditForm" />}
               ></Route>
             </Routes>
           </Router>
