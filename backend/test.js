@@ -234,6 +234,7 @@ describe("userSignIn", () => {
         .post("/auth/signIn")
         .send(User)
         .end((err, res) => {
+          // console.log(res.body);
           res.should.have.status(200);
           res.body.should.have.property("message").eql("Login Successful");
           done();

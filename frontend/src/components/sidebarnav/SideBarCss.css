@@ -43,9 +43,7 @@
   font-size: 2.2em;
 }
 #sideNav ul li {
-  display: flex;
   align-items: center;
-  display: flex;
   text-align: right;
   padding: 1em;
 
@@ -92,16 +90,18 @@
 #sideNavExpandable ul a {
   color: rgb(0, 0, 0);
   font-size: 1.1em;
-
+  display: flex;
+  gap: 1.5vh;
   display: flex;
   flex-direction: row;
   align-items: center;
   font-weight: 600;
 }
 #sideNavExpandable ul li {
+  display: flex;
   align-items: center;
   text-align: center;
-  /* border-bottom: 1px solid black; */
+  border-bottom: 1px solid rgb(0, 0, 0, 9);
   width: 100%;
   padding: 1em 0.5em;
   color: black;
@@ -114,7 +114,13 @@
 #sideNavExpandable ul li:hover a {
   color: white;
 }
-#sideNsideNavExpandable ul a div {
+#sidesideNavExpandable ul a div {
   color: rgb(0, 0, 0);
   font-size: 2.2em;
+}
+@media screen and (max-width: 870px) {
+  #sideNavExpandable ul a {
+    display: flex;
+    flex-direction: column;
+  }
 }

@@ -71,7 +71,7 @@ class NewItemForm extends Component {
     } catch (err) {
       console.log(err);
     }
-
+    window.scrollTo(0, 0);
     // console.log(resData);
   };
   handelOnchange = (event) => {
@@ -145,37 +145,31 @@ class NewItemForm extends Component {
         child=<div className="formContainer">
           <div className="innerFormContainer">
             {" "}
-            <h3 className="backButton">
-              <Link className="Link" to="/">
-                <i class="fa-solid fa-arrow-left"></i>
-              </Link>
-            </h3>
-            <form
-              onSubmit={this.handleSubmit}
-              method="post"
-              action="localhost:5000/api/stock/additem"
-              id="form"
-            >
+            <div>
+              <h3 className="backButton">
+                <Link className="Link" to={-1}>
+                  <i class="fa-solid fa-arrow-left"></i>
+                </Link>
+              </h3>
               <h1>Add New Item</h1>
+            </div>
+            <form onSubmit={this.handleSubmit} method="post" id="form">
               {this.state.formSubmitted && <h3>Form submitted sucessfully</h3>}
 
               <TextField
                 required
                 id="filled-basic"
+                InputProps={{
+                  style: {
+                    height: "50px",
+                  },
+                }}
                 name="itemName"
                 value={this.state.itemName}
                 label="Item Name"
                 variant="filled"
                 onChange={this.handelOnchange}
                 type="text"
-                InputLabelProps={{
-                  style: {
-                    background:
-                      "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
-                    webkitTextFillColor: "transparent",
-                    webkitBackgroundClip: "text",
-                  },
-                }}
                 style={{ width: "100%" }}
               />
               {this.state.itemNameError && (
@@ -189,18 +183,18 @@ class NewItemForm extends Component {
                 id="filled-basic"
                 min="1"
                 label="Quantity"
-                InputLabelProps={{
-                  style: {
-                    background:
-                      "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
-                    webkitTextFillColor: "transparent",
-                    webkitBackgroundClip: "text",
-                  },
-                }}
                 value={this.state.quantity}
                 InputProps={{
                   inputProps: {
                     min: 1,
+                  },
+                  //           style: {
+                  // height:"1em",
+                  // padding: '0 14px',
+
+                  //           }
+                  style: {
+                    height: "50px",
                   },
                 }}
                 name="quantity"
@@ -218,20 +212,20 @@ class NewItemForm extends Component {
                 required
                 id="filled-basic"
                 name="price"
-                InputLabelProps={{
-                  style: {
-                    background:
-                      "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
-                    webkitTextFillColor: "transparent",
-                    webkitBackgroundClip: "text",
-                  },
-                }}
                 label="Price"
                 value={this.state.price}
                 variant="filled"
                 InputProps={{
                   inputProps: {
                     min: 1,
+                  },
+                  //           style: {
+                  // height:"1em",
+                  // padding: '0 14px',
+
+                  //           }
+                  style: {
+                    height: "50px",
                   },
                 }}
                 onChange={this.handelOnchange}
@@ -248,15 +242,12 @@ class NewItemForm extends Component {
                 id="filled-basic"
                 name="manufacturingCompany"
                 label="Manufacturing company"
-                variant="filled"
-                InputLabelProps={{
+                InputProps={{
                   style: {
-                    background:
-                      "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
-                    webkitTextFillColor: "transparent",
-                    webkitBackgroundClip: "text",
+                    height: "50px",
                   },
                 }}
+                variant="filled"
                 onChange={this.handelOnchange}
                 type="text"
                 value={this.state.manufacturingCompany}
@@ -269,14 +260,6 @@ class NewItemForm extends Component {
                 required
                 multiline
                 rows={2}
-                InputLabelProps={{
-                  style: {
-                    background:
-                      "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
-                    webkitTextFillColor: "transparent",
-                    webkitBackgroundClip: "text",
-                  },
-                }}
                 name="description"
                 onChange={this.handelOnchange}
                 variant="filled"
@@ -290,14 +273,19 @@ class NewItemForm extends Component {
                 id="datetime-local"
                 label="Date"
                 type="date"
+                InputProps={{
+                  style: {
+                    height: "50px",
+                  },
+                }}
                 InputLabelProps={{
                   shrink: true,
-                  style: {
-                    background:
-                      "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
-                    webkitTextFillColor: "transparent",
-                    webkitBackgroundClip: "text",
-                  },
+                  // style: {
+                  //   background:
+                  //     "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
+                  //   webkitTextFillColor: "transparent",
+                  //   webkitBackgroundClip: "text",
+                  // },
                 }}
                 variant="filled"
                 value={this.state.date}

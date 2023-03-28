@@ -9,12 +9,22 @@
 .innerFormContainer {
   width: 80%;
   display: flex;
-  padding: 1em;
-  text-align: center;
   justify-content: center;
   flex-direction: column;
   border-radius: 1em;
   box-shadow: 0px 0px 12px 1px #b3b3b3;
+}
+.innerFormContainer > div {
+  color: white;
+  padding: 1em;
+  text-align: center;
+  background: #323765;
+  border-top-right-radius: 1em;
+  border-top-left-radius: 1em;
+}
+.innerFormContainer > div > h1 {
+  text-transform: uppercase;
+  font-weight: 500;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -25,10 +35,10 @@ input::-webkit-inner-spin-button {
   display: flex;
   flex-direction: column;
   row-gap: 1em;
-  padding: 1em 4em;
+  padding: 2em 4em;
   width: 100%;
 }
-#form > h1 {
+/* #form > h1 {
   background: linear-gradient(
     135deg,
     rgba(171, 160, 238, 1) 0%,
@@ -38,18 +48,17 @@ input::-webkit-inner-spin-button {
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
   font-size: 3em;
-}
+} */
 .errorMessage {
   font-size: 0.7em;
   text-align: left;
   margin-top: -15px;
   color: red;
-}
+} /* 
 .submitButtonContainer {
   display: flex;
   justify-content: center;
 }
-
 .submitButtonContainer > button {
   cursor: pointer;
   background: rgba(242, 112, 156);
@@ -63,12 +72,12 @@ input::-webkit-inner-spin-button {
   pointer-events: all !important;
   color: black;
   background: rgba(242, 112, 156, 0.6) 42%;
-}
+} */
 #form > div > div:before {
   content: "";
   border: none;
 }
-#form > div > div:after {
+/* #form > div > div:after {
   border-width: 1px;
   border-style: solid;
 
@@ -83,7 +92,24 @@ input::-webkit-inner-spin-button {
 }
 textarea::-webkit-scrollbar {
   display: none;
+} */
+.backButton {
+  /* background-color: white; */
+  position: absolute;
+  height: 2em;
+  width: 2em;
+  display: flex;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+.backButton a:active {
+  color: white;
+}
+.backButton a {
+  color: white;
 }
 .backButton:hover {
-  transform: scale(1.1);
+  box-shadow: 0px 0px 8px black;
 }

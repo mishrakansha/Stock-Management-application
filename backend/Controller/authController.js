@@ -13,36 +13,40 @@ const signIn = (req, res) => {
       bcrypt
         .compare(req.body.password, user.password)
         .then((passwordCheck) => {
+          // console.log(passwordCheck);
           if (!passwordCheck) {
             return res.status(400).send({
               error: "Passwords does not match",
             });
           }
+
           const token = jwt.sign(
             {
               userId: user._id,
               userEmail: user.email,
             },
             "RANDOM-TOKEN",
-            { expiresIn: "24h" }
+            {
+              expiresIn: "24h",
+              // algorithm: "HS256",
+            }
           );
+          // console.log(token);
           res.status(200).send({
             message: "Login Successful",
             email: user.email,
-            token,
+            token: token,
           });
         })
         .catch((error) => {
           res.status(400).send({
             message: "Passwords does not match",
-            error,
           });
         });
     })
     .catch((e) => {
       res.status(404).send({
         message: "Email not found",
-        e,
       });
     });
 };

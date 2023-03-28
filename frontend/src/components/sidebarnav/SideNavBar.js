@@ -8,7 +8,7 @@ export default class SideNavBar extends Component {
       <nav id="sideNav">
         <ul>
           <li id="dashboardIcon">
-            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+            <Link to="" style={{ textDecoration: "none", color: "white" }}>
               {/* <i className="fas fa-home"></i> */}
               <div className="material-symbols-outlined">dashboard</div>
             </Link>
@@ -16,7 +16,7 @@ export default class SideNavBar extends Component {
 
           <li id="addIcon">
             <Link
-              to="/additem"
+              to="additem"
               style={{ textDecoration: "none", color: "white" }}
             >
               <div className="material-symbols-sharp">add_box</div>
@@ -34,13 +34,13 @@ export class ExpendableSlidebar extends Component {
       <nav id="sideNavExpandable">
         <ul>
           <li id="dashboardText">
-            <Link to="/" style={{ textDecoration: "none" }}>
-              <div className="material-symbols-outlined">dashboard</div>{" "}
+            <Link to="">
+              <div className="material-symbols-outlined">dashboard</div>
               Dashboard
-            </Link>
+            </Link>{" "}
           </li>
           <li id="addText">
-            <Link to="/additem" style={{ textDecoration: "none" }}>
+            <Link to="additem">
               <div className="material-symbols-sharp">add_box</div> Add Item
             </Link>
           </li>

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { useParams } from "react-router-dom";
-import "./DetailsPage.css";
 import { getOneItem } from "./../../actions/itemsFetching";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import DataContainer from "../dataContainer/DataContainer";
 
+import "./DetailsPage.css";
 const withRouter = (WrappedComponent) => (props) => {
   const params = useParams();
   return <WrappedComponent {...props} params={params} />;
@@ -23,7 +23,7 @@ class Details extends Component {
         child=<div className="deailsPageContainer">
           <div className="innerDeailsPageContainer">
             <h3 className="backButton">
-              <Link className="Link" to="/">
+              <Link className="Link" to={-1}>
                 <i class="fa-solid fa-arrow-left"></i>
               </Link>
             </h3>

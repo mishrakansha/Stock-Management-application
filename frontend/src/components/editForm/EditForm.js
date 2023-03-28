@@ -160,35 +160,34 @@ class EditForm extends Component {
       <DataContainer
         child=<div className="formContainer">
           <div className="innerFormContainer">
-            <h3 className="backButton">
-              <Link className="Link" to="/">
-                <i class="fa-solid fa-arrow-left"></i>
-              </Link>
-            </h3>
+            <div>
+              <h3 className="backButton">
+                <Link className="Link" to={-1}>
+                  <i class="fa-solid fa-arrow-left"></i>
+                </Link>
+              </h3>
+              <h1>UPDATE ITEM</h1>
+            </div>
             <form
               onSubmit={this.handleSubmit}
               method="post"
               action="localhost:5000/api/stock/additem"
               id="form"
             >
-              <h1>UPDATE ITEM</h1>
               {this.state.formSubmitted && <h3>Sucessfully Updated </h3>}
 
               <TextField
                 required
-                InputLabelProps={{
-                  style: {
-                    background:
-                      "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
-                    webkitTextFillColor: "transparent",
-                    webkitBackgroundClip: "text",
-                  },
-                }}
                 id="filled-basic"
                 name="itemName"
                 value={this.state.itemName || ""}
                 label="Item Name"
                 variant="filled"
+                InputProps={{
+                  style: {
+                    height: "50px",
+                  },
+                }}
                 onChange={this.handelOnchange}
                 type="text"
                 style={{ width: "100%" }}
@@ -209,13 +208,13 @@ class EditForm extends Component {
                   inputProps: {
                     min: 1,
                   },
-                }}
-                InputLabelProps={{
+                  //           style: {
+                  // height:"1em",
+                  // padding: '0 14px',
+
+                  //           }
                   style: {
-                    background:
-                      "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
-                    webkitTextFillColor: "transparent",
-                    webkitBackgroundClip: "text",
+                    height: "50px",
                   },
                 }}
                 name="quantity"
@@ -240,13 +239,13 @@ class EditForm extends Component {
                   inputProps: {
                     min: 1,
                   },
-                }}
-                InputLabelProps={{
+                  //           style: {
+                  // height:"1em",
+                  // padding: '0 14px',
+
+                  //           }
                   style: {
-                    background:
-                      "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
-                    webkitTextFillColor: "transparent",
-                    webkitBackgroundClip: "text",
+                    height: "50px",
                   },
                 }}
                 onChange={this.handelOnchange}
@@ -263,15 +262,12 @@ class EditForm extends Component {
                 id="filled-basic"
                 name="manufacturingCompany"
                 label="Manufacturing company"
-                variant="filled"
-                InputLabelProps={{
+                InputProps={{
                   style: {
-                    background:
-                      "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
-                    webkitTextFillColor: "transparent",
-                    webkitBackgroundClip: "text",
+                    height: "50px",
                   },
                 }}
+                variant="filled"
                 onChange={this.handelOnchange}
                 type="text"
                 value={this.state.manufacturingCompany || ""}
@@ -284,19 +280,13 @@ class EditForm extends Component {
                 required
                 multiline
                 rows={2}
-                InputLabelProps={{
-                  style: {
-                    background:
-                      "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
-                    webkitTextFillColor: "transparent",
-                    webkitBackgroundClip: "text",
-                  },
-                }}
                 name="description"
                 onChange={this.handelOnchange}
                 variant="filled"
                 value={this.state.description || ""}
                 label="Description"
+                dv
+                xz
               />
               {this.state.descriptionError && (
                 <div className="errorMessage">* this field is required.</div>
@@ -307,17 +297,16 @@ class EditForm extends Component {
                 type="date"
                 variant="filled"
                 value={this.state.date || ""}
+                InputProps={{
+                  style: {
+                    height: "50px",
+                  },
+                }}
                 name="date"
                 onChange={this.handelOnchange}
                 p
                 InputLabelProps={{
                   shrink: true,
-                  style: {
-                    background:
-                      "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
-                    webkitTextFillColor: "transparent",
-                    webkitBackgroundClip: "text",
-                  },
                 }}
               />
               {this.state.dateError && (

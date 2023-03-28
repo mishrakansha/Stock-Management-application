@@ -4,7 +4,7 @@ import "./NavBarCss.css";
 import SideNavBar from "../sidebarnav/SideNavBar";
 import { ExpendableSlidebar } from "../sidebarnav/SideNavBar.js";
 import { connect } from "react-redux";
-import {} from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { dataContainer, sideNavBarExpended } from "./../../actions/navBar";
 export class NavBar extends Component {
   constructor(props) {
@@ -100,7 +100,7 @@ export class NavBar extends Component {
         ) : (
           <SideNavBar />
         )}
-        {/* </div> */}
+        {/* </div> */} <Outlet />
       </>
     );
   }

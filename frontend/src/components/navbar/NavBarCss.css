@@ -4,8 +4,8 @@
   padding: 1em;
   display: flex;
   z-index: 20;
-  /* background: #323765; */
-  background: linear-gradient(to right, #0178bc 0%, #00bdda 100%);
+  background: #323765;
+  /* background: linear-gradient(to right, #0178bc 0%, #00bdda 100%); */
 
   color: #ffffff;
   padding: 12px;
@@ -35,7 +35,8 @@
 }
 .icon {
   text-transform: uppercase;
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 1.2em;
 }
 .leftSideList {
   display: flex;

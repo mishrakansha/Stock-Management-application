@@ -3,8 +3,9 @@ import Card from "../card/Card";
 import "./DashboardPage.css";
 import { getAllItem } from "./../../actions/itemsFetching";
 import { connect } from "react-redux";
-import Loader from "../Loader/Loader";
 import DataContainer from "../dataContainer/DataContainer";
+
+import CircularProgress from "@mui/material/CircularProgress";
 
 class DashboardPage extends Component {
   constructor(props) {
@@ -34,12 +35,15 @@ class DashboardPage extends Component {
   }
   render() {
     const { item } = this.props;
+    console.log(item);
     const { isloading } = this.props;
     return (
       <DataContainer
         child={
           isloading ? (
-            <Loader></Loader>
+            <div className="loaderContainer">
+              <CircularProgress disableShrink />
+            </div>
           ) : (
             <div className="cardContainer">
               {item &&
@@ -66,12 +70,12 @@ class DashboardPage extends Component {
   }
 }
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
     isloading: state.items.isloading,
     item: state.items.items,
   };
 };
-
 export default connect(mapStateToProps, {
   getAllItem,
 })(DashboardPage);
