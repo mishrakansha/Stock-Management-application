@@ -14,6 +14,9 @@ export default class SignIn extends Component {
   render() {
     return (
       <div>
+        <div className="signInSignUpHeading">
+          <h2 className="authLinksActive">SIGN IN</h2>
+        </div>
         <form action="#">
           <TextField
             type="email"

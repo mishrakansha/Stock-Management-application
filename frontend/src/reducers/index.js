@@ -1,9 +1,8 @@
 import { combineReducers } from "redux";
-import itemReducer from "./itemReducer";
+import stocksReducer from "./stocksReducer";
 import navBar from "./navBar";
-
 const reducers = combineReducers({
-  items: itemReducer,
+  items: stocksReducer,
   navBar: navBar,
 });
 export default reducers;

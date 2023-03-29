@@ -2,16 +2,20 @@ import React, { Component } from "react";
 import Button from "@mui/material/Button";
 import "./Cards.css";
 import { Link } from "react-router-dom";
-import { deleteItem } from "./../../actions/itemsFetching";
+import { deleteItem } from "../../actions/stocksActions";
 import moment from "moment";
 import { connect } from "react-redux";
-
+import { editFormPopUp } from "../../actions/stocksActions";
 // import TextField from "@mui/material/TextField";
 class Card extends Component {
   constructor(props) {
     super(props);
     this.state = { delete: true };
   }
+  handleEditPopUp = () => {
+    console.log("clicked");
+    this.props.editFormPopUp(true, this.props.id);
+  };
   handleDelete = () => {
     const id = this.props.id;
     this.props
@@ -34,7 +38,7 @@ class Card extends Component {
             <div className="cardBody">
               <div>By:-{this.props.manufacturingCompany}</div>
               <div className="dateContainer">
-                <div className="dateTextContainer">Added On</div>
+                <div className="dateTextContainer">Date</div>
                 <div className="dateIconContainer">
                   <i className="fa-solid fa-calendar-days"></i>
                   {moment(this.props.date).format(" DD/MM/YYYY")}
@@ -72,7 +76,31 @@ class Card extends Component {
                     <i className="fa-solid fa-eye"></i>
                   </Button>
                 </Link>
-                <Link
+
+                <Button
+                  onClick={this.handleEditPopUp}
+                  sx={{
+                    width: 35,
+                    minHeight: 35,
+                    minWidth: 35,
+                    height: 35,
+                    backgroundColor: "#323765",
+                    borderRadius: 0,
+                    border: "1px solid",
+                    borderColor: "primary.main",
+                    "& .MuiButton-startIcon": { margin: 0 },
+                    ":hover": {
+                      bgcolor: "#323765",
+                      color: "white",
+                    },
+                  }}
+                  variant="contained"
+                  size="small"
+                >
+                  <i className="fa-solid fa-pencil"></i>
+                </Button>
+
+                {/* <Link
                   className="Link"
                   to={`editdetails/${this.props.id}`}
                   state={{ id: this.props.id }}
@@ -98,7 +126,7 @@ class Card extends Component {
                   >
                     <i className="fa-solid fa-pencil"></i>
                   </Button>
-                </Link>
+                </Link> */}
                 <Button
                   sx={{
                     width: 35,
@@ -129,4 +157,10 @@ class Card extends Component {
     );
   }
 }
-export default connect(null, { deleteItem })(Card);
+const mapStateToProps = (state) => {
+  return {
+    isloading: state.items.isloading,
+    item: state.items.stockItems,
+  };
+};
+export default connect(mapStateToProps, { deleteItem, editFormPopUp })(Card);

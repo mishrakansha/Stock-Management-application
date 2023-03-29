@@ -29,7 +29,6 @@ const modifyItem = async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-  console.log(req.body);
   var id = req.params["id"];
   var matchQuery = await Item.findOne({ _id: id });
   console.log(matchQuery);
@@ -46,12 +45,15 @@ const modifyItem = async (req, res) => {
         manufacturingCompany: req.body.manufacturingCompany,
       },
     };
-    console.log(newvalues);
-    const result = await Item.updateOne({ _id: id }, newvalues)
-      .then((item) => res.json("updated"))
-      .catch((err) => {
-        res.send(err.message);
-      });
+    // console.log(newvalues);
+    try {
+      const result = await Item.updateOne({ _id: id }, newvalues);
+      res
+        .status(200)
+        .json(await Item.findOne({ _id: await Item.findOne({ _id: id }) }));
+    } catch (err) {
+      return res.status(400).json(error.message);
+    }
   }
 };
 const deleteItem = async (req, res) => {

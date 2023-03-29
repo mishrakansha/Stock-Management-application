@@ -21,31 +21,42 @@ class Auth extends Component {
       <>
         <div className="wrapperBody">
           <div className="wrapper">
-            <div className="button-container">
-              <Link className="Link" onClick={this.handelSignIn}>
-                <h2
-                  className={
-                    this.state.showSignIn
-                      ? "authLinksActive"
-                      : "authLinksDeactive"
-                  }
-                >
-                  SIGN IN
-                </h2>
-              </Link>
-              <Link className="Link" onClick={this.handelSignUp}>
-                <h2
-                  className={
-                    !this.state.showSignIn
-                      ? "authLinksActive"
-                      : "authLinksDeactive"
-                  }
-                >
-                  SIGN UP
-                </h2>
-              </Link>
-            </div>
-            {this.state.showSignIn ? <SignIn /> : <SignUp />}
+            {this.state.showSignIn ? (
+              <>
+                <div className="leftDiv">
+                  <img
+                    alt="crypto"
+                    src="https://images.unsplash.com/photo-1601382270349-49c15bddf738?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                  />
+                </div>
+                <div className="rightDiv">
+                  <SignIn />
+                  <div className="button-container">
+                    <Link className="Link" onClick={this.handelSignUp}>
+                      Create new account
+                    </Link>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="leftDiv">
+                  <SignUp />
+                  <div className="button-container">
+                    <Link className="Link" onClick={this.handelSignIn}>
+                      Already a member ?
+                    </Link>
+                  </div>
+                </div>
+                <div className="rightDiv">
+                  <img
+                    alt="crypto"
+                    src="https://images.unsplash.com/photo-1601382270349-49c15bddf738?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                    // src="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+                  />
+                </div>
+              </>
+            )}
           </div>
         </div>
       </>

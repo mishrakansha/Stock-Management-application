@@ -19,7 +19,6 @@ const signIn = (req, res) => {
               error: "Passwords does not match",
             });
           }
-
           const token = jwt.sign(
             {
               userId: user._id,

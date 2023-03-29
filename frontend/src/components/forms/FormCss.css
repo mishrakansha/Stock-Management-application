@@ -113,3 +113,11 @@ textarea::-webkit-scrollbar {
 .backButton:hover {
   box-shadow: 0px 0px 8px black;
 }
+@media screen and (max-width: 620px) {
+  .formContainer {
+    padding: 0.5em;
+  }
+  .innerFormContainer {
+    width: 100%;
+  }
+}

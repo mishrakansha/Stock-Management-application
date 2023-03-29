@@ -1,6 +1,5 @@
 .deailsPageContainer {
   display: flex;
-  font-family: Roboto;
   justify-content: center;
   align-items: center;
   justify-items: center;
@@ -9,16 +8,15 @@
 }
 .detailsComponent {
   display: flex;
-  padding: 1em 4em;
+  padding: 1em 3em;
+  font-size: 1.05em;
+  row-gap: 1em;
   flex-direction: column;
 }
 .innerDeailsPageContainer {
   width: 80%;
-  display: flex;
-  padding: 1em;
-  row-gap: 2em;
-  flex-direction: column;
-  border-radius: 1em;
+  border-top-right-radius: 1em;
+  border-top-left-radius: 1em;
   box-shadow: 0px 0px 12px 1px #b3b3b3;
   /* background: linear-gradient(
     218deg,
@@ -33,39 +31,43 @@
     rgba(252, 70, 120, 1) 100%
   ); */
 }
+.innerDeailsPageContainer > div {
+  color: white;
+  padding: 1em;
+  background: #323765;
+  text-align: center;
+  border-top-right-radius: 1em;
+  border-top-left-radius: 1em;
+}
 .detailsPart {
   display: flex;
+  gap: 1em;
+  box-shadow: 0px 0px 12px 1px rgb(149 148 148 / 67%);
   flex-wrap: wrap;
   padding: 0.7em;
+  flex-direction: column;
+  border-radius: 0.3em;
+}
+.itemInfoElement {
+  font-weight: 400;
+  background-color: #eeee;
+  padding: 0.4em 1vw;
 }
 
-.containerTitles {
-  font-size: 1.3em;
-  opacity: 0.8;
-}
-.detailElement h4 {
-  opacity: 0.74;
-  font-size: 1.1em;
-}
 .detailElement {
-  padding: 0.4em;
-  width: 50%;
+  display: flex;
+  gap: 1%;
+  flex-wrap: wrap;
+  width: 100%;
 }
-.detailElement div {
-  opacity: 0.71;
-  font-size: 1.1em;
-}
-.descriptionPart {
-  padding: 0.7em;
-  opacity: 0.71;
+.detailElement > div {
+  width: 49%;
 }
 .backButton {
-  /* background-color: white; */
   position: absolute;
   height: 2em;
   width: 2em;
   display: flex;
-  color: black;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
@@ -78,10 +80,22 @@
   .detailElement {
     width: 100%;
   }
+  .detailsComponent {
+    padding: 2em 1em;
+  }
   .deailsPageContainer {
     padding: 0.5em;
   }
   .innerDeailsPageContainer {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 420px) {
+  .detailElement {
+    flex-direction: column;
+    gap: 1em;
+  }
+  .detailElement > div {
     width: 100%;
   }
 }
@@ -94,5 +108,5 @@ hr {
   transform: scale(1.1);
 }
 .backButton a {
-  color: black !important;
+  color: rgb(255, 255, 255);
 }

@@ -1,9 +1,9 @@
 .Link {
   text-decoration: none;
 }
-/* .Link:active {
-  color: black;
-} */
+.Link:active {
+  color: inherit;
+}
 
 .mainLayout {
   display: grid;

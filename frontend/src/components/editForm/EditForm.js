@@ -1,18 +1,14 @@
-import { editItem, getOneItem } from "./../../actions/itemsFetching";
+import { editItem, getOneItem } from "../../actions/stocksActions";
 import React, { Component } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import "./EditForm.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import moment from "moment";
-import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import DataContainer from "../dataContainer/DataContainer";
-const withRouter = (WrappedComponent) => (props) => {
-  const params = useParams();
+// import DataContainer from "../dataContainer/DataContainer";
 
-  return <WrappedComponent {...props} params={params} />;
-};
+import { editFormPopUp } from "../../actions/stocksActions";
 class EditForm extends Component {
   constructor() {
     super();
@@ -34,26 +30,22 @@ class EditForm extends Component {
     };
   }
   async componentDidMount() {
-    const { id } = this.props.params;
-    this.props
-      .getOneItem(id)
-      .then((data) => {
-        console.log("data ", data);
-        data.date = moment(this.props.date).format("yyyy-MM-DD");
-        console.log(data.date);
-        this.setState({
-          itemName: data.itemName,
-          quantity: data.quantity,
-          price: data.price,
-          description: data.description,
-          date: data.date,
-          manufacturingCompany: data.manufacturingCompany,
-        });
-        console.log(this.state.date);
-      })
-      .catch((e) => {
-        console.log(e);
+    const { editFormId: id } = this.props;
+    try {
+      await this.props.getOneItem(id);
+      const { oneItem: data } = this.props;
+      data.date = moment(this.props.date).format("yyyy-MM-DD");
+      this.setState({
+        itemName: data.itemName,
+        quantity: data.quantity,
+        price: data.price,
+        description: data.description,
+        date: data.date,
+        manufacturingCompany: data.manufacturingCompany,
       });
+    } catch (e) {
+      console.log(e);
+    }
   }
   handleSubmit = (event) => {
     event.preventDefault();
@@ -73,13 +65,11 @@ class EditForm extends Component {
       date: date,
       manufacturingCompany: manufacturingCompany,
     };
-    const { id } = this.props.params;
-
+    const { editFormId: id } = this.props;
     this.props
       .editItem(id, data)
       .then((data) => {
-        console.log(data);
-        this.setState({ formSubmitted: true });
+        this.setState({ formSubmitted: true, modified: false });
         setTimeout(() => {
           this.setState({ formSubmitted: false });
         }, 5000);
@@ -154,201 +144,228 @@ class EditForm extends Component {
     }
     this.setState({ modified: true });
   };
+  handelClose = () => {
+    this.props.editFormPopUp(false);
+  };
 
   render() {
+    console.log(this.props.id);
     return (
-      <DataContainer
-        child=<div className="formContainer">
-          <div className="innerFormContainer">
-            <div>
-              <h3 className="backButton">
-                <Link className="Link" to={-1}>
-                  <i class="fa-solid fa-arrow-left"></i>
-                </Link>
-              </h3>
-              <h1>UPDATE ITEM</h1>
-            </div>
-            <form
-              onSubmit={this.handleSubmit}
-              method="post"
-              action="localhost:5000/api/stock/additem"
-              id="form"
-            >
-              {this.state.formSubmitted && <h3>Sucessfully Updated </h3>}
-
-              <TextField
-                required
-                id="filled-basic"
-                name="itemName"
-                value={this.state.itemName || ""}
-                label="Item Name"
-                variant="filled"
-                InputProps={{
-                  style: {
-                    height: "50px",
+      // <DataContainer child=
+      <div className="editFormContainer">
+        <div className="innerFormContainer">
+          <div>
+            <h3 className="closeButton">
+              <Button
+                onClick={this.handelClose}
+                variant="contained"
+                sx={{
+                  width: 35,
+                  minHeight: 35,
+                  minWidth: 35,
+                  height: 35,
+                  boxShadow: "0px 0px 0px  transparent",
+                  backgroundColor: "inherit",
+                  borderRadius: "50%",
+                  border: "1px solid transparent",
+                  borderColor: "none",
+                  "& .MuiButton-startIcon": { margin: 0 },
+                  ":hover": {
+                    bgcolor: "#323765",
+                    color: "white",
                   },
                 }}
-                onChange={this.handelOnchange}
-                type="text"
-                style={{ width: "100%" }}
-              />
-              {this.state.itemNameError && (
-                <div className="errorMessage">
-                  * Name of the item should contain atleast 3 character and
-                  atmost 100 character
-                </div>
-              )}
-              <TextField
-                required
-                id="filled-basic"
-                min="1"
-                label="Quantity"
-                value={this.state.quantity || ""}
-                InputProps={{
-                  inputProps: {
-                    min: 1,
-                  },
-                  //           style: {
-                  // height:"1em",
-                  // padding: '0 14px',
-
-                  //           }
-                  style: {
-                    height: "50px",
-                  },
-                }}
-                name="quantity"
-                variant="filled"
-                onInput={this.handelOnchange}
-                type="number"
-                style={{ width: "100%" }}
-              />
-              {this.state.quantityError && (
-                <div className="errorMessage">
-                  * Quantity should be greater than 1.
-                </div>
-              )}
-              <TextField
-                required
-                id="filled-basic"
-                name="price"
-                label="Price"
-                value={this.state.price || ""}
-                variant="filled"
-                InputProps={{
-                  inputProps: {
-                    min: 1,
-                  },
-                  //           style: {
-                  // height:"1em",
-                  // padding: '0 14px',
-
-                  //           }
-                  style: {
-                    height: "50px",
-                  },
-                }}
-                onChange={this.handelOnchange}
-                type="number"
-                style={{ width: "100%" }}
-              />
-              {this.state.priceError && (
-                <div className="errorMessage">
-                  * Price should be greater than 1.
-                </div>
-              )}
-              <TextField
-                required
-                id="filled-basic"
-                name="manufacturingCompany"
-                label="Manufacturing company"
-                InputProps={{
-                  style: {
-                    height: "50px",
-                  },
-                }}
-                variant="filled"
-                onChange={this.handelOnchange}
-                type="text"
-                value={this.state.manufacturingCompany || ""}
-                style={{ width: "100%" }}
-              />
-              {this.state.manufacturingCompanyError && (
-                <div className="errorMessage">* this field is required.</div>
-              )}
-              <TextField
-                required
-                multiline
-                rows={2}
-                name="description"
-                onChange={this.handelOnchange}
-                variant="filled"
-                value={this.state.description || ""}
-                label="Description"
-                dv
-                xz
-              />
-              {this.state.descriptionError && (
-                <div className="errorMessage">* this field is required.</div>
-              )}
-              <TextField
-                id="datetime-local"
-                label="Date"
-                type="date"
-                variant="filled"
-                value={this.state.date || ""}
-                InputProps={{
-                  style: {
-                    height: "50px",
-                  },
-                }}
-                name="date"
-                onChange={this.handelOnchange}
-                p
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-              {this.state.dateError && (
-                <div className="errorMessage">
-                  * date should not be greater than than today
-                </div>
-              )}
-              <div className="submitButtonContainer">
-                <Button
-                  disabled={
-                    !this.state.modified ||
-                    this.state.dateError ||
-                    this.state.itemNameError ||
-                    this.state.descriptionError ||
-                    this.state.priceError ||
-                    this.state.manufacturingCompanyError
-                  }
-                  type="submit"
-                  onChange={this.handelOnchange}
-                  fullWidth
-                  variant="contained"
-                  sx={{
-                    mt: 3,
-                    mb: 2,
-                    width: "50%",
-                  }}
-                >
-                  Update
-                </Button>
-              </div>
-            </form>
+                size="small"
+              >
+                <span className="material-symbols-outlined">close</span>
+              </Button>
+            </h3>
+            <h1>UPDATE ITEM</h1>
           </div>
+          <form
+            onSubmit={this.handleSubmit}
+            method="post"
+            action="localhost:5000/api/stock/additem"
+            id="form"
+          >
+            {this.state.formSubmitted && <h3>Sucessfully Updated </h3>}
+
+            <TextField
+              required
+              id="filled-basic"
+              name="itemName"
+              value={this.state.itemName || ""}
+              label="Item Name"
+              variant="filled"
+              InputProps={{
+                style: {
+                  height: "50px",
+                },
+              }}
+              onChange={this.handelOnchange}
+              type="text"
+              style={{ width: "100%" }}
+            />
+            {this.state.itemNameError && (
+              <div className="errorMessage">
+                * Name of the item should contain atleast 3 character and atmost
+                100 character
+              </div>
+            )}
+            <TextField
+              required
+              id="filled-basic"
+              min="1"
+              label="Quantity"
+              value={this.state.quantity || ""}
+              InputProps={{
+                inputProps: {
+                  min: 1,
+                },
+                //           style: {
+                // height:"1em",
+                // padding: '0 14px',
+
+                //           }
+                style: {
+                  height: "50px",
+                },
+              }}
+              name="quantity"
+              variant="filled"
+              onInput={this.handelOnchange}
+              type="number"
+              style={{ width: "100%" }}
+            />
+            {this.state.quantityError && (
+              <div className="errorMessage">
+                * Quantity should be greater than 1.
+              </div>
+            )}
+            <TextField
+              required
+              id="filled-basic"
+              name="price"
+              label="Price"
+              value={this.state.price || ""}
+              variant="filled"
+              InputProps={{
+                inputProps: {
+                  min: 1,
+                },
+                //           style: {
+                // height:"1em",
+                // padding: '0 14px',
+
+                //           }
+                style: {
+                  height: "50px",
+                },
+              }}
+              onChange={this.handelOnchange}
+              type="number"
+              style={{ width: "100%" }}
+            />
+            {this.state.priceError && (
+              <div className="errorMessage">
+                * Price should be greater than 1.
+              </div>
+            )}
+            <TextField
+              required
+              id="filled-basic"
+              name="manufacturingCompany"
+              label="Manufacturing company"
+              InputProps={{
+                style: {
+                  height: "50px",
+                },
+              }}
+              variant="filled"
+              onChange={this.handelOnchange}
+              type="text"
+              value={this.state.manufacturingCompany || ""}
+              style={{ width: "100%" }}
+            />
+            {this.state.manufacturingCompanyError && (
+              <div className="errorMessage">* this field is required.</div>
+            )}
+            <TextField
+              required
+              multiline
+              rows={2}
+              name="description"
+              onChange={this.handelOnchange}
+              variant="filled"
+              value={this.state.description || ""}
+              label="Description"
+              dv
+              xz
+            />
+            {this.state.descriptionError && (
+              <div className="errorMessage">* this field is required.</div>
+            )}
+            <TextField
+              id="datetime-local"
+              label="Date"
+              type="date"
+              variant="filled"
+              value={this.state.date || ""}
+              InputProps={{
+                style: {
+                  height: "50px",
+                },
+              }}
+              name="date"
+              onChange={this.handelOnchange}
+              p
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            {this.state.dateError && (
+              <div className="errorMessage">
+                * date should not be greater than than today
+              </div>
+            )}
+            <div className="submitButtonContainer">
+              <Button
+                disabled={
+                  !this.state.modified ||
+                  this.state.dateError ||
+                  this.state.itemNameError ||
+                  this.state.descriptionError ||
+                  this.state.priceError ||
+                  this.state.manufacturingCompanyError
+                }
+                type="submit"
+                onChange={this.handelOnchange}
+                fullWidth
+                variant="contained"
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  width: "50%",
+                }}
+              >
+                Update
+              </Button>
+            </div>
+          </form>
         </div>
-      />
+      </div>
+      // />
     );
   }
 }
 const mapStateToProps = (state) => {
   return {
-    oneItem: state.items.payload,
+    editFormId: state.items.isPopperOpen.id,
+    oneItem: state.items.singleStockDetails,
   };
 };
-export default connect(mapStateToProps, { editItem, getOneItem })(
-  withRouter(EditForm)
-);
+export default connect(mapStateToProps, {
+  editItem,
+  editFormPopUp,
+  getOneItem,
+})(EditForm);

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { useParams } from "react-router-dom";
-import { getOneItem } from "./../../actions/itemsFetching";
+import { getOneItem } from "../../actions/stocksActions";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -22,44 +22,41 @@ class Details extends Component {
       <DataContainer
         child=<div className="deailsPageContainer">
           <div className="innerDeailsPageContainer">
-            <h3 className="backButton">
-              <Link className="Link" to={-1}>
-                <i class="fa-solid fa-arrow-left"></i>
-              </Link>
-            </h3>
+            <div>
+              <h3 className="backButton">
+                <Link className="Link" to={-1}>
+                  <i className="fa-solid fa-arrow-left"></i>
+                </Link>
+              </h3>
+              <h1>{oneItem.itemName}</h1>
+            </div>
+
             {oneItem && (
-              <div className="detailsComponent">
-                <h3 className="containerTitles">Deatails</h3>
-                <hr />
+              <section className="detailsComponent">
+                {/* <h3 className="containerTitles">Details</h3>
+                <hr /> */}
                 <div className="detailsPart">
+                  <div className="itemInfoElement">
+                    Manufacturing Company : {oneItem.manufacturingCompany}
+                  </div>
                   <div className="detailElement">
-                    <h4> Item Name </h4>
-                    <div>{oneItem.itemName}</div>
+                    <div className="itemInfoElement">
+                      Quantity : {oneItem.quantity}
+                    </div>
+                    <div className="itemInfoElement">
+                      Price : {oneItem.price}
+                    </div>
                   </div>
 
-                  <div className="detailElement">
-                    <h4> Quantity</h4>
-                    <div> {oneItem.quantity}</div>
+                  <div className="itemInfoElement">
+                    Date : {moment(oneItem.date).format("MMMM D, YYYY")}
                   </div>
-                  <div className="detailElement">
-                    <h4> Price</h4>
-                    <div> {oneItem.price}</div>
-                  </div>
-                  <div className="detailElement">
-                    <h4> Date</h4>
-                    <div>{moment(oneItem.date).format("MMMM D, YYYY")}</div>
-                  </div>
-                  <div className="detailElement">
-                    <h4> Manufacturing Company</h4>
-                    <div>{oneItem.manufacturingCompany}</div>
-                  </div>
-                </div>{" "}
-                <h3 className="containerTitles">Description</h3>
-                <hr />
-                <div className="descriptionPart">
+                </div>
+                <div className="detailsPart">
+                  <div className="itemInfoElement">Description :</div>
                   <div>{oneItem.description}</div>
                 </div>
-              </div>
+              </section>
             )}
           </div>
         </div>
@@ -68,8 +65,9 @@ class Details extends Component {
   }
 }
 const mapStateToProps = (state) => {
+  console.log(state.items.singleStockDetails);
   return {
-    oneItem: state.items.payload,
+    oneItem: state.items.singleStockDetails,
   };
 };
 

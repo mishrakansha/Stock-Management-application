@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { addItem } from "./../../actions/itemsFetching";
+import { addItem } from "../../actions/stocksActions";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import "./FormCss.css";
@@ -48,8 +48,7 @@ class NewItemForm extends Component {
       manufacturingCompany: manufacturingCompany,
     };
     try {
-      const res = await this.props.addItem(data);
-      console.log("res ", res);
+      await this.props.addItem(data);
       this.setState({ formSubmitted: true });
       this.setState({
         itemName: "",
@@ -148,7 +147,7 @@ class NewItemForm extends Component {
             <div>
               <h3 className="backButton">
                 <Link className="Link" to={-1}>
-                  <i class="fa-solid fa-arrow-left"></i>
+                  <i className="fa-solid fa-arrow-left"></i>
                 </Link>
               </h3>
               <h1>Add New Item</h1>

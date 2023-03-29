@@ -107,17 +107,21 @@ describe("Items", () => {
       });
       try {
         Item = await Item.save();
+        console.log(Item._id);
         chai
           .request(server)
-          .get("/api/stock/getOneItem/" + Item._id)
+          .put("/api/stock/modifyItem/" + Item._id)
           .send({
+            itemName: "Moon",
             quantity: 72,
-            price: 260000,
+            price: 26000,
             description:
               "Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.\n\nDuis consequat dui nec nisi volutpat eleifend. Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.\n\nMauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.\n\nIn quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.\n\nMaecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.\n\nMaecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.\n\nNullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.\n\nMorbi non lectus. non, sodales sed, tincidunt eu, felis.\n\nFusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.\n\nSed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.",
             date: "3/23/2022",
+            manufacturingCompany: "Mercury",
           })
           .end((err, res) => {
+            console.log(res.body);
             res.body.should.be.a("object");
             res.should.have.status(200);
             res.body.should.have.property("itemName");
@@ -166,62 +170,63 @@ describe("Items", () => {
     });
   });
 });
-// describe("userSignUp", () => {
-//   describe("/POST SignUp", () => {
-//     it("All fields are mandatory", (done) => {
-//       let User = {
-//         name: "akansha",
-//         // email: "akansha@keepAliveTimeout.com",
-//         password: "hello",
-//       };
-//       chai
-//         .request(server)
-//         .post("/auth/signUp")
-//         .send(User)
-//         .end((err, res) => {
-//           // console.log(res);
-//           res.should.have.status(400);
-//           res.body.should.be.a("object");
-//           res.body.should.have.property("errors");
-//           done();
-//         });
-//     });
-//     it("Password must be valid", (done) => {
-//       let User = {
-//         name: "akansha",
-//         email: "akansha@gmail.com",
-//         password: "hello",
-//       };
-//       chai
-//         .request(server)
-//         .post("/auth/signUp")
-//         .send(User)
-//         .end((err, res) => {
-//           res.should.have.status(400);
-//           res.body.should.be.a("object");
-//           res.body.should.have.property("errors");
-//           done();
-//         });
-//     });
-//     it("Sucessfully submitted form", (done) => {
-//       let User = {
-//         name: "akansha",
-//         email: "akanshamishra@gmail.com",
-//         password: "Hello@987",
-//       };
-//       chai
-//         .request(server)
-//         .post("/auth/signUp")
-//         .send(User)
-//         .end((err, res) => {
-//           console.log(res.body);
-//           // res.should.have.status(201);
-//           // res.body.should.be.a("object");
-//           done();
-//         });
-//     });
-//   });
-// });
+describe("userSignUp", () => {
+  describe("/POST SignUp", () => {
+    it("All fields are mandatory", (done) => {
+      let User = {
+        name: "akansha",
+        // email: "akansha@keepAliveTimeout.com",
+        password: "hello",
+      };
+      chai
+        .request(server)
+        .post("/auth/signUp")
+        .send(User)
+        .end((err, res) => {
+          // console.log(res);
+          res.should.have.status(400);
+          res.body.should.be.a("object");
+          res.body.should.have.property("errors");
+          done();
+        });
+    });
+    it("Password must be valid", (done) => {
+      let User = {
+        name: "akansha",
+        email: "akanshamishra94@gmail.com",
+        password: "hello",
+      };
+      chai
+        .request(server)
+        .post("/auth/signUp")
+        .send(User)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a("object");
+          res.body.should.have.property("errors");
+          done();
+        });
+    });
+    // it("Sucessfully submitted form", (done) => {
+    //   let User = {
+    //     name: "akansha",
+    //     email: "akanshamishra78@gmail.com",
+    //     password: "Hello@987",
+    //   };
+    //   chai
+    //     .request(server)
+    //     .post("/auth/signUp")
+    //     .send(User)
+    //     .end((err, res) => {
+    //       console.log(res.body);
+    //       // res.should.have.status(201);
+    //       // res.body.should.be.a("object");
+    //       done();
+    //     });
+    // });
+  });
+});
+
 describe("userSignIn", () => {
   describe("/POST SignIn", () => {
     it("Login Successfully", (done) => {

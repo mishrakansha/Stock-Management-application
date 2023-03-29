@@ -1,13 +1,22 @@
-.formContainer {
+.editFormContainer {
   display: flex;
+  position: fixed;
+  z-index: 110;
+  left: 0;
+  top: 12vh;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
   justify-content: center;
+  width: 100%;
   align-items: center;
   justify-items: center;
-  min-height: calc(100vh - 12vh);
-  padding: 2em;
+  /* min-height: calc(100vh - 12vh); */
+  padding: 22em 5em;
 }
 .innerFormContainer {
   width: 80%;
+  background-color: white;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -16,6 +25,7 @@
 }
 .innerFormContainer > div {
   color: white;
+
   padding: 1em;
   background: #323765;
   text-align: center;
@@ -93,7 +103,7 @@ input::-webkit-inner-spin-button {
 textarea::-webkit-scrollbar {
   display: none;
 } */
-.backButton {
+.closeButton {
   /* background-color: white; */
   position: absolute;
   height: 2em;
@@ -104,12 +114,28 @@ textarea::-webkit-scrollbar {
   align-items: center;
   border-radius: 50%;
 }
-.backButton a:active {
+.closeButton a:active {
   color: white;
 }
-.backButton a {
+.closeButton a {
   color: white;
 }
-.backButton:hover {
+.closeButton:hover {
   box-shadow: 0px 0px 8px black;
+}
+@media screen and (max-width: 620px) {
+  .formContainer {
+    padding: 0.5em;
+    justify-content: unset;
+    align-items: unset;
+  }
+  .innerFormContainer {
+    width: 100%;
+    justify-content: unset;
+    align-items: unset;
+    height: max-content;
+  }
+  #form {
+    padding: 2em 1em;
+  }
 }

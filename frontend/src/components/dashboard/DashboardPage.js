@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import Card from "../card/Card";
 import "./DashboardPage.css";
-import { getAllItem } from "./../../actions/itemsFetching";
+import EditForm from "../editForm/EditForm";
+import { getAllItem } from "../../actions/stocksActions";
 import { connect } from "react-redux";
 import DataContainer from "../dataContainer/DataContainer";
-
 import CircularProgress from "@mui/material/CircularProgress";
-
 class DashboardPage extends Component {
   constructor(props) {
     super(props);
@@ -35,8 +34,10 @@ class DashboardPage extends Component {
   }
   render() {
     const { item } = this.props;
-    console.log(item);
     const { isloading } = this.props;
+    const { isPopperOpen } = this.props;
+    console.log(isPopperOpen);
+    console.log("render card");
     return (
       <DataContainer
         child={
@@ -46,6 +47,7 @@ class DashboardPage extends Component {
             </div>
           ) : (
             <div className="cardContainer">
+              {isPopperOpen ? <EditForm /> : null}
               {item &&
                 item.length > 0 &&
                 item.map((element) => {
@@ -70,10 +72,11 @@ class DashboardPage extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state.items.isPopperOpen);
   return {
+    isPopperOpen: state.items.isPopperOpen.isPopperOpen,
     isloading: state.items.isloading,
-    item: state.items.items,
+    item: state.items.stockItems,
   };
 };
 export default connect(mapStateToProps, {
