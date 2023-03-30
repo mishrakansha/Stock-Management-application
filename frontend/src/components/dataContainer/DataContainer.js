@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import "./DataContainer.css";
+import "./dataContainer.css";
 import { connect } from "react-redux";
 class DataContainer extends Component {
   render() {
+    const { dataContainerGrid, child } = this.props;
     return (
-      <div id="dataContainer" style={this.props.dataContainerGrid}>
-        {" "}
-        {this.props.child}
+      <div id="dataContainer" style={dataContainerGrid}>
+        {child}
       </div>
     );
   }

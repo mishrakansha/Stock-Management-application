@@ -13,7 +13,6 @@
   display: flex;
   width: 100%;
   justify-content: center;
-  background: rgb(0, 0, 0, 0.8);
   align-items: center;
   height: calc(100vh - 12vh);
   flex-direction: column;

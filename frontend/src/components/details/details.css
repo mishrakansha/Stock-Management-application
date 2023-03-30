@@ -1,10 +1,22 @@
 .deailsPageContainer {
   display: flex;
   justify-content: center;
-  align-items: center;
   justify-items: center;
   min-height: calc(100vh - 12vh);
-  padding: 2em;
+  padding: 1px 0px;
+}
+.descriptionContainer {
+  display: flex;
+  box-shadow: 0px 5px 12px 1px rgb(149 148 148 / 67%);
+  flex-wrap: wrap;
+  gap: 0.4em;
+  padding: 0.7em;
+  flex-direction: column;
+  border-radius: 0.3em;
+}
+.descriptionBody {
+  font-size: 14px;
+  padding: 1px 10px 10px 10px;
 }
 .detailsComponent {
   display: flex;
@@ -14,35 +26,21 @@
   flex-direction: column;
 }
 .innerDeailsPageContainer {
-  width: 80%;
-  border-top-right-radius: 1em;
-  border-top-left-radius: 1em;
   box-shadow: 0px 0px 12px 1px #b3b3b3;
-  /* background: linear-gradient(
-    218deg,
-    rgba(63, 193, 251, 1) 0%,
-    rgba(88, 177, 232, 1) 13%,
-    rgba(252, 70, 107, 0.6728816526610644) 100%
-  ); */
-
-  /* background: linear-gradient(
-    218deg,
-    rgba(10, 84, 117, 1) 0%,
-    rgba(252, 70, 120, 1) 100%
-  ); */
+  width: 100%;
 }
 .innerDeailsPageContainer > div {
   color: white;
   padding: 1em;
   background: #323765;
+  position: sticky;
+  top: calc(12vh + 1px);
   text-align: center;
-  border-top-right-radius: 1em;
-  border-top-left-radius: 1em;
 }
 .detailsPart {
   display: flex;
   gap: 1em;
-  box-shadow: 0px 0px 12px 1px rgb(149 148 148 / 67%);
+  box-shadow: 0px 5px 12px 1px rgb(149 148 148 / 67%);
   flex-wrap: wrap;
   padding: 0.7em;
   flex-direction: column;

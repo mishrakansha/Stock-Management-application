@@ -123,10 +123,6 @@ link {
   display: flex;
   justify-content: center;
 }
-.submitButtonContainer {
-  display: flex;
-  justify-content: center;
-}
 .submitButtonContainer > button {
   cursor: pointer;
   background: #323765;
@@ -157,25 +153,3 @@ link {
     width: 100%;
   }
 }
-/* @keyframes slideIn {
-  from {
-    margin-left: 50%;
-    width: 0%;
-  }
-
-  to {
-    margin-left: 0%;
-    width: 50%;
-  }
-} */
-/* @keyframes slideOut {
-  from {
-    margin-left: -50%;
-    width: 0%;
-  }
-
-  to {
-    margin-left: 0%;
-    width: 50%;
-  }
-} */

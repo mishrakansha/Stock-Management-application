@@ -8,12 +8,13 @@ const signIn = (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-  User.findOne({ email: req.body.email })
+
+  const { email, password } = req.body;
+  User.findOne({ email: email })
     .then((user) => {
       bcrypt
-        .compare(req.body.password, user.password)
+        .compare(password, user.password)
         .then((passwordCheck) => {
-          // console.log(passwordCheck);
           if (!passwordCheck) {
             return res.status(400).send({
               error: "Passwords does not match",
@@ -27,10 +28,8 @@ const signIn = (req, res) => {
             "RANDOM-TOKEN",
             {
               expiresIn: "24h",
-              // algorithm: "HS256",
             }
           );
-          // console.log(token);
           res.status(200).send({
             message: "Login Successful",
             email: user.email,
@@ -55,12 +54,13 @@ const signUp = (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
+  const { name, email, password } = req.body;
   bcrypt
-    .hash(req.body.password, 10)
+    .hash(password, 10)
     .then((hashedPassword) => {
       const user = new User({
-        name: req.body.name,
-        email: req.body.email,
+        name: name,
+        email: email,
         password: hashedPassword,
       });
       user

@@ -7,7 +7,7 @@ import {
   EDIT_ITEM,
   DELETE_ITEM,
   EDIT_FORM_POPUP,
-} from "../actions/types";
+} from "../actionTypes/types";
 const initialState = {
   stockItems: [],
   singleStockDetails: {},
@@ -47,13 +47,9 @@ const itemReducer = (state = initialState, { type, payload }) => {
           (element) => element._id !== payload
         ),
       };
-
-    // return state;
     case LOADING:
       return { ...state, isloading: payload };
     case EDIT_FORM_POPUP:
-      // console.log("payload", payload);
-      // console.log(state);
       return { ...state, isPopperOpen: payload };
 
     default:

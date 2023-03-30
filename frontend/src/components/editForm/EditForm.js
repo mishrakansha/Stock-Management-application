@@ -1,14 +1,14 @@
-import { editItem, getOneItem } from "../../actions/stocksActions";
+import { editItem, getOneItem } from "../../redux/actions/stocks";
 import React, { Component } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import "./EditForm.css";
-// import { Link } from "react-router-dom";
+import "./editForm.css";
 import moment from "moment";
 import { connect } from "react-redux";
-// import DataContainer from "../dataContainer/DataContainer";
-
-import { editFormPopUp } from "../../actions/stocksActions";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import { editFormPopUp } from "../../redux/actions/stocks";
 class EditForm extends Component {
   constructor() {
     super();
@@ -30,18 +30,26 @@ class EditForm extends Component {
     };
   }
   async componentDidMount() {
-    const { editFormId: id } = this.props;
+    const { editFormId: id, getOneItem } = this.props;
     try {
-      await this.props.getOneItem(id);
+      await getOneItem(id);
       const { oneItem: data } = this.props;
-      data.date = moment(this.props.date).format("yyyy-MM-DD");
+      let {
+        itemName,
+        manufacturingCompany,
+        price,
+        quantity,
+        date,
+        description,
+      } = data;
+      date = moment(date).format("yyyy-MM-DD");
       this.setState({
-        itemName: data.itemName,
-        quantity: data.quantity,
-        price: data.price,
-        description: data.description,
-        date: data.date,
-        manufacturingCompany: data.manufacturingCompany,
+        itemName: itemName,
+        quantity: quantity,
+        price: price,
+        description: description,
+        date: date,
+        manufacturingCompany: manufacturingCompany,
       });
     } catch (e) {
       console.log(e);
@@ -65,18 +73,9 @@ class EditForm extends Component {
       date: date,
       manufacturingCompany: manufacturingCompany,
     };
-    const { editFormId: id } = this.props;
-    this.props
-      .editItem(id, data)
-      .then((data) => {
-        this.setState({ formSubmitted: true, modified: false });
-        setTimeout(() => {
-          this.setState({ formSubmitted: false });
-        }, 5000);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const { editFormId: id, editItem, editFormPopUp } = this.props;
+    editItem(id, data);
+    editFormPopUp(false);
     window.scrollTo(0, 0);
   };
   handelOnchange = (event) => {
@@ -145,56 +144,47 @@ class EditForm extends Component {
     this.setState({ modified: true });
   };
   handelClose = () => {
-    this.props.editFormPopUp(false);
+    const { editFormPopUp } = this.props;
+    editFormPopUp(false);
   };
-
   render() {
-    console.log(this.props.id);
+    const { isPopperOpen: open } = this.props;
+    const {
+      itemName,
+      quantity,
+      price,
+      description,
+      date,
+      manufacturingCompany,
+      manufacturingCompanyError,
+      itemNameError,
+      quantityError,
+      priceError,
+      descriptionError,
+      dateError,
+      formSubmitted,
+      modified,
+    } = this.state;
     return (
-      // <DataContainer child=
-      <div className="editFormContainer">
-        <div className="innerFormContainer">
+      <Dialog open={open} onClose={this.handleClose} fullWidth={true}>
+        <div className="innerEditFormContainer">
           <div>
-            <h3 className="closeButton">
-              <Button
-                onClick={this.handelClose}
-                variant="contained"
-                sx={{
-                  width: 35,
-                  minHeight: 35,
-                  minWidth: 35,
-                  height: 35,
-                  boxShadow: "0px 0px 0px  transparent",
-                  backgroundColor: "inherit",
-                  borderRadius: "50%",
-                  border: "1px solid transparent",
-                  borderColor: "none",
-                  "& .MuiButton-startIcon": { margin: 0 },
-                  ":hover": {
-                    bgcolor: "#323765",
-                    color: "white",
-                  },
-                }}
-                size="small"
-              >
-                <span className="material-symbols-outlined">close</span>
-              </Button>
-            </h3>
             <h1>UPDATE ITEM</h1>
           </div>
+        </div>
+        <DialogContent>
           <form
             onSubmit={this.handleSubmit}
             method="post"
             action="localhost:5000/api/stock/additem"
-            id="form"
+            id="editForm"
           >
-            {this.state.formSubmitted && <h3>Sucessfully Updated </h3>}
-
+            {formSubmitted && <h3>Sucessfully Updated </h3>}
             <TextField
               required
               id="filled-basic"
               name="itemName"
-              value={this.state.itemName || ""}
+              value={itemName || ""}
               label="Item Name"
               variant="filled"
               InputProps={{
@@ -206,7 +196,7 @@ class EditForm extends Component {
               type="text"
               style={{ width: "100%" }}
             />
-            {this.state.itemNameError && (
+            {itemNameError && (
               <div className="errorMessage">
                 * Name of the item should contain atleast 3 character and atmost
                 100 character
@@ -217,16 +207,11 @@ class EditForm extends Component {
               id="filled-basic"
               min="1"
               label="Quantity"
-              value={this.state.quantity || ""}
+              value={quantity || ""}
               InputProps={{
                 inputProps: {
                   min: 1,
                 },
-                //           style: {
-                // height:"1em",
-                // padding: '0 14px',
-
-                //           }
                 style: {
                   height: "50px",
                 },
@@ -237,7 +222,7 @@ class EditForm extends Component {
               type="number"
               style={{ width: "100%" }}
             />
-            {this.state.quantityError && (
+            {quantityError && (
               <div className="errorMessage">
                 * Quantity should be greater than 1.
               </div>
@@ -247,17 +232,12 @@ class EditForm extends Component {
               id="filled-basic"
               name="price"
               label="Price"
-              value={this.state.price || ""}
+              value={price || ""}
               variant="filled"
               InputProps={{
                 inputProps: {
                   min: 1,
                 },
-                //           style: {
-                // height:"1em",
-                // padding: '0 14px',
-
-                //           }
                 style: {
                   height: "50px",
                 },
@@ -266,7 +246,7 @@ class EditForm extends Component {
               type="number"
               style={{ width: "100%" }}
             />
-            {this.state.priceError && (
+            {priceError && (
               <div className="errorMessage">
                 * Price should be greater than 1.
               </div>
@@ -284,10 +264,10 @@ class EditForm extends Component {
               variant="filled"
               onChange={this.handelOnchange}
               type="text"
-              value={this.state.manufacturingCompany || ""}
+              value={manufacturingCompany || ""}
               style={{ width: "100%" }}
             />
-            {this.state.manufacturingCompanyError && (
+            {manufacturingCompanyError && (
               <div className="errorMessage">* this field is required.</div>
             )}
             <TextField
@@ -297,12 +277,12 @@ class EditForm extends Component {
               name="description"
               onChange={this.handelOnchange}
               variant="filled"
-              value={this.state.description || ""}
+              value={description || ""}
               label="Description"
               dv
               xz
             />
-            {this.state.descriptionError && (
+            {descriptionError && (
               <div className="errorMessage">* this field is required.</div>
             )}
             <TextField
@@ -310,7 +290,7 @@ class EditForm extends Component {
               label="Date"
               type="date"
               variant="filled"
-              value={this.state.date || ""}
+              value={date || ""}
               InputProps={{
                 style: {
                   height: "50px",
@@ -323,7 +303,7 @@ class EditForm extends Component {
                 shrink: true,
               }}
             />
-            {this.state.dateError && (
+            {dateError && (
               <div className="errorMessage">
                 * date should not be greater than than today
               </div>
@@ -331,12 +311,12 @@ class EditForm extends Component {
             <div className="submitButtonContainer">
               <Button
                 disabled={
-                  !this.state.modified ||
-                  this.state.dateError ||
-                  this.state.itemNameError ||
-                  this.state.descriptionError ||
-                  this.state.priceError ||
-                  this.state.manufacturingCompanyError
+                  !modified ||
+                  dateError ||
+                  itemNameError ||
+                  descriptionError ||
+                  priceError ||
+                  manufacturingCompanyError
                 }
                 type="submit"
                 onChange={this.handelOnchange}
@@ -352,14 +332,27 @@ class EditForm extends Component {
               </Button>
             </div>
           </form>
-        </div>
-      </div>
-      // />
+        </DialogContent>
+        <DialogActions>
+          <Button
+            sx={{
+              color: " #323765",
+              ":hover": {
+                background: "rgb(50 55 101 / 4%)",
+              },
+            }}
+            onClick={this.handelClose}
+          >
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     );
   }
 }
 const mapStateToProps = (state) => {
   return {
+    isPopperOpen: state.items.isPopperOpen.isPopperOpen,
     editFormId: state.items.isPopperOpen.id,
     oneItem: state.items.singleStockDetails,
   };
