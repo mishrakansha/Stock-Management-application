@@ -1,4 +1,4 @@
-import { SIDE_NAV_BAR_EXPENDED, DATA_CONTAINER } from "../actions/types";
+import { SIDE_NAV_BAR_EXPENDED, DATA_CONTAINER } from "../actionTypes/types";
 const initialState = {
   dataContainerGrid: { gridColumn: "2/7" },
   sideNavBarExpended: false,

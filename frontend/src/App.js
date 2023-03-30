@@ -1,15 +1,12 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
 import React, { Component } from "react";
 import NavBar from "./components/navbar/NavBar";
 import NewItemForm from "./components/forms/NewItemForm";
 import DashboardPage from "./components/dashboard/DashboardPage";
 import Details from "./components/details/Details";
 import EditForm from "./components/editForm/EditForm";
-import Auth from "./components/authentication/Auth";
 
-// import Test from "./test/Test";
 export default class App extends Component {
   render() {
     return (
@@ -19,8 +16,7 @@ export default class App extends Component {
 
           <Router>
             <Routes>
-              <Route exact path="/" element={<Auth />}></Route>
-              <Route exact path="/login" element={<NavBar />}>
+              <Route exact path="/" element={<NavBar />}>
                 <Route
                   exact
                   path="additem"

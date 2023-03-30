@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const { body } = require("express-validator");
 const authController = require("../Controller/authController");
-
 router.post(
   "/signIn",
   [body("email", "Enter the valid email").isEmail().normalizeEmail()],

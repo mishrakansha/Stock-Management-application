@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { addItem } from "../../actions/stocksActions";
+import { addItem } from "./../../redux/actions/stocks";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import "./FormCss.css";
+import "./newItemForm.css";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import DataContainer from "../dataContainer/DataContainer";
+
 class NewItemForm extends Component {
   constructor() {
     super();
@@ -22,15 +23,10 @@ class NewItemForm extends Component {
       priceError: true,
       descriptionError: true,
       dateError: true,
-      formSubmitted: false,
     };
   }
   handleSubmit = async (event) => {
     event.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    // for (const [key, value] of data) {
-    //   console.log(`${key}: ${value}\n`);
-    // }
     const {
       itemName,
       quantity,
@@ -47,31 +43,9 @@ class NewItemForm extends Component {
       date: date,
       manufacturingCompany: manufacturingCompany,
     };
-    try {
-      await this.props.addItem(data);
-      this.setState({ formSubmitted: true });
-      this.setState({
-        itemName: "",
-        quantity: "",
-        price: "",
-        description: "",
-        date: "",
-        manufacturingCompany: "",
-        manufacturingCompanyError: true,
-        itemNameError: true,
-        quantityError: true,
-        priceError: true,
-        descriptionError: true,
-        dateError: true,
-      });
-      setTimeout(() => {
-        this.setState({ formSubmitted: false });
-      }, 5000);
-    } catch (err) {
-      console.log(err);
-    }
-    window.scrollTo(0, 0);
-    // console.log(resData);
+    const { addItem } = this.props;
+    addItem(data);
+    <Link to="/"></Link>;
   };
   handelOnchange = (event) => {
     var data = event.target.value;
@@ -139,6 +113,20 @@ class NewItemForm extends Component {
   };
 
   render() {
+    const {
+      itemName,
+      quantity,
+      price,
+      description,
+      date,
+      manufacturingCompany,
+      manufacturingCompanyError,
+      itemNameError,
+      quantityError,
+      priceError,
+      descriptionError,
+      dateError,
+    } = this.state;
     return (
       <DataContainer
         child=<div className="formContainer">
@@ -153,8 +141,6 @@ class NewItemForm extends Component {
               <h1>Add New Item</h1>
             </div>
             <form onSubmit={this.handleSubmit} method="post" id="form">
-              {this.state.formSubmitted && <h3>Form submitted sucessfully</h3>}
-
               <TextField
                 required
                 id="filled-basic"
@@ -164,14 +150,14 @@ class NewItemForm extends Component {
                   },
                 }}
                 name="itemName"
-                value={this.state.itemName}
+                value={itemName}
                 label="Item Name"
                 variant="filled"
                 onChange={this.handelOnchange}
                 type="text"
                 style={{ width: "100%" }}
               />
-              {this.state.itemNameError && (
+              {itemNameError && (
                 <div className="errorMessage">
                   * Name of the item should contain atleast 3 character and
                   atmost 100 character
@@ -182,7 +168,7 @@ class NewItemForm extends Component {
                 id="filled-basic"
                 min="1"
                 label="Quantity"
-                value={this.state.quantity}
+                value={quantity}
                 InputProps={{
                   inputProps: {
                     min: 1,
@@ -202,7 +188,7 @@ class NewItemForm extends Component {
                 type="number"
                 style={{ width: "100%" }}
               />
-              {this.state.quantityError && (
+              {quantityError && (
                 <div className="errorMessage">
                   * Quantity should be greater than 1.
                 </div>
@@ -212,7 +198,7 @@ class NewItemForm extends Component {
                 id="filled-basic"
                 name="price"
                 label="Price"
-                value={this.state.price}
+                value={price}
                 variant="filled"
                 InputProps={{
                   inputProps: {
@@ -231,7 +217,7 @@ class NewItemForm extends Component {
                 type="number"
                 style={{ width: "100%" }}
               />
-              {this.state.priceError && (
+              {priceError && (
                 <div className="errorMessage">
                   * Price should be greater than 1.
                 </div>
@@ -249,10 +235,10 @@ class NewItemForm extends Component {
                 variant="filled"
                 onChange={this.handelOnchange}
                 type="text"
-                value={this.state.manufacturingCompany}
+                value={manufacturingCompany}
                 style={{ width: "100%" }}
               />
-              {this.state.manufacturingCompanyError && (
+              {manufacturingCompanyError && (
                 <div className="errorMessage">* this field is required.</div>
               )}
               <TextField
@@ -262,10 +248,10 @@ class NewItemForm extends Component {
                 name="description"
                 onChange={this.handelOnchange}
                 variant="filled"
-                value={this.state.description}
+                value={description}
                 label="Description"
               />
-              {this.state.descriptionError && (
+              {descriptionError && (
                 <div className="errorMessage">* this field is required.</div>
               )}
               <TextField
@@ -287,11 +273,11 @@ class NewItemForm extends Component {
                   // },
                 }}
                 variant="filled"
-                value={this.state.date}
+                value={date}
                 name="date"
                 onChange={this.handelOnchange}
               />
-              {this.state.dateError && (
+              {dateError && (
                 <div className="errorMessage">
                   * date should not be greater than than today
                 </div>
@@ -299,11 +285,11 @@ class NewItemForm extends Component {
               <div className="submitButtonContainer">
                 <Button
                   disabled={
-                    this.state.dateError ||
-                    this.state.itemNameError ||
-                    this.state.descriptionError ||
-                    this.state.priceError ||
-                    this.state.manufacturingCompanyError
+                    dateError ||
+                    itemNameError ||
+                    descriptionError ||
+                    priceError ||
+                    manufacturingCompanyError
                   }
                   type="submit"
                   onChange={this.handelOnchange}

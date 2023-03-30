@@ -6,7 +6,7 @@ import {
   DELETE_ITEM,
   LOADING,
   EDIT_FORM_POPUP,
-} from "./types";
+} from "../actionTypes/types";
 import axios from "axios";
 export const addItem = (data) => async (dispatch) => {
   try {
@@ -50,7 +50,6 @@ export const getOneItem = (id) => async (dispatch) => {
       type: GET_ONE_ITEM,
       payload: oneItem.data,
     });
-    // console.log("oneItem", oneItem);
   } catch (err) {
     return err;
   }

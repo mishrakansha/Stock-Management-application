@@ -1,4 +1,4 @@
-import { DATA_CONTAINER, SIDE_NAV_BAR_EXPENDED } from "./types";
+import { DATA_CONTAINER, SIDE_NAV_BAR_EXPENDED } from "../actionTypes/types";
 export const sideNavBarExpended = (styling) => (dispatch) => {
   dispatch({
     type: SIDE_NAV_BAR_EXPENDED,

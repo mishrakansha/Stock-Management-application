@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { useParams } from "react-router-dom";
-import { getOneItem } from "../../actions/stocksActions";
+import { getOneItem } from "./../../redux/actions/stocks";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import DataContainer from "../dataContainer/DataContainer";
-
-import "./DetailsPage.css";
+import "./details.css";
 const withRouter = (WrappedComponent) => (props) => {
   const params = useParams();
   return <WrappedComponent {...props} params={params} />;
@@ -14,10 +13,19 @@ const withRouter = (WrappedComponent) => (props) => {
 class Details extends Component {
   async componentDidMount() {
     const { id } = this.props.params;
-    this.props.getOneItem(id);
+    const { getOneItem } = this.props;
+    getOneItem(id);
   }
   render() {
     const { oneItem } = this.props;
+    const {
+      itemName,
+      manufacturingCompany,
+      price,
+      quantity,
+      date,
+      description,
+    } = oneItem;
     return (
       <DataContainer
         child=<div className="deailsPageContainer">
@@ -28,33 +36,27 @@ class Details extends Component {
                   <i className="fa-solid fa-arrow-left"></i>
                 </Link>
               </h3>
-              <h1>{oneItem.itemName}</h1>
+              <h1>{itemName}</h1>
             </div>
 
             {oneItem && (
               <section className="detailsComponent">
-                {/* <h3 className="containerTitles">Details</h3>
-                <hr /> */}
                 <div className="detailsPart">
                   <div className="itemInfoElement">
-                    Manufacturing Company : {oneItem.manufacturingCompany}
+                    Manufacturing Company : {manufacturingCompany}
                   </div>
                   <div className="detailElement">
-                    <div className="itemInfoElement">
-                      Quantity : {oneItem.quantity}
-                    </div>
-                    <div className="itemInfoElement">
-                      Price : {oneItem.price}
-                    </div>
+                    <div className="itemInfoElement">Quantity : {quantity}</div>
+                    <div className="itemInfoElement">Price : {price}</div>
                   </div>
 
                   <div className="itemInfoElement">
-                    Date : {moment(oneItem.date).format("MMMM D, YYYY")}
+                    Date : {moment(date).format("MMMM D, YYYY")}
                   </div>
                 </div>
-                <div className="detailsPart">
+                <div className="descriptionContainer">
                   <div className="itemInfoElement">Description :</div>
-                  <div>{oneItem.description}</div>
+                  <div className="descriptionBody">{description}</div>
                 </div>
               </section>
             )}
@@ -65,7 +67,6 @@ class Details extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  console.log(state.items.singleStockDetails);
   return {
     oneItem: state.items.singleStockDetails,
   };

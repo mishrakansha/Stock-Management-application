@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-// import TextField from "@mui/material/TextField";
-import "./NavBarCss.css";
+import "./navBar.css";
 import SideNavBar from "../sidebarnav/SideNavBar";
 import { ExpendableSlidebar } from "../sidebarnav/SideNavBar.js";
 import { connect } from "react-redux";
 import { Outlet } from "react-router-dom";
-import { dataContainer, sideNavBarExpended } from "./../../actions/navBar";
+import {
+  dataContainer,
+  sideNavBarExpended,
+} from "./../../redux/actions/navbar";
 export class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -15,17 +17,19 @@ export class NavBar extends Component {
     };
   }
   hamburgerClick = async () => {
+    const { isExpended, dataContainer, sideNavBarExpended } = this.props;
     if (window.innerWidth > 760) {
-      if (!this.props.isExpended) {
-        this.props.dataContainer({ gridColumn: "3/7" });
-        this.props.sideNavBarExpended(true);
+      if (!isExpended) {
+        dataContainer({ gridColumn: "3/7" });
+        sideNavBarExpended(true);
       } else {
-        this.props.dataContainer({ gridColumn: "2/7" });
-        this.props.sideNavBarExpended(false);
+        dataContainer({ gridColumn: "2/7" });
+        sideNavBarExpended(false);
       }
     }
   };
   componentDidMount() {
+    const { dataContainer, sideNavBarExpended } = this.props;
     window.addEventListener("resize", (event) => {
       var width =
         document.documentElement.clientWidth ||
@@ -34,29 +38,22 @@ export class NavBar extends Component {
       if (width > 760) {
         this.setState({ showhamburger: true });
       } else {
-        this.props.dataContainer({ gridColumn: "2/7" });
-        this.props.sideNavBarExpended(false);
+        dataContainer({ gridColumn: "2/7" });
+        sideNavBarExpended(false);
         this.setState({ showhamburger: false });
       }
     });
-    // window
-    //   .matchMedia("(max-width: 4096px) and (min-width:761px)")
-    //   .addEventListener("change", () => {
-    //     this.setState({ showhamburger: true });
-    //   });
-    // window
-    //   .matchMedia("( max-width: 760px )")
-    //   .addEventListener("change", handler);
   }
 
   render() {
     const { isExpended } = this.props;
+    const { showhamburger } = this.state;
     return (
       <>
         <div className="headNavBar">
           <nav className="nav">
             <ul className="leftSideList">
-              {this.state.showhamburger && (
+              {showhamburger && (
                 <li
                   onClick={this.hamburgerClick}
                   id="hamburger"

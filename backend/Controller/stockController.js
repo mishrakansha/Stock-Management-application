@@ -1,28 +1,27 @@
 const Item = require("../models/Items");
 const { validationResult } = require("express-validator");
 const getAllStock = async (req, res) => {
-  const allProducts = await Item.find({})
-    .then((items) => {
-      res.status(200).json(items);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.send(404).send(err.message);
-    });
+  try {
+    const allProducts = await Item.find({});
+    res.status(200).json(allProducts);
+  } catch (err) {
+    console.log(err);
+    res.send(404).send(err.message);
+  }
 };
 const getOneItem = async (req, res) => {
-  const oneProduct = await Item.findOne({ _id: req.params["id"] })
-    .then((item) => {
-      if (item == null) {
-        res.json("not found");
-      } else {
-        res.json(item);
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-      res.send(err.message);
-    });
+  var id = req.params["id"];
+  try {
+    const oneProduct = await Item.findOne({ _id: id });
+    if (oneProduct == null) {
+      res.json("not found");
+    } else {
+      res.json(oneProduct);
+    }
+  } catch (err) {
+    console.log(err);
+    res.send(err.message);
+  }
 };
 const modifyItem = async (req, res) => {
   const errors = validationResult(req);
@@ -31,23 +30,23 @@ const modifyItem = async (req, res) => {
   }
   var id = req.params["id"];
   var matchQuery = await Item.findOne({ _id: id });
-  console.log(matchQuery);
+  const { itemName, quantity, price, description, date, manufacturingCompany } =
+    req.body;
   if (matchQuery == null) {
     res.json("error");
   } else {
     const newvalues = {
       $set: {
-        itemName: req.body.itemName,
-        quantity: req.body.quantity,
-        price: req.body.price,
-        description: req.body.description,
-        date: req.body.date,
-        manufacturingCompany: req.body.manufacturingCompany,
+        itemName: itemName,
+        quantity: quantity,
+        price: price,
+        description: description,
+        date: date,
+        manufacturingCompany: manufacturingCompany,
       },
     };
-    // console.log(newvalues);
     try {
-      const result = await Item.updateOne({ _id: id }, newvalues);
+      await Item.updateOne({ _id: id }, newvalues);
       res
         .status(200)
         .json(await Item.findOne({ _id: await Item.findOne({ _id: id }) }));
@@ -57,18 +56,17 @@ const modifyItem = async (req, res) => {
   }
 };
 const deleteItem = async (req, res) => {
-  var matchQuery = await Item.findOne({ _id: req.params["id"] });
-
+  var id = req.params["id"];
+  var matchQuery = await Item.findOne({ _id: id });
   if (matchQuery == null) {
     res.json("error");
   } else {
-    const result = await Item.deleteOne({ _id: req.params["id"] })
-      .then(() => {
-        res.status(200).send({ message: "Item successfully deleted!" });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      const result = await Item.deleteOne({ _id: id });
+      res.status(200).send({ message: "Item successfully deleted!" });
+    } catch (err) {
+      console.log(err);
+    }
   }
 };
 const additem = async (req, res) => {
@@ -76,15 +74,16 @@ const additem = async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).send({ errors: errors.array() });
   }
+  const { itemName, quantity, price, description, date, manufacturingCompany } =
+    req.body;
   const newItem = new Item({
-    itemName: req.body.itemName,
-    quantity: req.body.quantity,
-    price: req.body.price,
-    description: req.body.description,
-    date: req.body.date,
-    manufacturingCompany: req.body.manufacturingCompany,
+    itemName: itemName,
+    quantity: quantity,
+    price: price,
+    description: description,
+    date: date,
+    manufacturingCompany: manufacturingCompany,
   });
-
   newItem
     .save()
     .then((item) => {

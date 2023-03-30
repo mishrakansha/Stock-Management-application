@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./SideBarCss.css";
+import "./sideNavBar.css";
 import { Link } from "react-router-dom";
 
 export default class SideNavBar extends Component {
@@ -9,7 +9,6 @@ export default class SideNavBar extends Component {
         <ul>
           <li id="dashboardIcon">
             <Link to="" style={{ textDecoration: "none", color: "white" }}>
-              {/* <i className="fas fa-home"></i> */}
               <div className="material-symbols-outlined">dashboard</div>
             </Link>
           </li>
