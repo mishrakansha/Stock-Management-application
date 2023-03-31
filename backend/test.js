@@ -30,7 +30,7 @@ describe("/POST items", () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.a("object");
-        res.body.should.have.property("errors");
+        res.body.should.have.property("message").eql("Bad request");
         done();
       });
   });
@@ -203,7 +203,7 @@ describe("/POST SignUp", () => {
   it("Sucessfully submitted form", (done) => {
     let User = {
       name: "akansha",
-      email: "akanshamishra9780@gmail.com",
+      email: "akansha1223@gmail.com",
       password: "Hello@987",
     };
     chai

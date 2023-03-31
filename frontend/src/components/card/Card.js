@@ -34,7 +34,7 @@ class Card extends Component {
             <h4>{itemName}</h4>
           </div>
           <div className="cardBody">
-            <div>By:-{manufacturingCompany}</div>
+            <div>Manufactured By : {manufacturingCompany}</div>
             <div className="dateContainer">
               <div className="dateTextContainer">Date</div>
               <div className="dateIconContainer">
@@ -124,23 +124,9 @@ class Card extends Component {
             </div>
           </div>
         </div>
-        <Dialog open={openDeletePopper} maxWidth="sm" smallWidth>
+        <Dialog open={openDeletePopper} maxWidth="sm">
           <DialogTitle>Are you sure to delete this item?</DialogTitle>
           <DialogActions>
-            {" "}
-            <Button
-              sx={{
-                background: " #323765",
-                ":hover": {
-                  background: "#323765",
-                  transform: "scale(1.01)",
-                },
-              }}
-              onClick={this.handleDelete}
-              variant="contained"
-            >
-              Delete
-            </Button>
             <Button
               sx={{
                 background: " #323765",
@@ -153,6 +139,19 @@ class Card extends Component {
               variant="contained"
             >
               Cancel
+            </Button>
+            <Button
+              sx={{
+                background: " #323765",
+                ":hover": {
+                  background: "#323765",
+                  transform: "scale(1.01)",
+                },
+              }}
+              onClick={this.handleDelete}
+              variant="contained"
+            >
+              Confirm
             </Button>
           </DialogActions>
         </Dialog>

@@ -10,7 +10,7 @@ import {
 import axios from "axios";
 export const addItem = (data) => async (dispatch) => {
   try {
-    let addedItem = await axios.post(
+    const addedItem = await axios.post(
       "http://localhost:5000/api/stock/additem",
       data,
       {
@@ -23,7 +23,6 @@ export const addItem = (data) => async (dispatch) => {
       type: ADD_ITEM,
       payload: addedItem.data,
     });
-    return addedItem.data;
   } catch (err) {
     return err;
   }

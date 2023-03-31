@@ -31,7 +31,7 @@ export class NavBar extends Component {
   componentDidMount() {
     const { dataContainer, sideNavBarExpended } = this.props;
     window.addEventListener("resize", (event) => {
-      var width =
+      const width =
         document.documentElement.clientWidth ||
         document.body.clientWidth ||
         window.innerWidth;
@@ -66,24 +66,7 @@ export class NavBar extends Component {
                 <div className="icon">Stock management app</div>
               </li>
             </ul>
-            {/* <ul className="searchBar">
-              <span className="searchIcon">
-                <i className="fas fa-search "></i>
-              </span>
-              <TextField
-                variant="outlined"
-                hiddenLabel
-                id="filled-hidden-label-small"
-                placeholder="search item.........."
-                size="small"
-                inputProps={{
-                  style: {
-                    border: "none",
-                    padding: "8.5px 14px 8.5px 30px",
-                  },
-                }}
-              />{" "}
-            </ul> */}
+
             <ul className="profileIcon">
               <li className="barIcon">
                 <i className="fa-solid fa-user"></i>
@@ -91,13 +74,12 @@ export class NavBar extends Component {
             </ul>
           </nav>
         </div>
-        {/* <div className="sideNavBarContainers"> */}
         {isExpended && window.innerWidth > 760 ? (
           <ExpendableSlidebar />
         ) : (
           <SideNavBar />
-        )}
-        {/* </div> */} <Outlet />
+        )}{" "}
+        <Outlet />
       </>
     );
   }

@@ -55,3 +55,32 @@
   color: white;
   background: #737373;
 }
+.flexInputBoxEditForm {
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+}
+.flexInputBoxEditForm > div {
+  width: 49%;
+}
+
+.flexInputBoxEditForm > div > div {
+  width: 100%;
+}
+.flexEditFormErrorMessage {
+  font-size: 0.7em;
+  text-align: left;
+  color: red;
+}
+@media screen and (max-width: 620px) {
+  .flexInputBoxEditForm {
+    flex-direction: column;
+  }
+  .flexInputBoxEditForm {
+    flex-direction: column;
+    gap: 1em;
+  }
+  .flexInputBoxEditForm > div {
+    width: 100%;
+  }
+}

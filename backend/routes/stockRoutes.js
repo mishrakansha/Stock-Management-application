@@ -13,7 +13,7 @@ router.put(
       .escape()
       .trim(),
     body("quantity", "Enter the valid quantity")
-      .isInt({ min: 1 })
+      .isInt({ min: 0 })
       .escape()
       .trim(),
     body("price", "Enter the valid price").isInt({ min: 1 }).escape().trim(),
@@ -36,7 +36,7 @@ router.post(
       .escape()
       .trim(),
     body("quantity", "Enter the valid quantity")
-      .isInt({ min: 1 })
+      .isInt({ min: 0 })
       .escape()
       .trim(),
     body("price", "Enter the valid price").isInt({ min: 1 }).escape().trim(),

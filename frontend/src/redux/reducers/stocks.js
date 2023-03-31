@@ -26,11 +26,13 @@ const itemReducer = (state = initialState, { type, payload }) => {
     case GET_ONE_ITEM:
       return { ...state, singleStockDetails: payload };
     case EDIT_ITEM:
-      // return state;
-      let arr = state.stockItems.map((item) => {
-        if (item._id === payload.data._id) {
+      const { data } = payload;
+      const { _id: id } = payload.data;
+      const updatedData = state.stockItems.map((item) => {
+        const { _id: itemId } = item;
+        if (itemId === id) {
           return {
-            ...payload.data,
+            ...data,
           };
         } else {
           return item;
@@ -38,14 +40,15 @@ const itemReducer = (state = initialState, { type, payload }) => {
       });
       return {
         ...state,
-        stockItems: arr,
+        stockItems: updatedData,
       };
     case DELETE_ITEM:
+      const newData = state.stockItems.filter(
+        (element) => element._id !== payload
+      );
       return {
         ...state,
-        stockItems: state.stockItems.filter(
-          (element) => element._id !== payload
-        ),
+        stockItems: newData,
       };
     case LOADING:
       return { ...state, isloading: payload };

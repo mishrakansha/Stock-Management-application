@@ -34,15 +34,9 @@ class EditForm extends Component {
     try {
       await getOneItem(id);
       const { oneItem: data } = this.props;
-      let {
-        itemName,
-        manufacturingCompany,
-        price,
-        quantity,
-        date,
-        description,
-      } = data;
-      date = moment(date).format("yyyy-MM-DD");
+      const date = moment(data.date).format("yyyy-MM-DD");
+      const { itemName, manufacturingCompany, price, quantity, description } =
+        data;
       this.setState({
         itemName: itemName,
         quantity: quantity,
@@ -76,10 +70,9 @@ class EditForm extends Component {
     const { editFormId: id, editItem, editFormPopUp } = this.props;
     editItem(id, data);
     editFormPopUp(false);
-    window.scrollTo(0, 0);
   };
   handelOnchange = (event) => {
-    var data = event.target.value;
+    const data = event.target.value;
     if (event.target.name === "itemName") {
       if (data.length > 2 && data.length <= 100) {
         this.setState({ itemNameError: false });
@@ -88,7 +81,7 @@ class EditForm extends Component {
       }
       this.setState({ itemName: data });
     } else if (event.target.name === "quantity") {
-      if (data > 0) {
+      if (data >= 0) {
         this.setState({ quantityError: false });
       } else {
         this.setState({ quantityError: true });
@@ -130,9 +123,9 @@ class EditForm extends Component {
     } else if (event.target.name === "manufacturingCompany") {
       this.setState({ manufacturingCompany: event.target.value });
     } else if (event.target.name === "date") {
-      var inputtedDate = event.target.value;
-      var today = new Date();
-      let datenew = new Date(inputtedDate);
+      const inputtedDate = event.target.value;
+      const today = new Date();
+      const datenew = new Date(inputtedDate);
       if (today < datenew) {
         console.log("invalid");
         this.setState({ dateError: true });
@@ -202,55 +195,59 @@ class EditForm extends Component {
                 100 character
               </div>
             )}
-            <TextField
-              required
-              id="filled-basic"
-              min="1"
-              label="Quantity"
-              value={quantity || ""}
-              InputProps={{
-                inputProps: {
-                  min: 1,
-                },
-                style: {
-                  height: "50px",
-                },
-              }}
-              name="quantity"
-              variant="filled"
-              onInput={this.handelOnchange}
-              type="number"
-              style={{ width: "100%" }}
-            />
-            {quantityError && (
-              <div className="errorMessage">
-                * Quantity should be greater than 1.
+            <div className="flexInputBoxEditForm">
+              <div>
+                <TextField
+                  required
+                  id="filled-basic"
+                  min="1"
+                  label="Quantity"
+                  value={quantity || ""}
+                  InputProps={{
+                    inputProps: {
+                      min: 0,
+                    },
+                    style: {
+                      height: "50px",
+                    },
+                  }}
+                  name="quantity"
+                  variant="filled"
+                  onInput={this.handelOnchange}
+                  type="number"
+                />
+                {quantityError && (
+                  <div className="flexEditFormErrorMessage">
+                    * Quantity should be greater than 1.
+                  </div>
+                )}
               </div>
-            )}
-            <TextField
-              required
-              id="filled-basic"
-              name="price"
-              label="Price"
-              value={price || ""}
-              variant="filled"
-              InputProps={{
-                inputProps: {
-                  min: 1,
-                },
-                style: {
-                  height: "50px",
-                },
-              }}
-              onChange={this.handelOnchange}
-              type="number"
-              style={{ width: "100%" }}
-            />
-            {priceError && (
-              <div className="errorMessage">
-                * Price should be greater than 1.
+              <div>
+                <TextField
+                  required
+                  id="filled-basic"
+                  name="price"
+                  label="Price"
+                  value={price || ""}
+                  variant="filled"
+                  InputProps={{
+                    inputProps: {
+                      min: 1,
+                    },
+                    style: {
+                      height: "50px",
+                    },
+                  }}
+                  onChange={this.handelOnchange}
+                  type="number"
+                />
+                {priceError && (
+                  <div className="flexEditFormErrorMessage">
+                    * Price should be greater than 1.
+                  </div>
+                )}
               </div>
-            )}
+            </div>
             <TextField
               required
               id="filled-basic"
@@ -279,15 +276,13 @@ class EditForm extends Component {
               variant="filled"
               value={description || ""}
               label="Description"
-              dv
-              xz
             />
             {descriptionError && (
               <div className="errorMessage">* this field is required.</div>
             )}
             <TextField
               id="datetime-local"
-              label="Date"
+              label="Date Added On"
               type="date"
               variant="filled"
               value={date || ""}
@@ -298,7 +293,6 @@ class EditForm extends Component {
               }}
               name="date"
               onChange={this.handelOnchange}
-              p
               InputLabelProps={{
                 shrink: true,
               }}

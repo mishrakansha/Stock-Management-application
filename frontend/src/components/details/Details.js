@@ -38,7 +38,6 @@ class Details extends Component {
               </h3>
               <h1>{itemName}</h1>
             </div>
-
             {oneItem && (
               <section className="detailsComponent">
                 <div className="detailsPart">
@@ -47,11 +46,10 @@ class Details extends Component {
                   </div>
                   <div className="detailElement">
                     <div className="itemInfoElement">Quantity : {quantity}</div>
-                    <div className="itemInfoElement">Price : {price}</div>
+                    <div className="itemInfoElement">Price : ₹ {price}</div>
                   </div>
-
                   <div className="itemInfoElement">
-                    Date : {moment(date).format("MMMM D, YYYY")}
+                    Date Added On: {moment(date).format("MMMM D, YYYY")}
                   </div>
                 </div>
                 <div className="descriptionContainer">

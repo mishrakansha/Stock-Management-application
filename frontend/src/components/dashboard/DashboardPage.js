@@ -31,7 +31,7 @@ class DashboardPage extends Component {
               {isPopperOpen ? <EditForm /> : null}
               {item &&
                 item.length > 0 &&
-                item.map((element) => {
+                item.reverse().map((element) => {
                   return (
                     <Card
                       key={element && element._id}

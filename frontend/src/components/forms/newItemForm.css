@@ -69,11 +69,46 @@ input::-webkit-inner-spin-button {
 .backButton:hover {
   box-shadow: 0px 0px 8px black;
 }
+.flexInputBoxForm {
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+}
+.flexInputBoxForm > div {
+  width: 49%;
+}
+
+.flexInputBoxForm > div > div {
+  width: 100%;
+}
+.flexFormErrorMessage {
+  font-size: 0.7em;
+  text-align: left;
+  color: red;
+}
+
 @media screen and (max-width: 620px) {
   .formContainer {
     padding: 0.5em;
   }
   .innerFormContainer {
+    width: 100%;
+  }
+  .flexInputBoxForm {
+    flex-direction: column;
+    gap: 1em;
+  }
+  .flexInputBoxForm > div {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 745px) {
+  .flexInputBoxForm {
+    flex-direction: column;
+    gap: 1em;
+  }
+  .flexInputBoxForm > div {
     width: 100%;
   }
 }

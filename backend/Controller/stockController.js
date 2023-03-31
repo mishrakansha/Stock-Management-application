@@ -5,35 +5,48 @@ const getAllStock = async (req, res) => {
     const allProducts = await Item.find({});
     res.status(200).json(allProducts);
   } catch (err) {
-    console.log(err);
-    res.send(404).send(err.message);
+    return res.status(400).json({
+      success: false,
+      message: "Bad request",
+    });
   }
 };
 const getOneItem = async (req, res) => {
-  var id = req.params["id"];
+  const id = req.params["id"];
   try {
     const oneProduct = await Item.findOne({ _id: id });
     if (oneProduct == null) {
-      res.json("not found");
+      return res.status(400).json({
+        success: false,
+        message: "Bad request",
+      });
     } else {
       res.json(oneProduct);
     }
   } catch (err) {
-    console.log(err);
-    res.send(err.message);
+    res.status(400).json({
+      success: false,
+      message: "Bad request",
+    });
   }
 };
 const modifyItem = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    res.status(400).json({
+      success: false,
+      message: "Bad request",
+    });
   }
-  var id = req.params["id"];
-  var matchQuery = await Item.findOne({ _id: id });
+  const id = req.params["id"];
+  const matchQuery = await Item.findOne({ _id: id });
   const { itemName, quantity, price, description, date, manufacturingCompany } =
     req.body;
   if (matchQuery == null) {
-    res.json("error");
+    res.status(400).json({
+      success: false,
+      message: "Bad request",
+    });
   } else {
     const newvalues = {
       $set: {
@@ -51,28 +64,40 @@ const modifyItem = async (req, res) => {
         .status(200)
         .json(await Item.findOne({ _id: await Item.findOne({ _id: id }) }));
     } catch (err) {
-      return res.status(400).json(error.message);
+      res.status(400).json({
+        success: false,
+        message: "Bad request",
+      });
     }
   }
 };
 const deleteItem = async (req, res) => {
-  var id = req.params["id"];
-  var matchQuery = await Item.findOne({ _id: id });
+  const id = req.params["id"];
+  const matchQuery = await Item.findOne({ _id: id });
   if (matchQuery == null) {
-    res.json("error");
+    res.status(400).json({
+      success: false,
+      message: "Bad request",
+    });
   } else {
     try {
       const result = await Item.deleteOne({ _id: id });
       res.status(200).send({ message: "Item successfully deleted!" });
     } catch (err) {
-      console.log(err);
+      res.status(400).json({
+        success: false,
+        message: "Bad request",
+      });
     }
   }
 };
 const additem = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).send({ errors: errors.array() });
+    res.status(400).json({
+      success: false,
+      message: "Bad request",
+    });
   }
   const { itemName, quantity, price, description, date, manufacturingCompany } =
     req.body;
@@ -90,8 +115,10 @@ const additem = async (req, res) => {
       res.status(200).json(item);
     })
     .catch((err) => {
-      console.log("error", err.message);
-      res.status(400).json(err.message);
+      res.status(400).json({
+        success: false,
+        message: "Bad request",
+      });
     });
 };
 module.exports = { getAllStock, deleteItem, additem, getOneItem, modifyItem };

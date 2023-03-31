@@ -25,7 +25,7 @@ class NewItemForm extends Component {
       dateError: true,
     };
   }
-  handleSubmit = async (event) => {
+  handleSubmit = (event) => {
     event.preventDefault();
     const {
       itemName,
@@ -48,7 +48,7 @@ class NewItemForm extends Component {
     window.location.assign("/");
   };
   handelOnchange = (event) => {
-    var data = event.target.value;
+    const data = event.target.value;
     if (event.target.name === "itemName") {
       if (data.length > 2 && data.length <= 100) {
         this.setState({ itemNameError: false });
@@ -57,7 +57,7 @@ class NewItemForm extends Component {
       }
       this.setState({ itemName: data });
     } else if (event.target.name === "quantity") {
-      if (data > 0) {
+      if (data >= 0) {
         this.setState({ quantityError: false });
       } else {
         this.setState({ quantityError: true });
@@ -99,9 +99,9 @@ class NewItemForm extends Component {
     } else if (event.target.name === "manufacturingCompany") {
       this.setState({ manufacturingCompany: event.target.value });
     } else if (event.target.name === "date") {
-      var inputtedDate = event.target.value;
-      var today = new Date();
-      let datenew = new Date(inputtedDate);
+      const inputtedDate = event.target.value;
+      const today = new Date();
+      const datenew = new Date(inputtedDate);
       if (today < datenew) {
         console.log("invalid");
         this.setState({ dateError: true });
@@ -111,7 +111,6 @@ class NewItemForm extends Component {
       this.setState({ date: event.target.value });
     }
   };
-
   render() {
     const {
       itemName,
@@ -163,65 +162,61 @@ class NewItemForm extends Component {
                   atmost 100 character
                 </div>
               )}
-              <TextField
-                required
-                id="filled-basic"
-                min="1"
-                label="Quantity"
-                value={quantity}
-                InputProps={{
-                  inputProps: {
-                    min: 1,
-                  },
-                  //           style: {
-                  // height:"1em",
-                  // padding: '0 14px',
-
-                  //           }
-                  style: {
-                    height: "50px",
-                  },
-                }}
-                name="quantity"
-                variant="filled"
-                onInput={this.handelOnchange}
-                type="number"
-                style={{ width: "100%" }}
-              />
-              {quantityError && (
-                <div className="errorMessage">
-                  * Quantity should be greater than 1.
+              <div className="flexInputBoxForm">
+                <div>
+                  <TextField
+                    required
+                    id="filled-basic"
+                    min="1"
+                    label="Quantity"
+                    value={quantity}
+                    InputProps={{
+                      inputProps: {
+                        min: 0,
+                      },
+                      style: {
+                        height: "50px",
+                      },
+                    }}
+                    name="quantity"
+                    variant="filled"
+                    onInput={this.handelOnchange}
+                    type="number"
+                    style={{ width: "100%" }}
+                  />
+                  {quantityError && (
+                    <div className="flexFormErrorMessage">
+                      * Quantity should be greater than 1.
+                    </div>
+                  )}
                 </div>
-              )}
-              <TextField
-                required
-                id="filled-basic"
-                name="price"
-                label="Price"
-                value={price}
-                variant="filled"
-                InputProps={{
-                  inputProps: {
-                    min: 1,
-                  },
-                  //           style: {
-                  // height:"1em",
-                  // padding: '0 14px',
-
-                  //           }
-                  style: {
-                    height: "50px",
-                  },
-                }}
-                onChange={this.handelOnchange}
-                type="number"
-                style={{ width: "100%" }}
-              />
-              {priceError && (
-                <div className="errorMessage">
-                  * Price should be greater than 1.
+                <div>
+                  <TextField
+                    required
+                    id="filled-basic"
+                    name="price"
+                    label="Price"
+                    value={price}
+                    variant="filled"
+                    InputProps={{
+                      inputProps: {
+                        min: 1,
+                      },
+                      style: {
+                        height: "50px",
+                      },
+                    }}
+                    onChange={this.handelOnchange}
+                    type="number"
+                    style={{ width: "100%" }}
+                  />
+                  {priceError && (
+                    <div className="flexFormErrorMessage">
+                      * Price should be greater than 1.
+                    </div>
+                  )}
                 </div>
-              )}
+              </div>
               <TextField
                 required
                 id="filled-basic"
@@ -256,7 +251,7 @@ class NewItemForm extends Component {
               )}
               <TextField
                 id="datetime-local"
-                label="Date"
+                label="Date Added On"
                 type="date"
                 InputProps={{
                   style: {
@@ -265,12 +260,6 @@ class NewItemForm extends Component {
                 }}
                 InputLabelProps={{
                   shrink: true,
-                  // style: {
-                  //   background:
-                  //     "linear-gradient(135deg,rgba(171, 160, 238, 1) 0%,rgba(242, 112, 156, 1) 42%,rgba(228, 194, 157, 1) 100%)",
-                  //   webkitTextFillColor: "transparent",
-                  //   webkitBackgroundClip: "text",
-                  // },
                 }}
                 variant="filled"
                 value={date}
