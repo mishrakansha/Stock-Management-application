@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { addItem } from "./../../redux/actions/stocks";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import "./newItemForm.css";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import DataContainer from "../dataContainer/DataContainer";
-
+import DataContainer from "../dataContainer/index";
+import PropTypes from "prop-types";
 class NewItemForm extends Component {
   constructor() {
     super();
@@ -296,10 +294,7 @@ class NewItemForm extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  const { dataContainerGrid } = state.navBar;
-  return {
-    dataContainerGrid: dataContainerGrid,
-  };
+NewItemForm.propTypes = {
+  addItem: PropTypes.func,
 };
-export default connect(mapStateToProps, { addItem })(NewItemForm);
+export default NewItemForm;

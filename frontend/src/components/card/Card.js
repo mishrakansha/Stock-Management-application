@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import "./card.css";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { deleteItem } from "../../redux/actions/stocks";
 import moment from "moment";
-import { connect } from "react-redux";
-import { editFormPopUp } from "../../redux/actions/stocks";
 import { Dialog, DialogTitle, DialogActions, Button } from "@mui/material";
 class Card extends Component {
   constructor(props) {
@@ -34,7 +32,9 @@ class Card extends Component {
             <h4>{itemName}</h4>
           </div>
           <div className="cardBody">
-            <div>Manufactured By : {manufacturingCompany}</div>
+            <div className="manufacturingCompany">
+              Manufactured By : {manufacturingCompany}
+            </div>
             <div className="dateContainer">
               <div className="dateTextContainer">Date</div>
               <div className="dateIconContainer">
@@ -43,13 +43,13 @@ class Card extends Component {
               </div>
             </div>
             <div className="priceQuantityContainer">
-              <div>Qty : {quantity}</div>
-              <div>₹ : {price}</div>
+              <div className="quantityContainer">Qty : {quantity}</div>
+              <div className="priceContainer">₹ : {price}</div>
             </div>
             <div className="crudButtons">
               <Link
                 className="Link"
-                title="Details "
+                title="Preview "
                 to={`showdetails/${id}`}
                 state={{ id: id }}
               >
@@ -159,10 +159,14 @@ class Card extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    isloading: state.items.isloading,
-    item: state.items.stockItems,
-  };
+Card.propTypes = {
+  editFormPopUp: PropTypes.func,
+  deleteItem: PropTypes.func,
+  id: PropTypes.string,
+  itemName: PropTypes.string,
+  manufacturingCompany: PropTypes.string,
+  price: PropTypes.number,
+  quantity: PropTypes.number,
+  date: PropTypes.string,
 };
-export default connect(mapStateToProps, { deleteItem, editFormPopUp })(Card);
+export default Card;

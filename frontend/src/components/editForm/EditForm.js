@@ -1,14 +1,12 @@
-import { editItem, getOneItem } from "../../redux/actions/stocks";
 import React, { Component } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import "./editForm.css";
+import PropTypes from "prop-types";
 import moment from "moment";
-import { connect } from "react-redux";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import { editFormPopUp } from "../../redux/actions/stocks";
 class EditForm extends Component {
   constructor() {
     super();
@@ -31,23 +29,20 @@ class EditForm extends Component {
   }
   async componentDidMount() {
     const { editFormId: id, getOneItem } = this.props;
-    try {
-      await getOneItem(id);
-      const { oneItem: data } = this.props;
-      const date = moment(data.date).format("yyyy-MM-DD");
-      const { itemName, manufacturingCompany, price, quantity, description } =
-        data;
-      this.setState({
-        itemName: itemName,
-        quantity: quantity,
-        price: price,
-        description: description,
-        date: date,
-        manufacturingCompany: manufacturingCompany,
-      });
-    } catch (e) {
-      console.log(e);
-    }
+
+    await getOneItem(id);
+    const { oneItem: data } = this.props;
+    const date = moment(data.date).format("yyyy-MM-DD");
+    const { itemName, manufacturingCompany, price, quantity, description } =
+      data;
+    this.setState({
+      itemName: itemName,
+      quantity: quantity,
+      price: price,
+      description: description,
+      date: date,
+      manufacturingCompany: manufacturingCompany,
+    });
   }
   handleSubmit = (event) => {
     event.preventDefault();
@@ -344,15 +339,13 @@ class EditForm extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    isPopperOpen: state.items.isPopperOpen.isPopperOpen,
-    editFormId: state.items.isPopperOpen.id,
-    oneItem: state.items.singleStockDetails,
-  };
+
+EditForm.propTypes = {
+  oneItem: PropTypes.object,
+  isPopperOpen: PropTypes.bool,
+  editFormId: PropTypes.string,
+  editItem: PropTypes.func,
+  getOneItem: PropTypes.func,
+  editFormPopUp: PropTypes.func,
 };
-export default connect(mapStateToProps, {
-  editItem,
-  editFormPopUp,
-  getOneItem,
-})(EditForm);
+export default EditForm;

@@ -2,12 +2,8 @@ import React, { Component } from "react";
 import "./navBar.css";
 import SideNavBar from "../sidebarnav/SideNavBar";
 import { ExpendableSlidebar } from "../sidebarnav/SideNavBar.js";
-import { connect } from "react-redux";
 import { Outlet } from "react-router-dom";
-import {
-  dataContainer,
-  sideNavBarExpended,
-} from "./../../redux/actions/navbar";
+import PropTypes from "prop-types";
 export class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -63,7 +59,7 @@ export class NavBar extends Component {
                 </li>
               )}
               <li>
-                <div className="icon">Stock management app</div>
+                <div className="navHeading">Stock management app</div>
               </li>
             </ul>
 
@@ -84,15 +80,10 @@ export class NavBar extends Component {
     );
   }
 }
-
-const mapStateToProps = (state) => {
-  const { sideNavBarExpended, dataContainerGrid } = state.navBar;
-  return {
-    isExpended: sideNavBarExpended,
-    dataContainerGrid: dataContainerGrid,
-  };
+NavBar.propTypes = {
+  dataContainer: PropTypes.func,
+  sideNavBarExpended: PropTypes.func,
+  isExpended: PropTypes.bool,
+  dataContainerGrid: PropTypes.object,
 };
-
-export default connect(mapStateToProps, { dataContainer, sideNavBarExpended })(
-  NavBar
-);
+export default NavBar;

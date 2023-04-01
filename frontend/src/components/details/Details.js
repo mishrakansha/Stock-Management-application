@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { useParams } from "react-router-dom";
-import { getOneItem } from "./../../redux/actions/stocks";
 import moment from "moment";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import DataContainer from "../dataContainer/DataContainer";
+import DataContainer from "../dataContainer/index";
 import "./details.css";
+import PropTypes from "prop-types";
 const withRouter = (WrappedComponent) => (props) => {
   const params = useParams();
   return <WrappedComponent {...props} params={params} />;
@@ -64,10 +63,10 @@ class Details extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    oneItem: state.items.singleStockDetails,
-  };
+DataContainer.propTypes = {
+  oneItem: PropTypes.object,
+  getOneItem: PropTypes.func,
+  id: PropTypes.string,
 };
 
-export default connect(mapStateToProps, { getOneItem })(withRouter(Details));
+export default withRouter(Details);

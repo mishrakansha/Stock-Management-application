@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   ADD_ITEM,
   GET_ALL_ITEMS,
@@ -7,7 +8,6 @@ import {
   LOADING,
   EDIT_FORM_POPUP,
 } from "../actionTypes/types";
-import axios from "axios";
 export const addItem = (data) => async (dispatch) => {
   try {
     const addedItem = await axios.post(

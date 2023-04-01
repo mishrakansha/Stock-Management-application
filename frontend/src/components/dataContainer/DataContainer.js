@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./dataContainer.css";
-import { connect } from "react-redux";
+import PropTypes from "prop-types";
 class DataContainer extends Component {
   render() {
     const { dataContainerGrid, child } = this.props;
@@ -11,9 +11,8 @@ class DataContainer extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    dataContainerGrid: state.navBar.dataContainerGrid,
-  };
+DataContainer.propTypes = {
+  dataContainerGrid: PropTypes.object,
+  child: PropTypes.object,
 };
-export default connect(mapStateToProps, {})(DataContainer);
+export default DataContainer;

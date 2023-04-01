@@ -37,6 +37,7 @@
     "styled-components": "^5.3.8",
     "web-vitals": "^2.1.4"
   },
+
   "jest": {
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
@@ -45,7 +46,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+   "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!axios)/'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

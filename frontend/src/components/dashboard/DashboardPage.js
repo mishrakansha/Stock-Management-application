@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import Card from "../card/Card";
+import Card from "../card/index";
 import "./dashboardPage.css";
-import EditForm from "../editForm/EditForm";
-import { getAllItem } from "./../../redux/actions/stocks";
-import { connect } from "react-redux";
-import DataContainer from "../dataContainer/DataContainer";
+import EditForm from "../editForm/index";
+import DataContainer from "../dataContainer/index";
 import CircularProgress from "@mui/material/CircularProgress";
+import PropTypes from "prop-types";
 class DashboardPage extends Component {
   constructor(props) {
     super(props);
@@ -54,13 +53,10 @@ class DashboardPage extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    isPopperOpen: state.items.isPopperOpen.isPopperOpen,
-    isloading: state.items.isloading,
-    item: state.items.stockItems,
-  };
+DashboardPage.propTypes = {
+  item: PropTypes.array,
+  isloading: PropTypes.bool,
+  isPopperOpen: PropTypes.bool,
+  getAllItem: PropTypes.func,
 };
-export default connect(mapStateToProps, {
-  getAllItem,
-})(DashboardPage);
+export default DashboardPage;
