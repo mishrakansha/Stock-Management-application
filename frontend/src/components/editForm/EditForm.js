@@ -322,8 +322,9 @@ class EditForm extends Component {
             </div>
           </form>
         </DialogContent>
-        <DialogActions className="backButton">
+        <DialogActions>
           <Button
+            className="closeButton"
             sx={{
               color: " #323765",
               ":hover": {

@@ -43,7 +43,7 @@ const signIn = (req, res) => {
         });
     })
     .catch((e) => {
-      res.status(404).send({
+      res.status(400).send({
         message: "Email not found",
       });
     });

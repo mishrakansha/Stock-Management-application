@@ -24,19 +24,6 @@
   width: 100%;
 }
 
-.closeButton {
-  position: absolute;
-  height: 2em;
-  width: 2em;
-  right: 1em;
-  top: 1em;
-  display: flex;
-  color: white;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-}
-
 .submitButtonContainer {
   display: flex;
   justify-content: center;

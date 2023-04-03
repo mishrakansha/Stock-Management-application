@@ -203,7 +203,7 @@ describe("/POST SignUp", () => {
   it("Sucessfully submitted form", (done) => {
     let User = {
       name: "akansha",
-      email: "akansha1223@gmail.com",
+      email: "akanshamishra@gmail.com",
       password: "Hello@987",
     };
     chai
@@ -221,7 +221,7 @@ describe("/POST SignUp", () => {
 describe("/POST SignIn", () => {
   it("Login Successfully", (done) => {
     let User = {
-      email: "akanshamishra@gmail.com",
+      email: "akansha1223@gmail.com",
       password: "Hello@987",
     };
     chai
@@ -236,8 +236,8 @@ describe("/POST SignIn", () => {
   });
   it("Passwords does not match", (done) => {
     let User = {
-      email: "akanshamishra@gmail.com",
-      password: "Hello@98797",
+      email: "akansha1223@gmail.com",
+      password: "Hello@9879",
     };
     chai
       .request(server)

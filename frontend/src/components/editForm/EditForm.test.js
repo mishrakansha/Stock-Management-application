@@ -34,6 +34,6 @@ describe("EditForm", () => {
     expect(component.find(".submitButtonContainer").text()).toEqual("Update");
   });
   it("Test to render the close button Button", () => {
-    expect(component.find(".backButton").text()).toEqual("Close");
+    expect(component.find(".closeButton").text()).toEqual("Close");
   });
 });

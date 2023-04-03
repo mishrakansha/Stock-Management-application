@@ -185,10 +185,9 @@ Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit u
       </div>
     </form>
   </ForwardRef(DialogContent)>
-  <ForwardRef(DialogActions)
-    className="backButton"
-  >
+  <ForwardRef(DialogActions)>
     <ForwardRef(Button)
+      className="backButton"
       onClick={[Function]}
       sx={
         Object {
