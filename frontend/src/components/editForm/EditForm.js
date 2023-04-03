@@ -170,7 +170,7 @@ class EditForm extends Component {
             {formSubmitted && <h3>Sucessfully Updated </h3>}
             <TextField
               required
-              id="filled-basic"
+              id="filled-basic itemName"
               name="itemName"
               value={itemName || ""}
               label="Item Name"
@@ -322,7 +322,7 @@ class EditForm extends Component {
             </div>
           </form>
         </DialogContent>
-        <DialogActions>
+        <DialogActions className="backButton">
           <Button
             sx={{
               color: " #323765",

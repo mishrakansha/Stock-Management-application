@@ -66,7 +66,7 @@ class Details extends Component {
 DataContainer.propTypes = {
   oneItem: PropTypes.object,
   getOneItem: PropTypes.func,
-  id: PropTypes.string,
+  params: PropTypes.object,
 };
 
 export default withRouter(Details);
