@@ -1,11 +1,11 @@
 process.env.NODE_ENV = "test";
-let mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const Items = require("./models/Items");
 const User = require("./models/User");
-let chai = require("chai");
-let chaiHttp = require("chai-http");
-let server = require("./index");
-let should = chai.should();
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const server = require("./index");
+const should = chai.should();
 chai.use(chaiHttp);
 
 describe("/GET items", () => {
@@ -22,7 +22,7 @@ describe("/GET items", () => {
 });
 describe("/POST items", () => {
   it("All fields are mandatory", (done) => {
-    let Items = {};
+    const Items = {};
     chai
       .request(server)
       .post("/api/stock/addItem")
@@ -35,7 +35,7 @@ describe("/POST items", () => {
       });
   });
   it("it should POST a Items ", (done) => {
-    let Items = {
+    const Items = {
       itemName: "i-370",
       quantity: 13,
       price: 78,
@@ -62,7 +62,7 @@ describe("/POST items", () => {
 });
 describe("/GET/:id items", () => {
   it("it should GET a Items by the given id", async () => {
-    let Item = new Items({
+    const Item = new Items({
       itemName: "Monterey",
       quantity: 72,
       price: 26,
@@ -94,7 +94,7 @@ describe("/GET/:id items", () => {
 
 describe("/PUT/:id Items", () => {
   it("it should UPDATE a Items given the id", async () => {
-    let Item = new Items({
+    const Item = new Items({
       itemName: "M",
       quantity: 72,
       price: 26,
@@ -133,9 +133,9 @@ describe("/PUT/:id Items", () => {
   });
 });
 
-describe("/DELETE/:id Items", () => {
-  it("it should DELETE a Items given the id", async () => {
-    var Item = new Items({
+describe("/DEconstE/:id Items", () => {
+  it("it should DEconstE a Items given the id", async () => {
+    const Item = new Items({
       itemName: "Navigator",
       quantity: 16,
       price: 27,
@@ -148,16 +148,16 @@ describe("/DELETE/:id Items", () => {
       console.log(err);
     });
     try {
-      Item = await Item.save();
+      const newItem = await Item.save();
       chai
         .request(server)
-        .delete("/api/stock/deleteItem/" + Item._id)
+        .deconste("/api/stock/deconsteItem/" + newItem._id)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a("object");
           res.body.should.have
             .property("message")
-            .eql("Item successfully deleted!");
+            .eql("Item successfully deconsted!");
           res.should.have.property("ok").eql(true);
         });
     } catch (err) {
@@ -168,7 +168,7 @@ describe("/DELETE/:id Items", () => {
 
 describe("/POST SignUp", () => {
   it("All fields are mandatory", (done) => {
-    let User = {
+    const User = {
       name: "akansha",
       password: "hello",
     };
@@ -184,7 +184,7 @@ describe("/POST SignUp", () => {
       });
   });
   it("Password must be valid", (done) => {
-    let User = {
+    const User = {
       name: "akansha",
       email: "akanshamishra94@gmail.com",
       password: "hello",
@@ -201,7 +201,7 @@ describe("/POST SignUp", () => {
       });
   });
   it("Sucessfully submitted form", (done) => {
-    let User = {
+    const User = {
       name: "akansha",
       email: "akanshamishra@gmail.com",
       password: "Hello@987",
@@ -220,7 +220,7 @@ describe("/POST SignUp", () => {
 
 describe("/POST SignIn", () => {
   it("Login Successfully", (done) => {
-    let User = {
+    const User = {
       email: "akansha1223@gmail.com",
       password: "Hello@987",
     };
@@ -235,7 +235,7 @@ describe("/POST SignIn", () => {
       });
   });
   it("Passwords does not match", (done) => {
-    let User = {
+    const User = {
       email: "akansha1223@gmail.com",
       password: "Hello@9879",
     };

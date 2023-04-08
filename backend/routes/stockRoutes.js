@@ -1,10 +1,11 @@
 const express = require("express");
+const { verifyToken } = require("../authenticationMiddleware");
 const { body } = require("express-validator");
 const router = express.Router();
 const stockController = require("../Controller/stockController");
-router.get("/allItem", stockController.getAllStock);
-router.get("/getOneItem/:id", stockController.getOneItem);
-router.delete("/deleteItem/:id", stockController.deleteItem);
+router.get("/allItem", verifyToken, stockController.getAllStock);
+router.get("/getOneItem/:id", verifyToken, stockController.getOneItem);
+router.delete("/deleteItem/:id", verifyToken, stockController.deleteItem);
 router.put(
   "/modifyItem/:id",
   [
@@ -26,6 +27,7 @@ router.put(
       throw new Error("Date is required and cannot be invalid");
     }),
   ],
+  verifyToken,
   stockController.modifyItem
 );
 router.post(
@@ -49,6 +51,7 @@ router.post(
       return true;
     }),
   ],
+  verifyToken,
   stockController.additem
 );
 

@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 const signIn = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    return res.status(400).json({ message: errors.array() });
   }
 
   const { email, password } = req.body;
@@ -25,7 +25,7 @@ const signIn = (req, res) => {
               userId: user._id,
               userEmail: user.email,
             },
-            "RANDOM-TOKEN",
+            "secret",
             {
               expiresIn: "24h",
             }
@@ -52,14 +52,15 @@ const signIn = (req, res) => {
 const signUp = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    return res.status(400).json({ message: errors.array() });
   }
-  const { name, email, password } = req.body;
+  const { name, email, password, username } = req.body;
   bcrypt
     .hash(password, 10)
     .then((hashedPassword) => {
       const user = new User({
         name: name,
+        username: username,
         email: email,
         password: hashedPassword,
       });
@@ -72,17 +73,14 @@ const signUp = (req, res) => {
           });
         })
         .catch((error) => {
-          console.log(error);
           res.status(500).send({
-            message: "Error creating user",
-            error,
+            message: error.message,
           });
         });
     })
     .catch((e) => {
       res.status(500).send({
-        message: "Password was not hashed successfully",
-        e,
+        message: "Error !",
       });
     });
 };

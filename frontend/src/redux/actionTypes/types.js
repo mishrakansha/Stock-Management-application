@@ -7,3 +7,4 @@ export const LOADING = "LOADING";
 export const SIDE_NAV_BAR_EXPENDED = "SIDE_NAV_BAR_EXPENDED";
 export const DATA_CONTAINER = "DATA_CONTAINER";
 export const EDIT_FORM_POPUP = "EDIT_FORM_POPUP";
+export const ADD_FORM_POPUP = "ADD_FORM_POPUP";

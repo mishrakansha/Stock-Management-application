@@ -23,7 +23,6 @@ class EditForm extends Component {
       priceError: false,
       descriptionError: false,
       dateError: false,
-      formSubmitted: false,
       modified: false,
     };
   }
@@ -136,7 +135,7 @@ class EditForm extends Component {
     editFormPopUp(false);
   };
   render() {
-    const { isPopperOpen: open } = this.props;
+    const { isEditPopperOpen: open } = this.props;
     const {
       itemName,
       quantity,
@@ -150,7 +149,6 @@ class EditForm extends Component {
       priceError,
       descriptionError,
       dateError,
-      formSubmitted,
       modified,
     } = this.state;
     return (
@@ -167,7 +165,6 @@ class EditForm extends Component {
             action="localhost:5000/api/stock/additem"
             id="editForm"
           >
-            {formSubmitted && <h3>Sucessfully Updated </h3>}
             <TextField
               required
               id="filled-basic itemName"
@@ -213,7 +210,7 @@ class EditForm extends Component {
                 />
                 {quantityError && (
                   <div className="flexEditFormErrorMessage">
-                    * Quantity should be greater than 1.
+                    * Quantity should be greater than or equal to 0.
                   </div>
                 )}
               </div>
@@ -238,7 +235,7 @@ class EditForm extends Component {
                 />
                 {priceError && (
                   <div className="flexEditFormErrorMessage">
-                    * Price should be greater than 1.
+                    * Price should be greater than 0.
                   </div>
                 )}
               </div>
@@ -297,40 +294,36 @@ class EditForm extends Component {
                 * date should not be greater than than today
               </div>
             )}
-            <div className="submitButtonContainer">
-              <Button
-                disabled={
-                  !modified ||
-                  dateError ||
-                  itemNameError ||
-                  descriptionError ||
-                  priceError ||
-                  manufacturingCompanyError
-                }
-                type="submit"
-                onChange={this.handelOnchange}
-                fullWidth
-                variant="contained"
-                sx={{
-                  mt: 3,
-                  mb: 2,
-                  width: "50%",
-                }}
-              >
-                Update
-              </Button>
-            </div>
           </form>
         </DialogContent>
-        <DialogActions>
+        <DialogActions className="submitButtonContainer">
           <Button
-            className="closeButton"
+            disabled={
+              !modified ||
+              dateError ||
+              itemNameError ||
+              descriptionError ||
+              priceError ||
+              manufacturingCompanyError
+            }
+            onClick={this.handleSubmit}
+            type="submit"
+            onChange={this.handelOnchange}
+            fullWidth
+            variant="contained"
             sx={{
-              color: " #323765",
-              ":hover": {
-                background: "rgb(50 55 101 / 4%)",
-              },
+              mt: 3,
+              mb: 2,
+              width: "50%",
             }}
+          >
+            Update
+          </Button>
+          <Button
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2, width: "50%" }}
+            className="closeButton"
             onClick={this.handelClose}
           >
             Close
@@ -343,7 +336,7 @@ class EditForm extends Component {
 
 EditForm.propTypes = {
   oneItem: PropTypes.object,
-  isPopperOpen: PropTypes.bool,
+  isEditPopperOpen: PropTypes.bool,
   editFormId: PropTypes.string,
   editItem: PropTypes.func,
   getOneItem: PropTypes.func,

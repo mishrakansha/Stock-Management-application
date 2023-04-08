@@ -52,7 +52,6 @@ class Auth extends Component {
                   <img
                     alt="crypto"
                     src="https://images.unsplash.com/photo-1601382270349-49c15bddf738?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-                    // src="https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
                   />
                 </div>
               </>

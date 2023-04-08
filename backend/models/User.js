@@ -1,5 +1,10 @@
 const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   name: {
     type: String,
     required: true,
@@ -7,7 +12,6 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
   },
   password: {
     type: String,
@@ -18,6 +22,23 @@ const userSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+userSchema.pre("save", async function (next) {
+  try {
+    const existingUser = await this.constructor.findOne({
+      username: this.username,
+    });
+
+    if (existingUser) {
+      const error = new Error("Username already exists");
+      return next(error);
+    }
+
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 const User = mongoose.model("user", userSchema);
 User.createIndexes();
+
 module.exports = User;

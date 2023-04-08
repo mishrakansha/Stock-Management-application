@@ -1,8 +1,10 @@
 const Item = require("../models/Items");
 const { validationResult } = require("express-validator");
+
 const getAllStock = async (req, res) => {
   try {
-    const allProducts = await Item.find({});
+    const { user } = req;
+    const allProducts = await Item.find({ User: user }).populate("User");
     res.status(200).json(allProducts);
   } catch (err) {
     return res.status(400).json({
@@ -101,10 +103,12 @@ const additem = async (req, res) => {
   }
   const { itemName, quantity, price, description, date, manufacturingCompany } =
     req.body;
+  const { user } = req;
   const newItem = new Item({
     itemName: itemName,
     quantity: quantity,
     price: price,
+    User: user,
     description: description,
     date: date,
     manufacturingCompany: manufacturingCompany,

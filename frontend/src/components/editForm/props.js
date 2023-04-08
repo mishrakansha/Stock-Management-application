@@ -6,8 +6,8 @@ import {
 const mapStateToProps = (state) => {
   return {
     oneItem: state.items.singleStockDetails,
-    isPopperOpen: state.items.isPopperOpen.isPopperOpen,
-    editFormId: state.items.isPopperOpen.id,
+    isEditPopperOpen: state.items.isEditPopperOpen.isPopperOpen,
+    editFormId: state.items.isEditPopperOpen.id,
   };
 };
 

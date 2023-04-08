@@ -7,6 +7,7 @@ import {
   DELETE_ITEM,
   LOADING,
   EDIT_FORM_POPUP,
+  ADD_FORM_POPUP,
 } from "../actionTypes/types";
 export const addItem = (data) => async (dispatch) => {
   try {
@@ -16,6 +17,7 @@ export const addItem = (data) => async (dispatch) => {
       {
         headers: {
           "Content-Type": "application/json",
+          Authorization: sessionStorage.getItem("token"),
         },
       }
     );
@@ -30,7 +32,11 @@ export const addItem = (data) => async (dispatch) => {
 export const getAllItem = () => async (dispatch) => {
   dispatch(isLoading(true));
   try {
-    let allItems = await axios.get("http://localhost:5000/api/stock/allItem");
+    let allItems = await axios.get("http://localhost:5000/api/stock/allItem", {
+      headers: {
+        Authorization: sessionStorage.getItem("token"),
+      },
+    });
     dispatch({
       type: GET_ALL_ITEMS,
       payload: allItems.data,
@@ -43,7 +49,12 @@ export const getAllItem = () => async (dispatch) => {
 export const getOneItem = (id) => async (dispatch) => {
   try {
     const oneItem = await axios.get(
-      `http://localhost:5000/api/stock/getOneItem/${id}`
+      `http://localhost:5000/api/stock/getOneItem/${id}`,
+      {
+        headers: {
+          Authorization: sessionStorage.getItem("token"),
+        },
+      }
     );
     dispatch({
       type: GET_ONE_ITEM,
@@ -62,6 +73,7 @@ export const editItem = (id, data) => async (dispatch) => {
       {
         headers: {
           "Content-Type": "application/json",
+          Authorization: sessionStorage.getItem("token"),
         },
       }
     );
@@ -77,7 +89,12 @@ export const editItem = (id, data) => async (dispatch) => {
 export const deleteItem = (id) => async (dispatch) => {
   try {
     const res = await axios.delete(
-      `http://localhost:5000/api/stock/deleteItem/${id}`
+      `http://localhost:5000/api/stock/deleteItem/${id}`,
+      {
+        headers: {
+          Authorization: sessionStorage.getItem("token"),
+        },
+      }
     );
     dispatch({
       type: DELETE_ITEM,
@@ -95,4 +112,8 @@ export const isLoading = (data) => ({
 export const editFormPopUp = (data, id) => ({
   type: EDIT_FORM_POPUP,
   payload: { isPopperOpen: data, id: id },
+});
+export const addFormPopUp = (data) => ({
+  type: ADD_FORM_POPUP,
+  payload: data,
 });

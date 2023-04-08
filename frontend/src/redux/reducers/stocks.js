@@ -5,6 +5,7 @@ import {
   GET_ONE_ITEM,
   LOADING,
   EDIT_ITEM,
+  ADD_FORM_POPUP,
   DELETE_ITEM,
   EDIT_FORM_POPUP,
 } from "../actionTypes/types";
@@ -12,14 +13,17 @@ const initialState = {
   stockItems: [],
   singleStockDetails: {},
   isloading: false,
-  isPopperOpen: false,
+  isEditPopperOpen: { isPopperOpen: false, id: "" },
+  isAddPopperOpen: false,
 };
 const itemReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case ADD_ITEM:
+      const { stockItems } = state;
+      const copyOfStockItems = [...stockItems, payload];
       return {
         ...state,
-        stockItems: [...state.stockItems, payload],
+        stockItems: copyOfStockItems,
       };
     case GET_ALL_ITEMS:
       return { ...state, stockItems: payload };
@@ -53,8 +57,10 @@ const itemReducer = (state = initialState, { type, payload }) => {
     case LOADING:
       return { ...state, isloading: payload };
     case EDIT_FORM_POPUP:
-      return { ...state, isPopperOpen: payload };
-
+      return { ...state, isEditPopperOpen: payload };
+    case ADD_FORM_POPUP:
+      console.log("payload", payload);
+      return { ...state, isAddPopperOpen: payload };
     default:
       return state;
   }
