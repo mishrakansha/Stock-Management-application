@@ -2,13 +2,13 @@ const User = require("../models/User");
 const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const tokenModel = require("../models/token");
 
 const signIn = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ message: errors.array() });
   }
-
   const { email, password } = req.body;
   User.findOne({ email: email })
     .then((user) => {
@@ -23,13 +23,14 @@ const signIn = (req, res) => {
           const token = jwt.sign(
             {
               userId: user._id,
-              userEmail: user.email,
+              userName: user.username,
             },
             "secret",
             {
               expiresIn: "24h",
             }
           );
+          tokenModel({ token: token }).save();
           res.status(200).send({
             message: "Login Successful",
             email: user.email,
@@ -84,5 +85,30 @@ const signUp = (req, res) => {
       });
     });
 };
-
-module.exports = { signUp, signIn };
+const logOut = async (req, res) => {
+  const errors = validationResult(req);
+  const { token } = req.body;
+  const matchQuery = await tokenModel.findOne({ token: token });
+  if (!errors.isEmpty()) {
+    res.status(500).send({
+      message: "UnAuthorized Access",
+    });
+  } else if (matchQuery == null) {
+    res.status(500).send({
+      message: "Session Time Out",
+    });
+  } else {
+    try {
+      const result = await tokenModel.deleteOne({ token: token });
+      res.status(200).send({
+        message: "Logged Out Successfully",
+        result,
+      });
+    } catch {
+      res.status(500).send({
+        message: "Server Error !",
+      });
+    }
+  }
+};
+module.exports = { signUp, signIn, logOut };

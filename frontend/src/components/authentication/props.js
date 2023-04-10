@@ -1,6 +1,4 @@
-const mapStateToProps = (state) => ({
-  dataContainerGrid: state.navBar.dataContainerGrid,
-});
+const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) => ({});
 
 export { mapStateToProps, mapDispatchToProps };

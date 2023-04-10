@@ -5,8 +5,6 @@ import "./newItemForm.css";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-// import { Link } from "react-router-dom";
-// import DataContainer from "../dataContainer/index";
 import PropTypes from "prop-types";
 class NewItemForm extends Component {
   constructor() {
@@ -50,67 +48,62 @@ class NewItemForm extends Component {
     const { addFormPopUp } = this.props;
     addFormPopUp(false);
   };
-  handelOnchange = (event) => {
+  handelOnchange = async (event) => {
     const data = event.target.value;
     if (event.target.name === "itemName") {
       if (data.length > 2 && data.length <= 100) {
-        this.setState({ itemNameError: false });
+        await this.setState({ itemNameError: false });
       } else {
-        this.setState({ itemNameError: true });
+        await this.setState({ itemNameError: true });
       }
       this.setState({ itemName: data });
     } else if (event.target.name === "quantity") {
       if (data >= 0 && data !== "") {
-        this.setState({ quantityError: false });
+        await this.setState({ quantityError: false, quantity: data });
       } else {
-        this.setState({ quantityError: true });
-        event.target.value = "";
+        await this.setState({ quantityError: true, quantity: "" });
       }
-      this.setState({ quantity: event.target.value });
     } else if (event.target.name === "description") {
       if (data.length > 0) {
-        this.setState({ descriptionError: false });
+        await this.setState({ descriptionError: false });
       } else {
-        this.setState({ descriptionError: true });
+        await this.setState({ descriptionError: true });
       }
       this.setState({ description: data });
     } else if (event.target.name === "manufacturingCompany") {
       if (data.length > 0) {
-        this.setState({
+        await this.setState({
           manufacturingCompanyError: false,
         });
       } else {
-        this.setState({ manufacturingCompanyError: true });
+        await this.setState({ manufacturingCompanyError: true });
       }
-      this.setState({
+      await this.setState({
         manufacturingCompany: data,
       });
     } else if (event.target.name === "price") {
       if (data > 0) {
-        this.setState({
+        await this.setState({
+          price: data,
           priceError: false,
         });
       } else {
-        this.setState({
+        await this.setState({
+          price: "",
           priceError: true,
         });
-        event.target.value = "";
       }
-      this.setState({
-        price: event.target.value,
-      });
     } else if (event.target.name === "manufacturingCompany") {
-      this.setState({ manufacturingCompany: event.target.value });
+      await this.setState({ manufacturingCompany: data });
     } else if (event.target.name === "date") {
       const today = new Date();
       const datenew = new Date(data);
       if (today < datenew) {
-        console.log("invalid");
-        this.setState({ dateError: true });
+        await this.setState({ dateError: true });
       } else {
-        this.setState({ dateError: false });
+        await this.setState({ dateError: false });
       }
-      this.setState({ date: event.target.value });
+      await this.setState({ date: data });
     }
     const {
       itemName,
@@ -119,6 +112,12 @@ class NewItemForm extends Component {
       description,
       date,
       manufacturingCompany,
+      manufacturingCompanyError,
+      itemNameError,
+      quantityError,
+      priceError,
+      descriptionError,
+      dateError,
     } = this.state;
     if (
       itemName === "" ||
@@ -126,7 +125,13 @@ class NewItemForm extends Component {
       price === "" ||
       description === "" ||
       date === "" ||
-      manufacturingCompany === ""
+      manufacturingCompany === "" ||
+      manufacturingCompanyError === true ||
+      itemNameError === true ||
+      quantityError === true ||
+      priceError === true ||
+      descriptionError === true ||
+      dateError === true
     )
       this.setState({ submitButtonDisable: true });
     else {
@@ -278,8 +283,8 @@ class NewItemForm extends Component {
               variant="filled"
               value={date}
               name="date"
+              onInput={this.handelOnchange}
               onBlur={this.handelOnchange}
-              onChange={this.handelOnchange}
             />
             {dateError && (
               <div className="errorMessage">
@@ -303,16 +308,7 @@ class NewItemForm extends Component {
           </form>
         </DialogContent>
         <DialogActions className="submitButtonContainer">
-          <Button
-            disabled={submitButtonDisable}
-            type="submit"
-            onClick={this.handleSubmit}
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2, width: "50%" }}
-          >
-            Submit
-          </Button>
+          {" "}
           <Button
             fullWidth
             variant="contained"
@@ -321,6 +317,21 @@ class NewItemForm extends Component {
             onClick={this.handelClose}
           >
             Close
+          </Button>
+          <Button
+            disabled={submitButtonDisable}
+            title={
+              submitButtonDisable
+                ? "All the fields are required and should be valid"
+                : "Submit"
+            }
+            type="submit"
+            onClick={this.handleSubmit}
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2, width: "50%" }}
+          >
+            Submit
           </Button>
         </DialogActions>
       </Dialog>

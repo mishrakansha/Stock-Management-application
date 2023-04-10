@@ -6,6 +6,7 @@ const stockController = require("../Controller/stockController");
 router.get("/allItem", verifyToken, stockController.getAllStock);
 router.get("/getOneItem/:id", verifyToken, stockController.getOneItem);
 router.delete("/deleteItem/:id", verifyToken, stockController.deleteItem);
+router.get("/getUserData/", verifyToken, stockController.getUserData);
 router.put(
   "/modifyItem/:id",
   [

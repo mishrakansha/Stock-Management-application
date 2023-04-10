@@ -3,6 +3,11 @@ const router = express.Router();
 const { body, oneOf } = require("express-validator");
 const authController = require("../Controller/authController");
 router.post(
+  "/logOut",
+  [body("token", "please Provide Token").trim()],
+  authController.logOut
+);
+router.post(
   "/signIn",
   [
     body("email", "Enter the valid email").isEmail().normalizeEmail(),

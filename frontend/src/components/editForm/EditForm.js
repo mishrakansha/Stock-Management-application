@@ -28,7 +28,6 @@ class EditForm extends Component {
   }
   async componentDidMount() {
     const { editFormId: id, getOneItem } = this.props;
-
     await getOneItem(id);
     const { oneItem: data } = this.props;
     const date = moment(data.date).format("yyyy-MM-DD");
@@ -65,70 +64,105 @@ class EditForm extends Component {
     editItem(id, data);
     editFormPopUp(false);
   };
-  handelOnchange = (event) => {
+  handelOnchange = async (event) => {
     const data = event.target.value;
     if (event.target.name === "itemName") {
       if (data.length > 2 && data.length <= 100) {
-        this.setState({ itemNameError: false });
+        await this.setState({ itemNameError: false });
       } else {
-        this.setState({ itemNameError: true });
+        await this.setState({ itemNameError: true });
       }
-      this.setState({ itemName: data });
+      await this.setState({ itemName: data });
     } else if (event.target.name === "quantity") {
-      if (data >= 0) {
-        this.setState({ quantityError: false });
+      if (data >= 0 && data !== "") {
+        await this.setState({ quantityError: false, quantity: parseInt(data) });
       } else {
-        this.setState({ quantityError: true });
-        event.target.value = "";
+        await this.setState({ quantityError: true, quantity: "" });
       }
-      this.setState({ quantity: event.target.value });
     } else if (event.target.name === "description") {
       if (data.length > 0) {
-        this.setState({ descriptionError: false });
+        await this.setState({ descriptionError: false });
       } else {
-        this.setState({ descriptionError: true });
+        await this.setState({ descriptionError: true });
       }
-      this.setState({ description: data });
+      await this.setState({ description: data });
     } else if (event.target.name === "manufacturingCompany") {
       if (data.length > 0) {
-        this.setState({
+        await this.setState({
           manufacturingCompanyError: false,
         });
       } else {
-        this.setState({ manufacturingCompanyError: true });
+        await this.setState({ manufacturingCompanyError: true });
       }
-      this.setState({
+      await this.setState({
         manufacturingCompany: data,
       });
     } else if (event.target.name === "price") {
       if (data > 0) {
-        this.setState({
+        await this.setState({
+          price: parseInt(data),
           priceError: false,
         });
       } else {
-        this.setState({
+        await this.setState({
+          price: "",
           priceError: true,
         });
-        event.target.value = "";
       }
-      this.setState({
-        price: event.target.value,
-      });
     } else if (event.target.name === "manufacturingCompany") {
-      this.setState({ manufacturingCompany: event.target.value });
+      await this.setState({ manufacturingCompany: event.target.value });
     } else if (event.target.name === "date") {
       const inputtedDate = event.target.value;
       const today = new Date();
       const datenew = new Date(inputtedDate);
       if (today < datenew) {
-        console.log("invalid");
-        this.setState({ dateError: true });
+        await this.setState({ dateError: true });
       } else {
-        this.setState({ dateError: false });
+        await this.setState({ dateError: false });
       }
-      this.setState({ date: event.target.value });
+      await this.setState({ date: data });
     }
-    this.setState({ modified: true });
+    const { oneItem: unmodifiedData } = this.props;
+    const originalDate = moment(unmodifiedData.date).format("yyyy-MM-DD");
+    const {
+      itemName: originalItemName,
+      manufacturingCompany: originalManufecturingCompany,
+      price: originalPrice,
+      quantity: originalQuantity,
+      description: originalDescription,
+    } = unmodifiedData;
+    const {
+      itemName,
+      quantity,
+      price,
+      description,
+      date,
+      manufacturingCompanyError,
+      itemNameError,
+      quantityError,
+      priceError,
+      descriptionError,
+      dateError,
+      manufacturingCompany,
+    } = this.state;
+    if (
+      (originalItemName !== itemName ||
+        originalQuantity !== quantity ||
+        originalPrice !== price ||
+        description !== originalDescription ||
+        originalDate !== date ||
+        originalManufecturingCompany !== manufacturingCompany) &&
+      manufacturingCompanyError === false &&
+      itemNameError === false &&
+      quantityError === false &&
+      priceError === false &&
+      descriptionError === false &&
+      dateError === false
+    ) {
+      this.setState({ modified: true });
+    } else {
+      this.setState({ modified: false });
+    }
   };
   handelClose = () => {
     const { editFormPopUp } = this.props;
@@ -192,9 +226,10 @@ class EditForm extends Component {
                 <TextField
                   required
                   id="filled-basic"
-                  min="1"
+                  name="quantity"
                   label="Quantity"
                   value={quantity || ""}
+                  variant="filled"
                   InputProps={{
                     inputProps: {
                       min: 0,
@@ -203,9 +238,7 @@ class EditForm extends Component {
                       height: "50px",
                     },
                   }}
-                  name="quantity"
-                  variant="filled"
-                  onInput={this.handelOnchange}
+                  onChange={this.handelOnchange}
                   type="number"
                 />
                 {quantityError && (
@@ -298,14 +331,17 @@ class EditForm extends Component {
         </DialogContent>
         <DialogActions className="submitButtonContainer">
           <Button
-            disabled={
-              !modified ||
-              dateError ||
-              itemNameError ||
-              descriptionError ||
-              priceError ||
-              manufacturingCompanyError
-            }
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2, width: "50%" }}
+            className="closeButton"
+            onClick={this.handelClose}
+          >
+            Close
+          </Button>{" "}
+          <Button
+            disabled={!modified}
+            title={!modified ? "kindly make any modification" : "Update"}
             onClick={this.handleSubmit}
             type="submit"
             onChange={this.handelOnchange}
@@ -318,15 +354,6 @@ class EditForm extends Component {
             }}
           >
             Update
-          </Button>
-          <Button
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2, width: "50%" }}
-            className="closeButton"
-            onClick={this.handelClose}
-          >
-            Close
           </Button>
         </DialogActions>
       </Dialog>

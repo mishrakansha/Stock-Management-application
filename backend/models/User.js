@@ -39,6 +39,6 @@ userSchema.pre("save", async function (next) {
   }
 });
 const User = mongoose.model("user", userSchema);
-User.createIndexes();
+User.createIndexes({ username: 1 }, { unique: true });
 
 module.exports = User;

@@ -13,12 +13,12 @@ export default class SideNavBar extends Component {
             </Link>
           </li>
 
-          <li id="addIcon">
+          <li>
             <Link
-              to="additem"
+              to="showProfile"
               style={{ textDecoration: "none", color: "white" }}
             >
-              <div className="material-symbols-sharp">add_box</div>
+              <div className="material-symbols-outlined">account_circle</div>
             </Link>
           </li>
         </ul>
@@ -36,11 +36,12 @@ export class ExpendableSlidebar extends Component {
             <Link to="">
               <div className="material-symbols-outlined">dashboard</div>
               Dashboard
-            </Link>{" "}
+            </Link>
           </li>
-          <li id="addText">
-            <Link to="additem">
-              <div className="material-symbols-sharp">add_box</div> Add Item
+          <li>
+            <Link to="showProfile">
+              <div className="material-symbols-outlined">account_circle</div>
+              Profile
             </Link>
           </li>
         </ul>

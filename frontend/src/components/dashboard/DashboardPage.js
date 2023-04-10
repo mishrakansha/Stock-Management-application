@@ -26,7 +26,6 @@ class DashboardPage extends Component {
   }
   render() {
     const { item, isloading, isEditPopperOpen, isAddPopperOpen } = this.props;
-    console.log("isAddPopperOpen", isAddPopperOpen);
     return (
       <>
         <DataContainer
@@ -39,7 +38,6 @@ class DashboardPage extends Component {
               <div className="cardContainer">
                 {isEditPopperOpen ? <EditForm /> : null}
                 {isAddPopperOpen ? <NewItemForm /> : null}
-
                 {item &&
                   item.length > 0 &&
                   item.reverse().map((element) => {
@@ -63,7 +61,18 @@ class DashboardPage extends Component {
           }
         />
         <Fab
-          sx={{ position: "fixed", top: "13vh", right: 16 }}
+          sx={{
+            position: "fixed",
+            top: "13vh",
+            bgcolor: "rgb(255 255 255 / 88%)",
+            color: "#323765",
+            right: 16,
+            ":hover": {
+              bgcolor: "white",
+              color: "#323765",
+            },
+          }}
+          title="Add Item"
           aria-label="Add"
           onClick={this.handelAddItem}
           color="primary"

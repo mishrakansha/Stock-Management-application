@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default class SignIn extends Component {
   constructor(props) {
     super(props);
@@ -18,26 +20,61 @@ export default class SignIn extends Component {
       email: email,
       password: password,
     };
-    const recivedData = await axios.post(
-      "http://localhost:5000/auth/signIn",
-      data,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
+    try {
+      const recivedData = await axios.post(
+        "http://localhost:5000/auth/signIn",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (recivedData.data.token) {
+        sessionStorage.setItem("token", recivedData.data.token);
+        toast.success(recivedData.data.message, {
+          position: "bottom-right",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeButton: false,
+          pauseOnHover: true,
+          draggable: true,
+          close: true,
+          onClose: setTimeout(() => {
+            window.location.reload();
+          }, 1000),
+          theme: "light",
+        });
       }
-    );
-    sessionStorage.setItem("token", recivedData.data.token);
-    if (recivedData.data.token) {
-      window.location.reload();
+    } catch (error) {
+      if (Array.isArray(error.response.data.message)) {
+        error.response.data.message.forEach((message) => {
+          toast.error(message.msg, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        });
+      } else {
+        toast.error(error.response.data.message, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
     }
   };
-  shouldComponentUpdate() {
-    if (this.state.isLoggedIn) {
-      return false;
-    }
-    return true;
-  }
 
   handelOnchange = (event) => {
     const data = event.target.value;
@@ -133,6 +170,18 @@ export default class SignIn extends Component {
             </Button>
           </div>
         </form>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </div>
     );
   }

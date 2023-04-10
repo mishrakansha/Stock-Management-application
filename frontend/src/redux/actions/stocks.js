@@ -9,6 +9,7 @@ import {
   EDIT_FORM_POPUP,
   ADD_FORM_POPUP,
 } from "../actionTypes/types";
+import { toast } from "react-toastify";
 export const addItem = (data) => async (dispatch) => {
   try {
     const addedItem = await axios.post(
@@ -26,6 +27,35 @@ export const addItem = (data) => async (dispatch) => {
       payload: addedItem.data,
     });
   } catch (err) {
+    const { message } = err.response.data;
+    if (message === "No token provided" || message === "Session Time Out") {
+      toast.error(message, {
+        toastId: "error1",
+        position: "bottom-right",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        onClose: setTimeout(() => {
+          sessionStorage.removeItem("token");
+          window.location.reload();
+        }, 1000),
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.error(message, {
+        toastId: "error1",
+        position: "bottom-right",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+
     return err;
   }
 };
@@ -43,7 +73,35 @@ export const getAllItem = () => async (dispatch) => {
     });
     dispatch(isLoading(false));
   } catch (err) {
-    console.log(err);
+    const { message } = err.response.data;
+    if (message === "No token provided" || message === "Session Time Out") {
+      toast.error(message, {
+        toastId: "error1",
+        position: "bottom-right",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        onClose: setTimeout(() => {
+          sessionStorage.removeItem("token");
+          window.location.reload();
+        }, 1000),
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.error(message, {
+        toastId: "error1",
+        position: "bottom-right",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+    return err;
   }
 };
 export const getOneItem = (id) => async (dispatch) => {
@@ -61,10 +119,36 @@ export const getOneItem = (id) => async (dispatch) => {
       payload: oneItem.data,
     });
   } catch (err) {
-    return err;
+    const { message } = err.response.data;
+    if (message === "No token provided" || message === "Session Time Out") {
+      toast.error(message, {
+        toastId: "error1",
+        position: "bottom-right",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        onClose: setTimeout(() => {
+          sessionStorage.removeItem("token");
+          window.location.reload();
+        }, 1000),
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.error(message, {
+        toastId: "error1",
+        position: "bottom-right",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   }
 };
-
 export const editItem = (id, data) => async (dispatch) => {
   try {
     let updatedItem = await axios.put(
@@ -79,16 +163,45 @@ export const editItem = (id, data) => async (dispatch) => {
     );
     dispatch({
       type: EDIT_ITEM,
-      payload: updatedItem,
+      payload: updatedItem.data,
     });
+
     return updatedItem;
   } catch (err) {
+    const { message } = err.response.data;
+    if (message === "No token provided" || message === "Session Time Out") {
+      toast.error(message, {
+        toastId: "error1",
+        position: "bottom-right",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        onClose: setTimeout(() => {
+          sessionStorage.removeItem("token");
+          window.location.reload();
+        }, 1000),
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.error(message, {
+        toastId: "error1",
+        position: "bottom-right",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
     return err;
   }
 };
 export const deleteItem = (id) => async (dispatch) => {
   try {
-    const res = await axios.delete(
+    const deletedItemData = await axios.delete(
       `http://localhost:5000/api/stock/deleteItem/${id}`,
       {
         headers: {
@@ -98,10 +211,38 @@ export const deleteItem = (id) => async (dispatch) => {
     );
     dispatch({
       type: DELETE_ITEM,
-      payload: id,
+      payload: deletedItemData.data,
     });
-    return res;
+    return deletedItemData;
   } catch (err) {
+    const { message } = err.response.data;
+    if (message === "No token provided" || message === "Session Time Out") {
+      toast.error(message, {
+        toastId: "error1",
+        position: "bottom-right",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        onClose: setTimeout(() => {
+          sessionStorage.removeItem("token");
+          window.location.reload();
+        }, 1000),
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } else {
+      toast.error(message, {
+        toastId: "error1",
+        position: "bottom-right",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
     return err;
   }
 };
