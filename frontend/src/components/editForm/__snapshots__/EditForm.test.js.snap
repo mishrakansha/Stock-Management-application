@@ -60,9 +60,8 @@ exports[`EditForm Take a snapshot if do not added 1`] = `
             }
             id="filled-basic"
             label="Quantity"
-            min="1"
             name="quantity"
-            onInput={[Function]}
+            onChange={[Function]}
             required={true}
             type="number"
             value={19}
@@ -163,42 +162,44 @@ Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit u
         value="2022-10-18"
         variant="filled"
       />
-      <div
-        className="submitButtonContainer"
-      >
-        <ForwardRef(Button)
-          disabled={true}
-          fullWidth={true}
-          onChange={[Function]}
-          sx={
-            Object {
-              "mb": 2,
-              "mt": 3,
-              "width": "50%",
-            }
-          }
-          type="submit"
-          variant="contained"
-        >
-          Update
-        </ForwardRef(Button)>
-      </div>
     </form>
   </ForwardRef(DialogContent)>
-  <ForwardRef(DialogActions)>
+  <ForwardRef(DialogActions)
+    className="submitButtonContainer"
+  >
     <ForwardRef(Button)
-      className="backButton"
+      className="closeButton"
+      fullWidth={true}
       onClick={[Function]}
       sx={
         Object {
-          ":hover": Object {
-            "background": "rgb(50 55 101 / 4%)",
-          },
-          "color": " #323765",
+          "mb": 2,
+          "mt": 3,
+          "width": "50%",
         }
       }
+      variant="contained"
     >
       Close
+    </ForwardRef(Button)>
+     
+    <ForwardRef(Button)
+      disabled={true}
+      fullWidth={true}
+      onChange={[Function]}
+      onClick={[Function]}
+      sx={
+        Object {
+          "mb": 2,
+          "mt": 3,
+          "width": "50%",
+        }
+      }
+      title="kindly make any modification"
+      type="submit"
+      variant="contained"
+    >
+      Update
     </ForwardRef(Button)>
   </ForwardRef(DialogActions)>
 </ForwardRef(Dialog)>

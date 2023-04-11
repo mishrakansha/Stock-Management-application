@@ -16,9 +16,16 @@ exports[`NavBar Take a snapshot if do not added 1`] = `
           id="hamburger"
           onClick={[Function]}
         >
-          <i
-            className="fa-solid fa-bars"
-          />
+          <span
+            className="material-symbols-outlined"
+            style={
+              Object {
+                "transform": "",
+              }
+            }
+          >
+            menu_open
+          </span>
         </li>
         <li>
           <div
@@ -33,10 +40,14 @@ exports[`NavBar Take a snapshot if do not added 1`] = `
       >
         <li
           className="barIcon"
+          title="logout"
         >
-          <i
-            className="fa-solid fa-user"
-          />
+          <span
+            className="material-symbols-outlined"
+            onClick={[Function]}
+          >
+            logout
+          </span>
         </li>
       </ul>
     </nav>
@@ -44,5 +55,22 @@ exports[`NavBar Take a snapshot if do not added 1`] = `
   <SideNavBar />
    
   <Outlet />
+  <ToastContainer
+    autoClose={5000}
+    closeButton={[Function]}
+    closeOnClick={true}
+    draggable={true}
+    draggableDirection="x"
+    draggablePercent={80}
+    hideProgressBar={false}
+    newestOnTop={false}
+    pauseOnFocusLoss={true}
+    pauseOnHover={true}
+    position="bottom-right"
+    role="alert"
+    rtl={false}
+    theme="light"
+    transition={[Function]}
+  />
 </Fragment>
 `;

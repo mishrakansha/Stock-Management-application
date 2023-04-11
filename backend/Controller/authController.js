@@ -7,7 +7,7 @@ const tokenModel = require("../models/token");
 const signIn = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ message: errors.array() });
+    return res.status(400).json({ success: false, message: errors.array() });
   }
   const { email, password } = req.body;
   User.findOne({ email: email })
@@ -16,9 +16,9 @@ const signIn = (req, res) => {
         .compare(password, user.password)
         .then((passwordCheck) => {
           if (!passwordCheck) {
-            return res.status(400).send({
-              error: "Passwords does not match",
-            });
+            return res
+              .status(400)
+              .send({ success: false, error: "Passwords does not match" });
           }
           const token = jwt.sign(
             {
@@ -32,28 +32,27 @@ const signIn = (req, res) => {
           );
           tokenModel({ token: token }).save();
           res.status(200).send({
+            success: true,
             message: "Login Successful",
             email: user.email,
             token: token,
           });
         })
         .catch((error) => {
-          res.status(400).send({
-            message: "Passwords does not match",
-          });
+          res
+            .status(400)
+            .send({ success: false, message: "Passwords does not match" });
         });
     })
     .catch((e) => {
-      res.status(400).send({
-        message: "Email not found",
-      });
+      res.status(400).send({ success: false, message: "Email not found" });
     });
 };
 
 const signUp = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ message: errors.array() });
+    return res.status(400).json({ success: false, message: errors.array() });
   }
   const { name, email, password, username } = req.body;
   bcrypt
@@ -69,18 +68,18 @@ const signUp = (req, res) => {
         .save()
         .then((result) => {
           res.status(201).send({
+            success: true,
             message: "User Created Successfully",
             result,
           });
         })
         .catch((error) => {
-          res.status(500).send({
-            message: error.message,
-          });
+          res.status(500).send({ success: false, message: error.message });
         });
     })
     .catch((e) => {
       res.status(500).send({
+        success: false,
         message: "Error !",
       });
     });
@@ -90,13 +89,9 @@ const logOut = async (req, res) => {
   const { token } = req.body;
   const matchQuery = await tokenModel.findOne({ token: token });
   if (!errors.isEmpty()) {
-    res.status(500).send({
-      message: "UnAuthorized Access",
-    });
+    res.status(500).send({ success: false, message: "UnAuthorized Access" });
   } else if (matchQuery == null) {
-    res.status(500).send({
-      message: "Session Time Out",
-    });
+    res.status(500).send({ success: false, message: "Session Time Out" });
   } else {
     try {
       const result = await tokenModel.deleteOne({ token: token });

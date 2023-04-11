@@ -9,34 +9,73 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 describe("/GET items", () => {
+  before("Login Successfully", (done) => {
+    const User = {
+      email: "akansha1223@gmail.com",
+      password: "Hello@987",
+    };
+    chai
+      .request(server)
+      .post("/auth/signIn")
+      .send(User)
+      .end((err, res) => {
+        token = res.body.token;
+        res.should.have.status(200);
+        res.body.should.have.property("success").eql(true);
+        res.body.should.have.property("message").eql("Login Successful");
+        done();
+      });
+  });
   it("it should GET all the Items", (done) => {
     chai
       .request(server)
       .get("/api/stock/allItem")
+      .set({ Authorization: token })
       .end((err, res) => {
         res.should.have.status(200);
-        res.body.length.should.be.not.eql(0);
+        res.body.should.have.property("allProducts");
+        res.body.should.have.property("success").eql(true);
         done();
       });
   });
 });
 describe("/POST items", () => {
+  before("Login Successfully", (done) => {
+    const User = {
+      email: "akansha1223@gmail.com",
+      password: "Hello@987",
+    };
+    chai
+      .request(server)
+      .post("/auth/signIn")
+      .send(User)
+      .set({ Authorization: token })
+      .end((err, res) => {
+        token = res.body.token;
+        res.should.have.status(200);
+        res.body.should.have.property("success").eql(true);
+        res.body.should.have.property("message").eql("Login Successful");
+        done();
+      });
+  });
   it("All fields are mandatory", (done) => {
     const Items = {};
     chai
       .request(server)
       .post("/api/stock/addItem")
+      .set({ Authorization: token })
       .send(Items)
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.a("object");
+        res.body.should.have.property("success").eql(false);
         res.body.should.have.property("message").eql("Bad request");
         done();
       });
   });
   it("it should POST a Items ", (done) => {
     const Items = {
-      itemName: "i-370",
+      itemName: "pen",
       quantity: 13,
       price: 78,
       description:
@@ -47,23 +86,44 @@ describe("/POST items", () => {
     chai
       .request(server)
       .post("/api/stock/addItem")
+      .set({ Authorization: token })
       .send(Items)
       .end((err, res) => {
         res.should.have.status(200);
-        res.body.should.have.property("itemName");
-        res.body.should.have.property("quantity");
-        res.body.should.have.property("price");
-        res.body.should.have.property("description");
-        res.body.should.have.property("date");
-        res.body.should.have.property("manufacturingCompany");
+        res.body.should.have.property("success").eql(true);
+        res.body.item.should.have.property("itemName");
+        res.body.item.should.have.property("quantity");
+        res.body.item.should.have.property("price");
+        res.body.item.should.have.property("description");
+        res.body.item.should.have.property("date");
+        res.body.item.should.have.property("manufacturingCompany");
         done();
       });
   });
 });
+
 describe("/GET/:id items", () => {
+  before("Login Successfully", (done) => {
+    const User = {
+      email: "akansha1223@gmail.com",
+      password: "Hello@987",
+    };
+    chai
+      .request(server)
+      .post("/auth/signIn")
+      .send(User)
+      .end((err, res) => {
+        token = res.body.token;
+        res.should.have.status(200);
+        res.body.should.have.property("success").eql(true);
+        res.body.should.have.property("message").eql("Login Successful");
+        done();
+      });
+  });
   it("it should GET a Items by the given id", async () => {
     const Item = new Items({
-      itemName: "Monterey",
+      User: "643260d8cbf86bbd4ef7874a",
+      itemName: "Mont",
       quantity: 72,
       price: 26,
       description:
@@ -72,19 +132,21 @@ describe("/GET/:id items", () => {
       manufacturingCompany: "Mercury",
     });
     try {
-      Item = await Item.save();
+      ItemDetails = await Item.save();
       chai
         .request(server)
-        .get("/api/stock/getOneItem/" + Item._id)
+        .get("/api/stock/getOneItem/" + ItemDetails._id)
+        .set({ Authorization: token })
         .end((err, res) => {
           res.body.should.be.a("object");
           res.should.have.status(200);
-          res.body.should.have.property("itemName");
-          res.body.should.have.property("quantity");
-          res.body.should.have.property("price");
-          res.body.should.have.property("description");
-          res.body.should.have.property("date");
-          res.body.should.have.property("manufacturingCompany");
+          res.body.should.have.property("success").eql(true);
+          res.body.oneProduct.should.have.property("itemName");
+          res.body.oneProduct.should.have.property("quantity");
+          res.body.oneProduct.should.have.property("price");
+          res.body.oneProduct.should.have.property("description");
+          res.body.oneProduct.should.have.property("date");
+          res.body.oneProduct.should.have.property("manufacturingCompany");
         });
     } catch (err) {
       console.log(err);
@@ -93,8 +155,26 @@ describe("/GET/:id items", () => {
 });
 
 describe("/PUT/:id Items", () => {
+  before("Login Successfully", (done) => {
+    const User = {
+      email: "akansha1223@gmail.com",
+      password: "Hello@987",
+    };
+    chai
+      .request(server)
+      .post("/auth/signIn")
+      .send(User)
+      .end((err, res) => {
+        token = res.body.token;
+        res.should.have.status(200);
+        res.body.should.have.property("success").eql(true);
+        res.body.should.have.property("message").eql("Login Successful");
+        done();
+      });
+  });
   it("it should UPDATE a Items given the id", async () => {
     const Item = new Items({
+      User: "643260d8cbf86bbd4ef7874a",
       itemName: "M",
       quantity: 72,
       price: 26,
@@ -104,10 +184,11 @@ describe("/PUT/:id Items", () => {
       manufacturingCompany: "Mercury",
     });
     try {
-      Item = await Item.save();
+      ItemDetails = await Item.save();
       chai
         .request(server)
-        .put("/api/stock/modifyItem/" + Item._id)
+        .put("/api/stock/modifyItem/" + ItemDetails._id)
+        .set({ Authorization: token })
         .send({
           itemName: "Moon",
           quantity: 72,
@@ -120,12 +201,13 @@ describe("/PUT/:id Items", () => {
         .end((err, res) => {
           res.body.should.be.a("object");
           res.should.have.status(200);
-          res.body.should.have.property("itemName");
-          res.body.should.have.property("quantity");
-          res.body.should.have.property("price");
-          res.body.should.have.property("description");
-          res.body.should.have.property("date");
-          res.body.should.have.property("manufacturingCompany");
+          res.body.should.have.property("success").eql(true);
+          res.body.updatedData.should.have.property("itemName");
+          res.body.updatedData.should.have.property("quantity");
+          res.body.updatedData.should.have.property("price");
+          res.body.updatedData.should.have.property("description");
+          res.body.updatedData.should.have.property("date");
+          res.body.updatedData.should.have.property("manufacturingCompany");
         });
     } catch (err) {
       console.log(err);
@@ -133,10 +215,28 @@ describe("/PUT/:id Items", () => {
   });
 });
 
-describe("/DEconstE/:id Items", () => {
-  it("it should DEconstE a Items given the id", async () => {
+describe("/delete/:id Items", () => {
+  before("Login Successfully", (done) => {
+    const User = {
+      email: "akansha1223@gmail.com",
+      password: "Hello@987",
+    };
+    chai
+      .request(server)
+      .post("/auth/signIn")
+      .send(User)
+      .end((err, res) => {
+        token = res.body.token;
+        res.should.have.status(200);
+        res.body.should.have.property("success").eql(true);
+        res.body.should.have.property("message").eql("Login Successful");
+        done();
+      });
+  });
+  it("it should delete a Items given the id", async () => {
     const Item = new Items({
-      itemName: "Navigator",
+      User: "643260d8cbf86bbd4ef7874a",
+      itemName: "Navigatorr",
       quantity: 16,
       price: 27,
       description:
@@ -144,21 +244,19 @@ describe("/DEconstE/:id Items", () => {
       date: "6/27/2022",
       manufacturingCompany: "Lincoln",
     });
-    Item.save((err) => {
-      console.log(err);
-    });
     try {
       const newItem = await Item.save();
       chai
         .request(server)
-        .deconste("/api/stock/deconsteItem/" + newItem._id)
+        .delete("/api/stock/deleteItem/" + newItem._id)
+        .set({ Authorization: token })
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a("object");
           res.body.should.have
             .property("message")
-            .eql("Item successfully deconsted!");
-          res.should.have.property("ok").eql(true);
+            .eql("Item successfully deleted!");
+          res.body.should.have.property("success").eql(true);
         });
     } catch (err) {
       console.log("err", err);
@@ -179,7 +277,7 @@ describe("/POST SignUp", () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.a("object");
-        res.body.should.have.property("errors");
+        res.body.should.have.property("success").eql(false);
         done();
       });
   });
@@ -196,15 +294,17 @@ describe("/POST SignUp", () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.a("object");
-        res.body.should.have.property("errors");
+        res.body.should.have.property("success").eql(false);
         done();
       });
   });
-  it("Sucessfully submitted form", (done) => {
+  it("Successfully submitted form", (done) => {
     const User = {
+      username: "akanshamishra",
       name: "akansha",
-      email: "akanshamishra@gmail.com",
+      email: "akanshamishra980@gmail.com",
       password: "Hello@987",
+      confirmPassword: "Hello@987",
     };
     chai
       .request(server)
@@ -213,6 +313,7 @@ describe("/POST SignUp", () => {
       .end((err, res) => {
         res.should.have.status(201);
         res.body.should.be.a("object");
+        res.body.should.have.property("success").eql(true);
         done();
       });
   });
@@ -246,6 +347,7 @@ describe("/POST SignIn", () => {
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.have.property("error").eql("Passwords does not match");
+        res.body.should.have.property("success").eql(false);
         done();
       });
   });

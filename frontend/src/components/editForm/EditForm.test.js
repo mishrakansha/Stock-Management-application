@@ -19,6 +19,7 @@ describe("EditForm", () => {
       getOneItem={getOneItem}
       oneItem={oneItem}
       isPopperOpen={true}
+      isEditPopperOpen={true}
       editFormId={"u877e87t67etgy7t6ee"}
     />
   );
@@ -31,7 +32,9 @@ describe("EditForm", () => {
     );
   });
   it("Test to render Update Button Text", () => {
-    expect(component.find(".submitButtonContainer").text()).toEqual("Update");
+    expect(component.find(".submitButtonContainer").text()).toEqual(
+      "Close Update"
+    );
   });
   it("Test to render the close button Button", () => {
     expect(component.find(".closeButton").text()).toEqual("Close");

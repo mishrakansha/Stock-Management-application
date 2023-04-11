@@ -3,6 +3,7 @@ const tokenModel = require("./models/token");
 module.exports.verifyToken = async (req, res, next) => {
   const token = req.headers.authorization;
   const matchQuery = await tokenModel.findOne({ token: token });
+
   if (!token) {
     return res
       .status(400)
