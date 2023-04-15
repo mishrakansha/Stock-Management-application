@@ -26,10 +26,10 @@ class Auth extends Component {
                 <div className="leftDiv">
                   <img
                     alt="crypto"
-                    src="https://images.unsplash.com/photo-1601382270349-49c15bddf738?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                    src="https://plus.unsplash.com/premium_photo-1677265809324-4cc68b8cc4e7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80"
                   />
                 </div>
-                <div className="rightDiv">
+                <div>
                   <SignIn />
                   <div className="button-container">
                     <Link className="Link" onClick={this.handelSignUp}>
@@ -40,7 +40,7 @@ class Auth extends Component {
               </>
             ) : (
               <>
-                <div className="leftDiv">
+                <div>
                   <SignUp />
                   <div className="button-container">
                     <Link className="Link" onClick={this.handelSignIn}>
@@ -51,7 +51,7 @@ class Auth extends Component {
                 <div className="rightDiv">
                   <img
                     alt="crypto"
-                    src="https://images.unsplash.com/photo-1601382270349-49c15bddf738?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                    src="https://plus.unsplash.com/premium_photo-1677265809324-4cc68b8cc4e7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80"
                   />
                 </div>
               </>

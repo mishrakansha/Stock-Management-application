@@ -8,7 +8,11 @@ export default class SideNavBar extends Component {
       <nav id="sideNav">
         <ul>
           <li id="dashboardIcon">
-            <Link to="" style={{ textDecoration: "none", color: "white" }}>
+            <Link
+              to=""
+              title="Dashboard"
+              style={{ textDecoration: "none", color: "white" }}
+            >
               <div className="material-symbols-outlined">dashboard</div>
             </Link>
           </li>
@@ -16,6 +20,7 @@ export default class SideNavBar extends Component {
           <li>
             <Link
               to="showProfile"
+              title="Profile"
               style={{ textDecoration: "none", color: "white" }}
             >
               <div className="material-symbols-outlined">account_circle</div>

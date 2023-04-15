@@ -14,7 +14,6 @@
   align-items: center;
   height: max-content;
   box-shadow: 0px 0px 12px 1px #b3b3b3;
-
   width: 260px;
   border-radius: 10px;
 }
@@ -35,7 +34,6 @@
 .crudButtons {
   display: flex;
   width: 90%;
-
   justify-content: space-between;
 }
 .priceQuantityContainer {
@@ -60,12 +58,12 @@
   text-align: center;
 }
 .dateTextContainer {
-  width: 40%;
+  width: 30%;
 }
 .dateIconContainer {
   width: fit-content;
   background: #323765;
-  width: 60%;
+  width: 70%;
   color: white;
 }
 .cardBody {

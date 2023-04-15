@@ -19,12 +19,13 @@
   padding: 0.5em;
 }
 .rightDiv {
-  /* transition: 2s;
-  transform: translateX(-50%); */
-  /* animation-duration: 3s;
-  animation-name: slideOut;
-  animation-fill-mode: forwards;
-  animation-direction: alternate; */
+  color: #fff;
+  margin: 0 0 0 0%;
+  position: relative;
+  text-align: center;
+  width: 50%;
+  animation: 0.5s rightDivSlide ease;
+  z-index: 5;
 }
 .leftDiv {
   color: #fff;
@@ -32,15 +33,8 @@
   position: relative;
   text-align: center;
   width: 50%;
+  animation: 0.5s leftDivSlide;
   z-index: 5;
-  transition: margin 0.7s, display 1s, width 1s;
-
-  /* transition: 2s;
-  transform: translateX(50%); */
-  /* animation-name: slideIn;
-  animation-fill-mode: forwards;
-  animation-duration: 3s;
-  animation-direction: alternate; */
 }
 .wrapper > div > img {
   height: 100%;
@@ -65,7 +59,10 @@
   background: #323765;
 }
 .wrapper form {
-  margin-top: 30px;
+  height: 85%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 .wrapper form .input-box div {
   height: 52px;
@@ -82,7 +79,6 @@ form .input-box input {
   border: 1.5px solid #c7bebe;
   border-bottom-width: 3.5px;
   border-radius: 6px;
-  transition: all 0.3s ease;
 }
 .input-box input:focus,
 .input-box input:valid {
@@ -142,7 +138,6 @@ link {
   color: #323765;
   font-size: larger;
   text-align: center;
-  z-index: 90;
   position: relative;
 }
 @media screen and (max-width: 700px) {
@@ -151,5 +146,47 @@ link {
   }
   .wrapper > div {
     width: 100%;
+  }
+  @keyframes leftDivSlide {
+    0% {
+      opacity: 0.2;
+      transform: translateY(100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+  @keyframes rightDivSlide {
+    0% {
+      opacity: 0.2;
+      transform: translateY(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+}
+@media screen and (min-width: 700px) {
+  @keyframes leftDivSlide {
+    0% {
+      opacity: 0.2;
+      transform: translateX(100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0%);
+    }
+  }
+  @keyframes rightDivSlide {
+    0% {
+      opacity: 0.2;
+      transform: translateX(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0%);
+    }
   }
 }

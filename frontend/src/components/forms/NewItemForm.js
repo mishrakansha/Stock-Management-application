@@ -52,56 +52,54 @@ class NewItemForm extends Component {
     const data = event.target.value;
     if (event.target.name === "itemName") {
       if (data.length > 2 && data.length <= 100) {
-        await this.setState({ itemNameError: false });
+        this.setState({ itemNameError: false });
       } else {
-        await this.setState({ itemNameError: true });
+        this.setState({ itemNameError: true });
       }
       this.setState({ itemName: data });
     } else if (event.target.name === "quantity") {
       if (data >= 0 && data !== "") {
-        await this.setState({ quantityError: false, quantity: data });
+        this.setState({ quantityError: false, quantity: data });
       } else {
-        await this.setState({ quantityError: true, quantity: "" });
+        this.setState({ quantityError: true, quantity: "" });
       }
     } else if (event.target.name === "description") {
       if (data.length > 0) {
-        await this.setState({ descriptionError: false });
+        this.setState({ descriptionError: false });
       } else {
-        await this.setState({ descriptionError: true });
+        this.setState({ descriptionError: true });
       }
       this.setState({ description: data });
     } else if (event.target.name === "manufacturingCompany") {
       if (data.length > 0) {
-        await this.setState({
+        this.setState({
           manufacturingCompanyError: false,
         });
       } else {
-        await this.setState({ manufacturingCompanyError: true });
+        this.setState({ manufacturingCompanyError: true });
       }
-      await this.setState({
+      this.setState({
         manufacturingCompany: data,
       });
     } else if (event.target.name === "price") {
       if (data > 0) {
-        await this.setState({
+        this.setState({
           price: data,
           priceError: false,
         });
       } else {
-        await this.setState({
+        this.setState({
           price: "",
           priceError: true,
         });
       }
-    } else if (event.target.name === "manufacturingCompany") {
-      await this.setState({ manufacturingCompany: data });
     } else if (event.target.name === "date") {
       const today = new Date();
-      const datenew = new Date(data);
-      if (today < datenew) {
-        await this.setState({ dateError: true });
+      const dateInputted = new Date(data);
+      if (today < dateInputted || data === "") {
+        this.setState({ dateError: true });
       } else {
-        await this.setState({ dateError: false });
+        this.setState({ dateError: false });
       }
       await this.setState({ date: data });
     }
@@ -142,6 +140,39 @@ class NewItemForm extends Component {
     const { addFormPopUp } = this.props;
     addFormPopUp(false);
   };
+  handelOnBlur = (event) => {
+    console.log("onblur");
+    const data = event.target.value;
+    if (event.target.name === "itemName") {
+      if (data.length < 2 || data.length > 100) {
+        this.setState({ itemNameError: true });
+      }
+    } else if (event.target.name === "quantity") {
+      if (data < 0 || data === "") {
+        this.setState({ quantityError: true });
+      }
+    } else if (event.target.name === "description") {
+      if (data.length <= 0) {
+        this.setState({ descriptionError: true });
+      }
+    } else if (event.target.name === "manufacturingCompany") {
+      if (data.length <= 0) {
+        this.setState({ manufacturingCompanyError: true });
+      }
+    } else if (event.target.name === "price") {
+      if (data <= 0) {
+        this.setState({
+          priceError: true,
+        });
+      }
+    } else if (event.target.name === "date") {
+      const today = new Date();
+      const dateInputted = new Date(data);
+      if (today < dateInputted || data === "") {
+        this.setState({ dateError: true });
+      }
+    }
+  };
   render() {
     const {
       itemName,
@@ -180,7 +211,7 @@ class NewItemForm extends Component {
               value={itemName}
               label="Item Name"
               variant="filled"
-              onBlur={this.handelOnchange}
+              onBlur={this.handelOnBlur}
               onChange={this.handelOnchange}
               type="text"
               style={{ width: "100%" }}
@@ -210,7 +241,7 @@ class NewItemForm extends Component {
                   name="quantity"
                   variant="filled"
                   onChange={this.handelOnchange}
-                  onBlur={this.handelOnchange}
+                  onBlur={this.handelOnBlur}
                   type="number"
                   style={{ width: "100%" }}
                 />
@@ -236,7 +267,7 @@ class NewItemForm extends Component {
                       height: "50px",
                     },
                   }}
-                  onBlur={this.handelOnchange}
+                  onBlur={this.handelOnBlur}
                   onChange={this.handelOnchange}
                   type="number"
                   style={{ width: "100%" }}
@@ -259,7 +290,7 @@ class NewItemForm extends Component {
                 },
               }}
               variant="filled"
-              onBlur={this.handelOnchange}
+              onBlur={this.handelOnBlur}
               onChange={this.handelOnchange}
               type="text"
               value={manufacturingCompany}
@@ -268,6 +299,20 @@ class NewItemForm extends Component {
             {manufacturingCompanyError && (
               <div className="errorMessage">* this field is required.</div>
             )}{" "}
+            <TextField
+              required
+              multiline
+              rows={2}
+              name="description"
+              onBlur={this.handelOnBlur}
+              onChange={this.handelOnchange}
+              variant="filled"
+              value={description}
+              label="Description"
+            />
+            {descriptionError && (
+              <div className="errorMessage">* this field is required.</div>
+            )}
             <TextField
               id="datetime-local"
               label="Date Added On"
@@ -283,27 +328,13 @@ class NewItemForm extends Component {
               variant="filled"
               value={date}
               name="date"
-              onInput={this.handelOnchange}
-              onBlur={this.handelOnchange}
+              onChange={this.handelOnchange}
+              onBlur={this.handelOnBlur}
             />
             {dateError && (
               <div className="errorMessage">
-                * date should not be greater than than today
+                * date is required and should not be greater than today
               </div>
-            )}
-            <TextField
-              required
-              multiline
-              rows={2}
-              name="description"
-              onBlur={this.handelOnchange}
-              onChange={this.handelOnchange}
-              variant="filled"
-              value={description}
-              label="Description"
-            />
-            {descriptionError && (
-              <div className="errorMessage">* this field is required.</div>
             )}
           </form>
         </DialogContent>

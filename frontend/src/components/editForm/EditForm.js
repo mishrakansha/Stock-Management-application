@@ -64,64 +64,7 @@ class EditForm extends Component {
     editItem(id, data);
     editFormPopUp(false);
   };
-  handelOnchange = async (event) => {
-    const data = event.target.value;
-    if (event.target.name === "itemName") {
-      if (data.length > 2 && data.length <= 100) {
-        await this.setState({ itemNameError: false });
-      } else {
-        await this.setState({ itemNameError: true });
-      }
-      await this.setState({ itemName: data });
-    } else if (event.target.name === "quantity") {
-      if (data >= 0 && data !== "") {
-        await this.setState({ quantityError: false, quantity: parseInt(data) });
-      } else {
-        await this.setState({ quantityError: true, quantity: "" });
-      }
-    } else if (event.target.name === "description") {
-      if (data.length > 0) {
-        await this.setState({ descriptionError: false });
-      } else {
-        await this.setState({ descriptionError: true });
-      }
-      await this.setState({ description: data });
-    } else if (event.target.name === "manufacturingCompany") {
-      if (data.length > 0) {
-        await this.setState({
-          manufacturingCompanyError: false,
-        });
-      } else {
-        await this.setState({ manufacturingCompanyError: true });
-      }
-      await this.setState({
-        manufacturingCompany: data,
-      });
-    } else if (event.target.name === "price") {
-      if (data > 0) {
-        await this.setState({
-          price: parseInt(data),
-          priceError: false,
-        });
-      } else {
-        await this.setState({
-          price: "",
-          priceError: true,
-        });
-      }
-    } else if (event.target.name === "manufacturingCompany") {
-      await this.setState({ manufacturingCompany: event.target.value });
-    } else if (event.target.name === "date") {
-      const inputtedDate = event.target.value;
-      const today = new Date();
-      const datenew = new Date(inputtedDate);
-      if (today < datenew) {
-        await this.setState({ dateError: true });
-      } else {
-        await this.setState({ dateError: false });
-      }
-      await this.setState({ date: data });
-    }
+  handleUpdateButton = () => {
     const { oneItem: unmodifiedData } = this.props;
     const originalDate = moment(unmodifiedData.date).format("yyyy-MM-DD");
     const {
@@ -162,6 +105,90 @@ class EditForm extends Component {
       this.setState({ modified: true });
     } else {
       this.setState({ modified: false });
+    }
+  };
+  handelOnchange = (event) => {
+    const data = event.target.value;
+    if (event.target.name === "itemName") {
+      if (data.length > 2 && data.length <= 100) {
+        this.setState({ itemNameError: false });
+      } else {
+        this.setState({ itemNameError: true });
+      }
+      this.setState({ itemName: data }, () => {
+        this.handleUpdateButton();
+      });
+    } else if (event.target.name === "quantity") {
+      if (data >= 0 && data !== "") {
+        this.setState(
+          { quantityError: false, quantity: parseInt(data) },
+          () => {
+            this.handleUpdateButton();
+          }
+        );
+      } else {
+        this.setState({ quantityError: true, quantity: "" }, () => {
+          this.handleUpdateButton();
+        });
+      }
+    } else if (event.target.name === "description") {
+      if (data.length > 0) {
+        this.setState({ descriptionError: false });
+      } else {
+        this.setState({ descriptionError: true });
+      }
+      this.setState({ description: data }, () => {
+        this.handleUpdateButton();
+      });
+    } else if (event.target.name === "manufacturingCompany") {
+      if (data.length > 0) {
+        this.setState({
+          manufacturingCompanyError: false,
+        });
+      } else {
+        this.setState({ manufacturingCompanyError: true });
+      }
+      this.setState(
+        {
+          manufacturingCompany: data,
+        },
+        () => {
+          this.handleUpdateButton();
+        }
+      );
+    } else if (event.target.name === "price") {
+      if (data > 0) {
+        this.setState(
+          {
+            price: parseInt(data),
+            priceError: false,
+          },
+          () => {
+            this.handleUpdateButton();
+          }
+        );
+      } else {
+        this.setState(
+          {
+            price: "",
+            priceError: true,
+          },
+          () => {
+            this.handleUpdateButton();
+          }
+        );
+      }
+    } else if (event.target.name === "date") {
+      const today = new Date();
+      const dateInputted = new Date(data);
+      if (today < dateInputted || data === "") {
+        this.setState({ dateError: true });
+      } else {
+        this.setState({ dateError: false });
+      }
+      this.setState({ date: data }, () => {
+        this.handleUpdateButton();
+      });
     }
   };
   handelClose = () => {
@@ -324,7 +351,7 @@ class EditForm extends Component {
             />
             {dateError && (
               <div className="errorMessage">
-                * date should not be greater than than today
+                * date is required and should not be greater than today
               </div>
             )}
           </form>

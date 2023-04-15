@@ -1,5 +1,6 @@
 export const items = [
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Outlander Sport",
     quantity: 19,
     price: 4,
@@ -9,6 +10,7 @@ export const items = [
     manufacturingCompany: "Mitsubishi",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Navigator",
     quantity: 16,
     price: 27,
@@ -18,6 +20,7 @@ export const items = [
     manufacturingCompany: "Lincoln",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Monterey",
     quantity: 72,
     price: 26,
@@ -27,6 +30,7 @@ export const items = [
     manufacturingCompany: "Mercury",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Aviator",
     quantity: 9,
     price: 10,
@@ -36,6 +40,7 @@ export const items = [
     manufacturingCompany: "Lincoln",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Q7",
     quantity: 9,
     price: 22,
@@ -45,6 +50,7 @@ export const items = [
     manufacturingCompany: "Audi",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Celica",
     quantity: 33,
     price: 64,
@@ -54,6 +60,7 @@ export const items = [
     manufacturingCompany: "Toyota",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "GS",
     quantity: 98,
     price: 22,
@@ -63,6 +70,7 @@ export const items = [
     manufacturingCompany: "Lexus",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Yukon",
     quantity: 7,
     price: 16,
@@ -72,6 +80,7 @@ export const items = [
     manufacturingCompany: "GMC",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Ram 1500 Club",
     quantity: 72,
     price: 47,
@@ -81,6 +90,7 @@ export const items = [
     manufacturingCompany: "Dodge",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Accent",
     quantity: 65,
     price: 82,
@@ -90,6 +100,7 @@ export const items = [
     manufacturingCompany: "Hyundai",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Ghost",
     quantity: 76,
     price: 45,
@@ -99,6 +110,7 @@ export const items = [
     manufacturingCompany: "Rolls-Royce",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "G-Class",
     quantity: 78,
     price: 57,
@@ -108,6 +120,7 @@ export const items = [
     manufacturingCompany: "Mercedes-Benz",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "300",
     quantity: 98,
     price: 99,
@@ -117,6 +130,7 @@ export const items = [
     manufacturingCompany: "Chrysler",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Bravada",
     quantity: 69,
     price: 57,
@@ -126,6 +140,7 @@ export const items = [
     manufacturingCompany: "Oldsmobile",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Esperante",
     quantity: 87,
     price: 53,
@@ -135,6 +150,7 @@ export const items = [
     manufacturingCompany: "Panoz",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Bonneville",
     quantity: 10,
     price: 33,
@@ -144,6 +160,7 @@ export const items = [
     manufacturingCompany: "Pontiac",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Scirocco",
     quantity: 26,
     price: 43,
@@ -153,6 +170,7 @@ export const items = [
     manufacturingCompany: "Volkswagen",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Q",
     quantity: 98,
     price: 20,
@@ -162,6 +180,7 @@ export const items = [
     manufacturingCompany: "Infiniti",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "F-Series",
     quantity: 76,
     price: 54,
@@ -171,6 +190,7 @@ export const items = [
     manufacturingCompany: "Ford",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "530",
     quantity: 1,
     price: 96,
@@ -180,6 +200,7 @@ export const items = [
     manufacturingCompany: "BMW",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "CLS-Class",
     quantity: 1,
     price: 13,
@@ -189,6 +210,7 @@ export const items = [
     manufacturingCompany: "Mercedes-Benz",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "tC",
     quantity: 68,
     price: 14,
@@ -198,6 +220,7 @@ export const items = [
     manufacturingCompany: "Scion",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Talon",
     quantity: 13,
     price: 21,
@@ -207,6 +230,7 @@ export const items = [
     manufacturingCompany: "Eagle",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "4Runner",
     quantity: 81,
     price: 4,
@@ -216,6 +240,7 @@ export const items = [
     manufacturingCompany: "Toyota",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Yukon",
     quantity: 20,
     price: 99,
@@ -225,6 +250,7 @@ export const items = [
     manufacturingCompany: "GMC",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "4Runner",
     quantity: 66,
     price: 15,
@@ -234,6 +260,7 @@ export const items = [
     manufacturingCompany: "Toyota",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "XJ Series",
     quantity: 41,
     price: 61,
@@ -243,6 +270,7 @@ export const items = [
     manufacturingCompany: "Jaguar",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Mustang",
     quantity: 93,
     price: 20,
@@ -252,6 +280,7 @@ export const items = [
     manufacturingCompany: "Ford",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "M-Class",
     quantity: 84,
     price: 23,
@@ -261,6 +290,7 @@ export const items = [
     manufacturingCompany: "Mercedes-Benz",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "900",
     quantity: 45,
     price: 12,
@@ -270,6 +300,7 @@ export const items = [
     manufacturingCompany: "Saab",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "GLI",
     quantity: 76,
     price: 82,
@@ -279,6 +310,7 @@ export const items = [
     manufacturingCompany: "Volkswagen",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Golf",
     quantity: 64,
     price: 61,
@@ -288,6 +320,7 @@ export const items = [
     manufacturingCompany: "Volkswagen",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "200",
     quantity: 11,
     price: 89,
@@ -297,6 +330,7 @@ export const items = [
     manufacturingCompany: "Chrysler",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "A6",
     quantity: 13,
     price: 13,
@@ -306,6 +340,7 @@ export const items = [
     manufacturingCompany: "Audi",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Firefly",
     quantity: 6,
     price: 62,
@@ -315,6 +350,7 @@ export const items = [
     manufacturingCompany: "Pontiac",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Prius Plug-in Hybrid",
     quantity: 2,
     price: 16,
@@ -324,6 +360,7 @@ export const items = [
     manufacturingCompany: "Toyota",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Xterra",
     quantity: 97,
     price: 54,
@@ -333,6 +370,7 @@ export const items = [
     manufacturingCompany: "Nissan",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Regency",
     quantity: 94,
     price: 33,
@@ -342,6 +380,7 @@ export const items = [
     manufacturingCompany: "Oldsmobile",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Sonoma",
     quantity: 79,
     price: 82,
@@ -351,6 +390,7 @@ export const items = [
     manufacturingCompany: "GMC",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Pilot",
     quantity: 98,
     price: 58,
@@ -360,6 +400,7 @@ export const items = [
     manufacturingCompany: "Honda",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "E-Class",
     quantity: 72,
     price: 93,
@@ -369,6 +410,7 @@ export const items = [
     manufacturingCompany: "Mercedes-Benz",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "GT-R",
     quantity: 86,
     price: 65,
@@ -378,6 +420,7 @@ export const items = [
     manufacturingCompany: "Nissan",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "MR2",
     quantity: 29,
     price: 78,
@@ -387,6 +430,7 @@ export const items = [
     manufacturingCompany: "Toyota",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "MX-6",
     quantity: 61,
     price: 76,
@@ -396,6 +440,7 @@ export const items = [
     manufacturingCompany: "Mazda",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Jetta",
     quantity: 39,
     price: 18,
@@ -405,6 +450,7 @@ export const items = [
     manufacturingCompany: "Volkswagen",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Colt",
     quantity: 81,
     price: 63,
@@ -414,6 +460,7 @@ export const items = [
     manufacturingCompany: "Plymouth",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Focus",
     quantity: 27,
     price: 93,
@@ -423,6 +470,7 @@ export const items = [
     manufacturingCompany: "Ford",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Yukon",
     quantity: 2,
     price: 29,
@@ -432,6 +480,7 @@ export const items = [
     manufacturingCompany: "GMC",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Tahoe",
     quantity: 92,
     price: 37,
@@ -441,6 +490,7 @@ export const items = [
     manufacturingCompany: "Chevrolet",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Grand Caravan",
     quantity: 22,
     price: 30,
@@ -450,6 +500,7 @@ export const items = [
     manufacturingCompany: "Dodge",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "CLS-Class",
     quantity: 90,
     price: 58,
@@ -459,6 +510,7 @@ export const items = [
     manufacturingCompany: "Mercedes-Benz",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Relay",
     quantity: 14,
     price: 90,
@@ -468,6 +520,7 @@ export const items = [
     manufacturingCompany: "Saturn",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "300SE",
     quantity: 53,
     price: 64,
@@ -477,6 +530,7 @@ export const items = [
     manufacturingCompany: "Mercedes-Benz",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Montero",
     quantity: 26,
     price: 79,
@@ -486,6 +540,7 @@ export const items = [
     manufacturingCompany: "Mitsubishi",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Prizm",
     quantity: 12,
     price: 75,
@@ -495,6 +550,7 @@ export const items = [
     manufacturingCompany: "Chevrolet",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Range Rover",
     quantity: 49,
     price: 30,
@@ -504,6 +560,7 @@ export const items = [
     manufacturingCompany: "Land Rover",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Firefly",
     quantity: 94,
     price: 23,
@@ -513,6 +570,7 @@ export const items = [
     manufacturingCompany: "Pontiac",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "LeSabre",
     quantity: 100,
     price: 80,
@@ -522,6 +580,7 @@ export const items = [
     manufacturingCompany: "Buick",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Tucson",
     quantity: 6,
     price: 13,
@@ -531,6 +590,7 @@ export const items = [
     manufacturingCompany: "Hyundai",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Golf",
     quantity: 9,
     price: 98,
@@ -540,6 +600,7 @@ export const items = [
     manufacturingCompany: "Volkswagen",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "XC90",
     quantity: 74,
     price: 60,
@@ -549,6 +610,7 @@ export const items = [
     manufacturingCompany: "Volvo",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "57",
     quantity: 27,
     price: 87,
@@ -558,6 +620,7 @@ export const items = [
     manufacturingCompany: "Maybach",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Envoy",
     quantity: 48,
     price: 21,
@@ -567,6 +630,7 @@ export const items = [
     manufacturingCompany: "GMC",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "New Beetle",
     quantity: 42,
     price: 28,
@@ -576,6 +640,7 @@ export const items = [
     manufacturingCompany: "Volkswagen",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Eurovan",
     quantity: 80,
     price: 51,
@@ -585,6 +650,7 @@ export const items = [
     manufacturingCompany: "Volkswagen",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Legend",
     quantity: 31,
     price: 66,
@@ -594,6 +660,7 @@ export const items = [
     manufacturingCompany: "Acura",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "DeVille",
     quantity: 11,
     price: 92,
@@ -603,6 +670,7 @@ export const items = [
     manufacturingCompany: "Cadillac",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Concorde",
     quantity: 14,
     price: 57,
@@ -612,6 +680,7 @@ export const items = [
     manufacturingCompany: "Chrysler",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "626",
     quantity: 65,
     price: 24,
@@ -621,6 +690,7 @@ export const items = [
     manufacturingCompany: "Mazda",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Frontier",
     quantity: 71,
     price: 87,
@@ -630,6 +700,7 @@ export const items = [
     manufacturingCompany: "Nissan",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "DeVille",
     quantity: 67,
     price: 52,
@@ -639,6 +710,7 @@ export const items = [
     manufacturingCompany: "Cadillac",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "New Yorker",
     quantity: 71,
     price: 9,
@@ -648,6 +720,7 @@ export const items = [
     manufacturingCompany: "Chrysler",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Montero",
     quantity: 80,
     price: 47,
@@ -657,6 +730,7 @@ export const items = [
     manufacturingCompany: "Mitsubishi",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Tempo",
     quantity: 9,
     price: 75,
@@ -666,6 +740,7 @@ export const items = [
     manufacturingCompany: "Ford",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Grand Prix",
     quantity: 14,
     price: 87,
@@ -675,6 +750,7 @@ export const items = [
     manufacturingCompany: "Pontiac",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Lumina",
     quantity: 46,
     price: 23,
@@ -684,6 +760,7 @@ export const items = [
     manufacturingCompany: "Chevrolet",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Catera",
     quantity: 54,
     price: 55,
@@ -693,6 +770,7 @@ export const items = [
     manufacturingCompany: "Cadillac",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Avalanche",
     quantity: 59,
     price: 34,
@@ -702,6 +780,7 @@ export const items = [
     manufacturingCompany: "Chevrolet",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "57",
     quantity: 60,
     price: 43,
@@ -711,6 +790,7 @@ export const items = [
     manufacturingCompany: "Maybach",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Phaeton",
     quantity: 87,
     price: 45,
@@ -720,6 +800,7 @@ export const items = [
     manufacturingCompany: "Volkswagen",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Justy",
     quantity: 33,
     price: 58,
@@ -729,6 +810,7 @@ export const items = [
     manufacturingCompany: "Subaru",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Murciélago",
     quantity: 38,
     price: 13,
@@ -738,6 +820,7 @@ export const items = [
     manufacturingCompany: "Lamborghini",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Windstar",
     quantity: 47,
     price: 10,
@@ -747,6 +830,7 @@ export const items = [
     manufacturingCompany: "Ford",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "C-Class",
     quantity: 77,
     price: 89,
@@ -756,6 +840,7 @@ export const items = [
     manufacturingCompany: "Mercedes-Benz",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Camaro",
     quantity: 73,
     price: 18,
@@ -765,6 +850,7 @@ export const items = [
     manufacturingCompany: "Chevrolet",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Probe",
     quantity: 74,
     price: 69,
@@ -774,6 +860,7 @@ export const items = [
     manufacturingCompany: "Ford",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Monaro",
     quantity: 74,
     price: 39,
@@ -783,6 +870,7 @@ export const items = [
     manufacturingCompany: "Holden",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Liberty",
     quantity: 17,
     price: 78,
@@ -792,6 +880,7 @@ export const items = [
     manufacturingCompany: "Jeep",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Sprinter",
     quantity: 51,
     price: 41,
@@ -801,6 +890,7 @@ export const items = [
     manufacturingCompany: "Dodge",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Thunderbird",
     quantity: 78,
     price: 24,
@@ -810,6 +900,7 @@ export const items = [
     manufacturingCompany: "Ford",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "LeSabre",
     quantity: 64,
     price: 12,
@@ -819,6 +910,7 @@ export const items = [
     manufacturingCompany: "Buick",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "B2000",
     quantity: 18,
     price: 42,
@@ -828,6 +920,7 @@ export const items = [
     manufacturingCompany: "Mazda",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Capri",
     quantity: 35,
     price: 4,
@@ -837,6 +930,7 @@ export const items = [
     manufacturingCompany: "Mercury",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "A4",
     quantity: 32,
     price: 40,
@@ -846,6 +940,7 @@ export const items = [
     manufacturingCompany: "Audi",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "DeVille",
     quantity: 80,
     price: 14,
@@ -855,6 +950,7 @@ export const items = [
     manufacturingCompany: "Cadillac",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Cruze",
     quantity: 48,
     price: 92,
@@ -864,6 +960,7 @@ export const items = [
     manufacturingCompany: "Chevrolet",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "H2",
     quantity: 96,
     price: 42,
@@ -873,6 +970,7 @@ export const items = [
     manufacturingCompany: "Hummer",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "QX56",
     quantity: 50,
     price: 44,
@@ -882,6 +980,7 @@ export const items = [
     manufacturingCompany: "Infiniti",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "Tundra",
     quantity: 39,
     price: 54,
@@ -891,6 +990,7 @@ export const items = [
     manufacturingCompany: "Toyota",
   },
   {
+    User: ObjectId("64379875289f1413429fcef9"),
     itemName: "i-370",
     quantity: 13,
     price: 78,

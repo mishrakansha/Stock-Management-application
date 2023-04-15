@@ -53,7 +53,6 @@ export class NavBar extends Component {
         }, 1000),
         theme: "light",
       });
-      console.log(recivedData);
     } catch (error) {
       toast.error(error.response.data.message + " Logging Out", {
         position: "bottom-right",

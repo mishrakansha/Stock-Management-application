@@ -91,7 +91,7 @@ export default class SignIn extends Component {
   render() {
     const { email, password } = this.state;
     return (
-      <div>
+      <>
         <div className="signInSignUpHeading">
           <h2 className="authLinksActive">SIGN IN</h2>
         </div>
@@ -162,6 +162,7 @@ export default class SignIn extends Component {
           <div className="submitButtonContainer">
             <Button
               type="submit"
+              title="SIGN IN"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2, width: "50%" }}
@@ -182,7 +183,7 @@ export default class SignIn extends Component {
           pauseOnHover
           theme="light"
         />
-      </div>
+      </>
     );
   }
 }

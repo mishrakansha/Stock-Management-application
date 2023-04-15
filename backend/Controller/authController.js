@@ -74,7 +74,8 @@ const signUp = (req, res) => {
           });
         })
         .catch((error) => {
-          res.status(500).send({ success: false, message: error.message });
+          const { message } = error;
+          res.status(500).send({ success: false, message: message });
         });
     })
     .catch((e) => {

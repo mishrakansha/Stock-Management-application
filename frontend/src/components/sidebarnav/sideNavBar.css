@@ -5,7 +5,7 @@
   height: calc(100vh - 12vh);
   background-color: #ffffff;
   overflow: initial;
-  box-shadow: 0px 0px 9px 1px #7e7e7e;
+  box-shadow: 0px 0px 9px 1px #bdbdbd;
   animation-name: sideNav;
   animation-duration: 0.5s;
   animation-timing-function: ease;
@@ -53,7 +53,7 @@
   top: 12vh;
   height: calc(100vh - 12vh);
   background-color: #ffffff;
-  box-shadow: 0px 0px 9px 1px #7e7e7e;
+  box-shadow: 0px 0px 9px 1px #bdbdbd;
   animation-name: sideNavExpandable;
   animation-duration: 0.5s;
   animation-timing-function: ease;
@@ -106,13 +106,7 @@
 }
 #sideNavExpandable ul li:hover,
 #sideNav ul li:hover {
-  background-color: rgb(0, 0, 0, 0.5);
-}
-#sideNav ul li:hover a div {
-  color: white;
-}
-#sideNavExpandable ul li:hover a {
-  color: white;
+  background-color: #dcdcdcee;
 }
 #sidesideNavExpandable ul a div {
   color: rgb(0, 0, 0);

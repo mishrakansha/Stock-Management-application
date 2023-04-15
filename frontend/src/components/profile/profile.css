@@ -38,15 +38,16 @@ input::-webkit-inner-spin-button {
   width: 2em;
   display: flex;
   color: white;
+  background-color: white;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
 }
 .backButton a:active {
-  color: white;
+  color: #323765;
 }
 .backButton a {
-  color: white;
+  color: #323765;
 }
 .backButton:hover {
   box-shadow: 0px 0px 8px black;

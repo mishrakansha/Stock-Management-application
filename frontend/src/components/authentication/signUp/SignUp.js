@@ -105,7 +105,9 @@ class SignUp extends Component {
       }
     }
   };
-
+  componentDidMount() {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }
   handelShowPassword = () => {
     this.setState({ showPassword: !this.state.showPassword });
   };
@@ -248,6 +250,7 @@ class SignUp extends Component {
               onClick={this.handelShowPassword}
               variant="contained"
               size="small"
+              title="SIGN UP"
             >
               {this.state.showPassword ? (
                 <span className="material-symbols-outlined eyeIcon">
